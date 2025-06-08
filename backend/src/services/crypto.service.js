@@ -1,5 +1,5 @@
 // crypto.service.js
-const api = require('./cryptoApi');
+const api = require('../config/cryptoApi');
 
 class CryptoService {
   /**
