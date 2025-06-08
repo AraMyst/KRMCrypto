@@ -1,4 +1,3 @@
-// utils/validators.js
 const { body, param, validationResult } = require('express-validator');
 
 // Regex para senhas: mínimo 8 caracteres, uma maiúscula, uma minúscula e um número
