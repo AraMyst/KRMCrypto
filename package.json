@@ -16,7 +16,8 @@
     "ip-geolocation-api-javascript-sdk": "^1.0.9",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.11.0",
-    "sib-api-v3-sdk": "^8.5.0"
+    "sib-api-v3-sdk": "^8.5.0",
+    "nodemailer": "^6.9.11"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
