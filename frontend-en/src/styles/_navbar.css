@@ -1,0 +1,27 @@
+/* styles/components/_navbar.css */
+@layer components {
+  .navbar {
+    @apply fixed top-0 left-0 right-0 z-50 bg-white shadow;
+  }
+  .navbar-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between;
+  }
+  .nav-links {
+    @apply hidden md:flex space-x-8;
+  }
+  .nav-link {
+    @apply text-gray-700 hover:text-blue-600 font-medium;
+  }
+  .nav-actions {
+    @apply flex items-center space-x-4;
+  }
+  .search-button {
+    @apply p-2 rounded hover:bg-gray-100;
+  }
+  .login-button {
+    @apply px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700;
+  }
+  .spacer {
+    @apply h-16;
+  }
+}

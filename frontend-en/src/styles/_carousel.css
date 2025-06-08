@@ -1,0 +1,26 @@
+/* styles/components/_carousel.css */
+@layer components {
+  .carousel-section {
+    @apply my-8;
+  }
+  .carousel-title {
+    @apply text-2xl font-semibold mb-4 capitalize;
+  }
+  .carousel-wrapper {
+    @apply relative;
+  }
+  .scroll-button {
+    @apply absolute top-1/2 transform -translate-y-1/2 bg-white bg-opacity-75 p-2 rounded-full shadow hover:bg-opacity-100 z-10;
+  }
+  .scroll-container {
+    @apply flex overflow-x-auto scroll-smooth space-x-4 no-scrollbar px-8;
+  }
+  /* Esconder scrollbar em todos os navegadores */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}

@@ -1,0 +1,15 @@
+/* styles/components/_banners.css */
+@layer components {
+  /* Container dos banners laterais */
+  .side-banners {
+    @apply fixed top-1/3 right-4 flex flex-col space-y-6 z-40;
+  }
+  /* Banner de newsletter */
+  .banner-newsletter {
+    @apply block w-40 p-4 bg-blue-600 text-white rounded-l-lg shadow hover:bg-blue-700 transition;
+  }
+  /* Banner de subscrição */
+  .banner-subscription {
+    @apply block w-40 p-4 bg-green-600 text-white rounded-l-lg shadow hover:bg-green-700 transition;
+  }
+}
