@@ -1,6 +1,6 @@
 // src/server.js
 require('dotenv').config();           // carrega .env
-require('../config/database');       // inicializa conexão com MongoDB
+require('./config/database');        // inicializa conexão com MongoDB
 
 const express = require('express');
 const app = express();
@@ -10,9 +10,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // rotas
-const cryptoRoutes     = require('../routes/crypto.routes');
-const newsletterRoutes = require('../routes/newsletter.routes');
-const paymentRoutes    = require('../routes/payment.routes');
+const cryptoRoutes     = require('./routes/crypto.routes');
+const newsletterRoutes = require('./routes/newsletter.routes');
+const paymentRoutes    = require('./routes/payment.routes');
 
 app.use('/api/crypto',     cryptoRoutes);
 app.use('/api/newsletter', newsletterRoutes);
