@@ -1,36 +1,29 @@
-// utils/email.util.js
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || 'smtp-relay.sendinblue.com',
-  port: Number(process.env.SMTP_PORT) || 587,
-  secure: false, // TLS será usado se disponível
+  host:     process.env.SMTP_HOST,
+  port:     Number(process.env.SMTP_PORT),
+  secure:   false, // usa STARTTLS se disponível
   auth: {
-    user: process.env.SMTP_USER || 'myfromemail@mycompany.com',
-    pass: process.env.SMTP_PASS || 'G8c7OUptbnACJWvF'
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASSWORD
   }
 });
 
 /**
- * Envia um e-mail.
- * @param {Object} opts
- * @param {string} opts.to Destinatário
- * @param {string} opts.subject Assunto
- * @param {string} [opts.text] Texto puro
- * @param {string} [opts.html] Conteúdo HTML
+ * Envia um e-mail
+ * @param {{ to: string, subject: string, text?: string, html?: string }} opts
  */
 async function sendEmail({ to, subject, text, html }) {
   const info = await transporter.sendMail({
-    from: process.env.EMAIL_FROM || '"KRMCrypto" <no-reply@krmcrypto.com>',
+    from:    process.env.EMAIL_FROM,
     to,
     subject,
     text,
     html
   });
-  console.log('Email sent:', info.messageId);
+  console.log('📧  Email enviado:', info.messageId);
   return info;
 }
 
-module.exports = {
-  sendEmail
-};
+module.exports = { sendEmail };
