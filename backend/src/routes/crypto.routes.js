@@ -1,6 +1,6 @@
 // crypto.routes.js
 const express = require('express');
-const CryptoController = require('./crypto.controller');
+const CryptoController = require('../controllers/crypto.controller');
 
 const router = express.Router();
 

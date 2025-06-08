@@ -1,5 +1,5 @@
 // crypto.controller.js
-const CryptoService = require('./crypto.service');
+const CryptoService = require('../services/crypto.service');
 
 class CryptoController {
   /**
