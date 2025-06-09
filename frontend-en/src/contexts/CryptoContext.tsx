@@ -30,7 +30,8 @@ export function CryptoProvider({ children }: { children: ReactNode }) {
       setLoading(true);
       setError(null);
       try {
-        const resp = await apiClient.get<CryptoPrice[]>('/api/crypto/prices');
+        // rota corrigida para o ticker de preços
+        const resp = await apiClient.get<CryptoPrice[]>('/api/crypto/ticker');
         setPrices(resp.data);
       } catch (err: any) {
         console.error('Crypto fetch error', err);
