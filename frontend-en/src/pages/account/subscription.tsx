@@ -34,10 +34,10 @@ export default function SubscriptionPage() {
     }
   }, [authLoading]);
 
-  // Redirect non-logged-in users
+  // Redirect non-logged-in users to registration
   useEffect(() => {
     if (!authLoading && !user) {
-      router.replace('/auth/login');
+      router.replace('/auth/register');
     }
   }, [user, authLoading, router]);
 
