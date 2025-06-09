@@ -1,9 +1,8 @@
 // src/pages/account/subscription.tsx
 import { useState, useEffect, FormEvent } from 'react';
 import { useRouter } from 'next/router';
-import { useAuth } from '../../hooks/useAuth';
-import { getPlans, createCheckoutSession } from '../../services/paymentService';
-import { getSubscription } from '../../services/paymentService';
+import useAuth from '../../hooks/useAuth';
+import { getPlans, createCheckoutSession, getSubscription } from '../../services/paymentService';
 import { Plan } from '../../services/paymentService';
 import { Subscription } from '../../types';
 
@@ -18,7 +17,7 @@ export default function SubscriptionPage() {
   const [error, setError] = useState<string | null>(null);
   const [creatingSession, setCreatingSession] = useState(false);
 
-  // Busca planos e assinatura atual
+  // Fetch plans and current subscription
   useEffect(() => {
     if (!authLoading) {
       Promise.all([
@@ -35,14 +34,14 @@ export default function SubscriptionPage() {
     }
   }, [authLoading]);
 
-  // Se não estiver logado, redireciona ao login
+  // Redirect non-logged-in users
   useEffect(() => {
     if (!authLoading && !user) {
       router.replace('/auth/login');
     }
   }, [user, authLoading, router]);
 
-  // Inicia sessão de checkout para o plano selecionado
+  // Start checkout session
   async function handleSubscribe(e: FormEvent) {
     e.preventDefault();
     if (!selectedPlan) {

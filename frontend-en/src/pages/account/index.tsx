@@ -1,7 +1,7 @@
 // src/pages/account/index.tsx
 import { FormEvent, useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useAuth } from '../../hooks/useAuth';
+import useAuth from '../../hooks/useAuth';
 import { getSubscription, cancelSubscription } from '../../services/paymentService';
 import { updateProfile } from '../../services/userService';
 import { Subscription } from '../../types';
@@ -28,7 +28,7 @@ export default function AccountPage() {
       setName(user.name);
       setEmail(user.email);
 
-      ;(async () => {
+      (async () => {
         try {
           const sub = await getSubscription();
           setSubscription(sub);
@@ -171,5 +171,5 @@ export default function AccountPage() {
         </button>
       </section>
     </div>
-  );
+);
 }
