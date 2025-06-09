@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import SearchModal from './SearchModal';
+import SearchDropdown from './SearchDropdown';
+import LoginDropdown from './LoginDropdown';
 
 const NAV_LINKS = [
   { label: 'News', href: '/news/global' },
@@ -13,11 +14,12 @@ const NAV_LINKS = [
 
 export default function Navbar() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           {/* Logo */}
           <Link href="/">
             <a className="flex-shrink-0">
@@ -45,7 +47,10 @@ export default function Navbar() {
           {/* Search + Login */}
           <div className="flex items-center space-x-4">
             <button
-              onClick={() => setIsSearchOpen(true)}
+              onClick={() => {
+                setIsSearchOpen((prev) => !prev);
+                setIsLoginOpen(false);
+              }}
               aria-label="Search articles"
               className="p-2 rounded hover:bg-gray-100"
             >
@@ -66,20 +71,28 @@ export default function Navbar() {
               </svg>
             </button>
 
-            <Link href="/auth/login">
-              <a className="px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark">
-                Log in
-              </a>
-            </Link>
+            <button
+              onClick={() => {
+                setIsLoginOpen((prev) => !prev);
+                setIsSearchOpen(false);
+              }}
+              className="px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark"
+            >
+              Log in
+            </button>
           </div>
         </div>
+
+        {isSearchOpen && (
+          <SearchDropdown onClose={() => setIsSearchOpen(false)} />
+        )}
+        {isLoginOpen && (
+          <LoginDropdown onClose={() => setIsLoginOpen(false)} />
+        )}
       </nav>
 
       {/* espaço para não sobrepor o conteúdo */}
       <div className="h-16" />
-
-      {/* Search Modal */}
-      {isSearchOpen && <SearchModal onClose={() => setIsSearchOpen(false)} />}
     </>
   );
 }
