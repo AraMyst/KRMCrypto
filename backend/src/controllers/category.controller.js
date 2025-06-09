@@ -21,10 +21,25 @@ exports.createCategory = async (req, res) => {
   }
 };
 
-exports.getCategories = async (req, res) => {
+// Lista todas as categorias
+exports.getAllCategories = async (req, res) => {
   try {
     const categories = await Category.find().lean();
     res.json(categories);
+  } catch {
+    res.status(500).json({ message: 'Erro no servidor.' });
+  }
+};
+
+// Mantido para compatibilidade com código legado
+exports.getCategories = exports.getAllCategories;
+
+// Obtém categoria pelo slug amigável utilizado nas URLs
+exports.getCategoryBySlug = async (req, res) => {
+  try {
+    const cat = await Category.findOne({ slug: req.params.slug }).lean();
+    if (!cat) return res.status(404).json({ message: 'Categoria não encontrada.' });
+    res.json(cat);
   } catch {
     res.status(500).json({ message: 'Erro no servidor.' });
   }
