@@ -18,8 +18,8 @@ export default function SideBanners() {
   return (
     <aside className="fixed top-1/3 right-4 flex flex-col space-y-6 z-40">
       {/* Banner Newsletter */}
-      <div className="block w-40 p-4 bg-primary text-white rounded-l-lg shadow">
-        <h3 className="font-bold mb-1">Newsletter</h3>
+      <div className="block w-40 p-4 bg-primary text-white rounded-l-lg shadow text-center">
+        <h3 className="font-bold mb-1 text-center">Newsletter</h3>
         {user && isSubscribed ? (
           <p className="text-sm">Congrats, you're already subscribed!</p>
         ) : (
@@ -35,7 +35,7 @@ export default function SideBanners() {
             <button
               type="submit"
               disabled={loading}
-              className="underline text-sm hover:text-gray-300 disabled:opacity-50"
+              className="underline text-sm hover:text-gray-300 disabled:opacity-50 block mx-auto"
             >
               {loading ? 'Submitting…' : 'Subscribe'}
             </button>
@@ -43,16 +43,16 @@ export default function SideBanners() {
         )}
       </div>
 
-      {/* Banner Subscription */}
-      <Link href="/auth/register">
-        <a className="block w-40 p-4 bg-green-600 text-white rounded-l-lg shadow hover:text-gray-300 transition">
-          <h3 className="font-bold mb-1">Subscription</h3>
-          <p className="text-sm">Get early price analysis from our experts</p>
-          <span className="mt-2 inline-block px-3 py-1 bg-white text-green-700 rounded text-sm font-semibold">
-            Subscribe Now
-          </span>
-        </a>
-      </Link>
+      {/* Banner Premium */}
+      <div className="block w-40 p-4 bg-green-600 text-white rounded-l-lg shadow">
+        <h3 className="font-bold mb-1 text-center">Premium</h3>
+        <p className="text-sm text-center">Get early price analysis from our experts</p>
+        <Link href="/auth/register">
+          <a className="mt-2 inline-block px-3 py-1 bg-white text-green-700 rounded text-sm font-semibold">
+            Go Premium
+          </a>
+        </Link>
+      </div>
     </aside>
   );
 }
