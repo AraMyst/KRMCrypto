@@ -1,0 +1,13 @@
+# Permite que todos os robôs indexem o site
+User-agent: *
+Disallow:
+
+# Bloqueia áreas que não interessam ao SEO
+Disallow: /api/
+Disallow: /auth/
+Disallow: /account/
+Disallow: /checkout/
+Disallow: /subscribe/
+
+# Link para o sitemap (se você gerar um em /public/sitemap.xml)
+Sitemap: https://idontknowcrypto.com/sitemap.xml
