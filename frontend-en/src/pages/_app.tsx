@@ -1,5 +1,10 @@
-// src/pages/_app.tsx
 import '../styles/globals.css';
+import '../styles/_navbar.css';
+import '../styles/_ticker.css';
+import '../styles/_carousel.css';
+import '../styles/_banners.css';
+import '../styles/_footer.css';
+
 import type { AppProps } from 'next/app';
 import Layout from '../components/Layout';
 import { AuthProvider } from '../contexts/AuthContext';

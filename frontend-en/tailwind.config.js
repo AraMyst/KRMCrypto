@@ -4,9 +4,9 @@ module.exports = {
     // onde Tailwind deve procurar classes
     './src/pages/**/*.{js,ts,jsx,tsx}',
     './src/components/**/*.{js,ts,jsx,tsx}',
-    './src/hooks/**/*.{js,ts}',
+    './src/hooks/**/*.{js,ts,tsx}',
     './src/contexts/**/*.{js,ts,tsx}',
-    './src/utils/**/*.{js,ts}',
+    './src/utils/**/*.{js,ts,tsx}',
   ],
   theme: {
     extend: {
@@ -16,7 +16,6 @@ module.exports = {
         'primary-dark': '#4A7FA3',
         secondary: '#34A853',
       },
-      // se quiser animações/globals extras:
       keyframes: {
         marquee: {
           '0%': { transform: 'translateX(0)' },
@@ -29,6 +28,6 @@ module.exports = {
     },
   },
   plugins: [
-    require('@tailwindcss/line-clamp'), // para .line-clamp-N
+    require('@tailwindcss/line-clamp'),
   ],
 };
