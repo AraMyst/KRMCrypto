@@ -48,7 +48,7 @@ export default function SideBanners() {
         <h3 className="font-bold mb-1 text-center">Premium</h3>
         <p className="text-sm text-center">Get early price analysis from our experts</p>
         <Link href="/auth/register">
-          <a className="mt-2 inline-block px-3 py-1 bg-white text-green-700 rounded text-sm font-semibold mx-auto">
+          <a className="mt-2 block w-fit px-3 py-1 bg-white text-green-700 rounded text-sm font-semibold mx-auto text-center">
             Go Premium
           </a>
         </Link>
