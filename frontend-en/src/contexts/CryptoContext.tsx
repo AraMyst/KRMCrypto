@@ -1,3 +1,4 @@
+// src/contexts/CryptoContext.tsx
 import {
   createContext,
   ReactNode,
@@ -24,8 +25,7 @@ export function CryptoProvider({ children }: { children: ReactNode }) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    let intervalId: NodeJS.Timer;
-
+    // Função que busca os preços
     const fetchPrices = async () => {
       setLoading(true);
       setError(null);
@@ -40,12 +40,13 @@ export function CryptoProvider({ children }: { children: ReactNode }) {
       }
     };
 
-    // Fetch inicial
+    // Executa o fetch assim que montar
     fetchPrices();
 
-    // Re-fetch a cada 60 segundos
-    intervalId = setInterval(fetchPrices, 60_000);
+    // Re-executa a cada 60 segundos
+    const intervalId = setInterval(fetchPrices, 60_000);
 
+    // Cleanup: limpa o interval corretamente
     return () => clearInterval(intervalId);
   }, []);
 
