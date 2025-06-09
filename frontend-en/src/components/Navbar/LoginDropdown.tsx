@@ -29,7 +29,7 @@ export default function LoginDropdown({ onClose }: LoginDropdownProps) {
   return (
     <div
       ref={ref}
-      className="absolute right-0 top-full mt-2 bg-white p-4 shadow rounded w-72 z-40"
+      className="fixed top-0 right-0 h-full w-80 bg-white p-4 shadow-lg z-40"
     >
       <form onSubmit={handleSubmit} className="space-y-2">
         {error && <p className="text-red-600 text-sm">{error}</p>}
