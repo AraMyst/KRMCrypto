@@ -34,14 +34,14 @@ export default function NewsletterForm() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Your email address"
-        className="w-full border border-gray-300 rounded px-3 py-2 mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full border border-gray-300 rounded px-3 py-2 mb-2 focus:outline-none focus:ring-2 focus:ring-primary"
         required
       />
 
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition disabled:opacity-50"
+        className="w-full bg-primary text-white py-2 rounded hover:bg-primary-dark transition disabled:opacity-50"
       >
         {status === 'loading' ? 'Submitting…' : 'Subscribe'}
       </button>

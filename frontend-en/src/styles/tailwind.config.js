@@ -11,8 +11,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // exemplo, puxando da sua logo
-        primary: '#1A73E8',
+        // cores baseadas na logo
+        primary: '#5691BB',
+        'primary-dark': '#4A7FA3',
         secondary: '#34A853',
       },
       // se quiser animações/globals extras:

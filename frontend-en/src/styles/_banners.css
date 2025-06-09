@@ -6,7 +6,7 @@
   }
   /* Banner de newsletter */
   .banner-newsletter {
-    @apply block w-40 p-4 bg-blue-600 text-white rounded-l-lg shadow hover:bg-blue-700 transition;
+    @apply block w-40 p-4 bg-primary text-white rounded-l-lg shadow hover:bg-primary-dark transition;
   }
   /* Banner de subscrição */
   .banner-subscription {

@@ -35,7 +35,7 @@ export default function Navbar() {
           <div className="hidden md:flex space-x-8">
             {NAV_LINKS.map((link) => (
               <Link key={link.href} href={link.href}>
-                <a className="text-gray-700 hover:text-blue-600 font-medium">
+                <a className="text-gray-700 hover:text-primary font-medium">
                   {link.label}
                 </a>
               </Link>
@@ -67,7 +67,7 @@ export default function Navbar() {
             </button>
 
             <Link href="/auth/login">
-              <a className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+              <a className="px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark">
                 Log in
               </a>
             </Link>

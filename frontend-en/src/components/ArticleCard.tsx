@@ -34,7 +34,7 @@ export default function ArticleCard({
         <div className="p-4 flex flex-col justify-between">
           <h3 className="text-lg font-semibold mb-2 line-clamp-2">{title}</h3>
           <p className="text-sm text-gray-600 mb-4 line-clamp-3">{excerpt}</p>
-          <span className="text-xs text-blue-600 font-medium hover:underline">
+          <span className="text-xs text-primary font-medium hover:underline">
             Read more →
           </span>
         </div>
