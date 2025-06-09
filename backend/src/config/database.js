@@ -3,8 +3,10 @@ const mongoose = require('mongoose');
 
 const mongoURI = process.env.MONGODB_URI;
 if (!mongoURI) {
-  console.error('❌  MONGODB_URI não definida em .env');
-  process.exit(1);
+  // In dev/test environments the DB may be optional
+  console.warn('⚠️  MONGODB_URI not set, skipping MongoDB connection');
+  module.exports = mongoose;
+  return;
 }
 
 mongoose
