@@ -112,7 +112,7 @@ export default function AccountPage() {
           <button
             type="submit"
             disabled={profileLoading}
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
+            className="px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark disabled:opacity-50"
           >
             {profileLoading ? 'Saving…' : 'Save Changes'}
           </button>
@@ -153,7 +153,7 @@ export default function AccountPage() {
           <div>
             <p>You do not have an active subscription.</p>
             <Link href="/checkout">
-              <a className="inline-block mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+              <a className="inline-block mt-2 px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark">
                 Subscribe Now
               </a>
             </Link>

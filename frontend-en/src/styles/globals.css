@@ -14,7 +14,7 @@ body {
 
 /* 3. Link defaults */
 a {
-  @apply text-blue-600 hover:text-blue-700;
+  @apply text-primary hover:text-primary-dark;
 }
 
 /* 4. Hide focus outlines except when keyboard-navigating */

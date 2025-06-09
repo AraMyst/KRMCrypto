@@ -60,7 +60,7 @@ export default function ResetPasswordPage() {
             <>
               <p className="text-green-600 mb-4">{message}</p>
               <Link href="/auth/login">
-                <a className="block text-center text-blue-600 hover:underline">
+                <a className="block text-center text-primary hover:underline">
                   Go to Login
                 </a>
               </Link>
@@ -73,7 +73,7 @@ export default function ResetPasswordPage() {
                   <label className="block text-sm font-medium mb-1">New Password</label>
                   <input
                     type="password"
-                    className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
@@ -86,7 +86,7 @@ export default function ResetPasswordPage() {
                   </label>
                   <input
                     type="password"
-                    className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
                     value={confirm}
                     onChange={(e) => setConfirm(e.target.value)}
                     required
@@ -96,7 +96,7 @@ export default function ResetPasswordPage() {
                 <button
                   type="submit"
                   disabled={status === 'submitting'}
-                  className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 disabled:opacity-50"
+                  className="w-full bg-primary text-white py-2 rounded hover:bg-primary-dark disabled:opacity-50"
                 >
                   {status === 'submitting' ? 'Submitting…' : 'Reset Password'}
                 </button>
@@ -106,7 +106,7 @@ export default function ResetPasswordPage() {
 
           <p className="mt-6 text-center text-sm">
             <Link href="/auth/login">
-              <a className="text-blue-600 hover:underline">Back to login</a>
+              <a className="text-primary hover:underline">Back to login</a>
             </Link>
           </p>
         </div>

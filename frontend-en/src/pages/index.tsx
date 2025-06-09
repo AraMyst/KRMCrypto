@@ -1,11 +1,7 @@
 // src/pages/index.tsx
 import { useState, useEffect } from 'react';
-import Navbar from '../components/Navbar/Navbar';
-import CryptoTicker from '../components/CryptoTicker';
 import useGeoCategories, { Category } from '../hooks/useGeoCategories';
 import CategoryCarousel, { Article } from '../components/CategoryCarousel/CategoryCarousel';
-import SideBanners from '../components/SideBanners';
-import Footer from '../components/Footer';
 import apiClient from '../utils/apiClient';
 
 export default function HomePage() {
@@ -37,40 +33,26 @@ export default function HomePage() {
   }, [categories, loading, error]);
 
   if (loading) {
-    return (
-      <>
-        <Navbar />
-        <div className="pt-24 text-center">Loading categories…</div>
-      </>
-    );
+    return <div className="pt-24 text-center">Loading categories…</div>;
   }
 
   if (error) {
     return (
-      <>
-        <Navbar />
-        <div className="pt-24 text-center text-red-600">Error loading categories: {error}</div>
-      </>
+      <div className="pt-24 text-center text-red-600">
+        Error loading categories: {error}
+      </div>
     );
   }
 
   return (
-    <>
-      <Navbar />
-      <CryptoTicker />
-
-      <main className="max-w-7xl mx-auto px-4 pt-8 pb-16">
-        {categories.map((cat: Category) => (
-          <CategoryCarousel
-            key={cat.slug}
-            country={cat.name}
-            articles={articlesMap[cat.slug] || []}
-          />
-        ))}
-      </main>
-
-      <SideBanners />
-      <Footer />
-    </>
+    <main className="max-w-7xl mx-auto px-4 pt-8 pb-16">
+      {categories.map((cat: Category) => (
+        <CategoryCarousel
+          key={cat.slug}
+          country={cat.name}
+          articles={articlesMap[cat.slug] || []}
+        />
+      ))}
+    </main>
   );
 }
