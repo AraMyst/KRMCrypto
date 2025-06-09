@@ -32,3 +32,6 @@ exports.restrictTo = (...allowedRoles) => {
     next();
   };
 };
+
+// Alias para compatibilidade com rotas existentes
+exports.authorize = (...roles) => exports.restrictTo(...roles);
