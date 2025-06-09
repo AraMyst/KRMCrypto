@@ -10,10 +10,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // rotas
+const authRoutes       = require('./routes/auth.routes');
+const subscriptionRoutes = require('./routes/subscription.routes');
 const cryptoRoutes     = require('./routes/crypto.routes');
 const newsletterRoutes = require('./routes/newsletter.routes');
 const paymentRoutes    = require('./routes/payment.routes');
 
+app.use('/api/auth',        authRoutes);
+app.use('/api/subscriptions', subscriptionRoutes);
 app.use('/api/crypto',     cryptoRoutes);
 app.use('/api/newsletter', newsletterRoutes);
 app.use('/api/payments',   paymentRoutes);
