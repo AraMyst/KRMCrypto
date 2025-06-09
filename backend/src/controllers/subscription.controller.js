@@ -13,7 +13,7 @@ exports.createSubscription = async (req, res, next) => {
   }
 };
 
-exports.getSubscription = async (req, res, next) => {
+exports.getMySubscription = async (req, res, next) => {
   try {
     const userId = req.user.id;
     const subscription = await subscriptionService.getSubscriptionByUser(userId);
@@ -42,6 +42,29 @@ exports.cancelSubscription = async (req, res, next) => {
     const userId = req.user.id;
     await subscriptionService.cancelSubscription(userId);
     res.status(204).send();
+  } catch (err) {
+    next(err);
+  }
+};
+
+// ====== Admin Routes ======
+
+exports.getAllSubscriptions = async (req, res, next) => {
+  try {
+    const subscriptions = await subscriptionService.getAllSubscriptions();
+    res.json({ subscriptions });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getSubscriptionById = async (req, res, next) => {
+  try {
+    const subscription = await subscriptionService.getSubscriptionById(req.params.id);
+    if (!subscription) {
+      return res.status(404).json({ message: 'Assinatura não encontrada.' });
+    }
+    res.json({ subscription });
   } catch (err) {
     next(err);
   }

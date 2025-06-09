@@ -61,9 +61,19 @@ async function cancelSubscription(userId) {
   );
 }
 
+async function getAllSubscriptions() {
+  return Subscription.find().populate('user');
+}
+
+async function getSubscriptionById(id) {
+  return Subscription.findById(id).populate('user');
+}
+
 module.exports = {
   createSubscription,
   getSubscriptionByUser,
   updateSubscription,
-  cancelSubscription
+  cancelSubscription,
+  getAllSubscriptions,
+  getSubscriptionById
 };
