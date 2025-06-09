@@ -1,4 +1,3 @@
-// frontend-en/tailwind.config.js
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -26,6 +25,7 @@ module.exports = {
       },
     },
   },
-  // removido '@tailwindcss/line-clamp' para evitar erro de módulo não encontrado
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/line-clamp'),
+  ],
 };
