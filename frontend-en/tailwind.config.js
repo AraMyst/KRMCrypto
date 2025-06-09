@@ -1,7 +1,7 @@
+// frontend-en/tailwind.config.js
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    // onde Tailwind deve procurar classes
     './src/pages/**/*.{js,ts,jsx,tsx}',
     './src/components/**/*.{js,ts,jsx,tsx}',
     './src/hooks/**/*.{js,ts,tsx}',
@@ -11,7 +11,6 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // cores baseadas na logo
         primary: '#5691BB',
         'primary-dark': '#4A7FA3',
         secondary: '#34A853',
@@ -27,7 +26,6 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require('@tailwindcss/line-clamp'),
-  ],
+  // removido '@tailwindcss/line-clamp' para evitar erro de módulo não encontrado
+  plugins: [],
 };
