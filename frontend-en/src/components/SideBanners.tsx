@@ -44,10 +44,10 @@ export default function SideBanners() {
       </div>
 
       {/* Banner Subscription */}
-      <Link href="/checkout">
+      <Link href="/auth/register">
         <a className="block w-40 p-4 bg-green-600 text-white rounded-l-lg shadow hover:text-gray-300 transition">
           <h3 className="font-bold mb-1">Subscription</h3>
-          <p className="text-sm">Consiga análises antecipadas dos nossos especialistas</p>
+          <p className="text-sm">Get early analyses from our experts</p>
         </a>
       </Link>
     </aside>

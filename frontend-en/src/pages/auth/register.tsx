@@ -93,10 +93,7 @@ export default function RegisterPage() {
           </button>
         </form>
         <p className="mt-4 text-center text-sm">
-          Already have an account?{' '}
-          <Link href="/auth/login">
-            <a className="text-primary hover:underline">Log In</a>
-          </Link>
+          Already have an account? Use the login button in the navigation bar.
         </p>
       </div>
     </div>

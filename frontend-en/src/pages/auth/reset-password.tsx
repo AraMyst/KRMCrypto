@@ -59,11 +59,7 @@ export default function ResetPasswordPage() {
           {status === 'success' ? (
             <>
               <p className="text-green-600 mb-4">{message}</p>
-              <Link href="/auth/login">
-                <a className="block text-center text-primary hover:underline">
-                  Go to Login
-                </a>
-              </Link>
+              <p className="block text-center text-primary">Use the login button in the navigation bar.</p>
             </>
           ) : (
             <>
@@ -105,9 +101,7 @@ export default function ResetPasswordPage() {
           )}
 
           <p className="mt-6 text-center text-sm">
-            <Link href="/auth/login">
-              <a className="text-primary hover:underline">Back to login</a>
-            </Link>
+            Use the login button in the navigation bar.
           </p>
         </div>
       </div>

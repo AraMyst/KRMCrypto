@@ -63,9 +63,7 @@ export default function ForgotPasswordPage() {
           )}
 
           <p className="mt-6 text-center text-sm">
-            <Link href="/auth/login">
-              <a className="text-primary hover:underline">Back to login</a>
-            </Link>
+            Use the login button in the navigation bar.
           </p>
         </div>
       </div>
