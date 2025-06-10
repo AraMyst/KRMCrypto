@@ -2,8 +2,8 @@
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import SearchDropdown from '../SearchDropdown'
-import LoginDropdown from '../LoginDropdown'
+import SearchDropdown from './SearchDropdown'
+import LoginDropdown from './LoginDropdown'
 
 // atualizei apenas aqui:
 const NAV_LINKS = [
