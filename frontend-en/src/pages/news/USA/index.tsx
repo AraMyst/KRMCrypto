@@ -44,7 +44,7 @@ export default function USANewsPage({ articles }: USANewsPageProps) {
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/news?category=usa`
+      `${process.env.NEXT_PUBLIC_API_URL}/api/posts?category=usa`
     );
     const articles: Article[] = await res.json();
     return { props: { articles } };

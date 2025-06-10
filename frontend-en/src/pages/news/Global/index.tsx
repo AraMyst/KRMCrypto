@@ -44,7 +44,7 @@ export default function GlobalNewsPage({ articles }: GlobalNewsPageProps) {
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/news?category=global`
+      `${process.env.NEXT_PUBLIC_API_URL}/api/posts?category=global`
     );
     const articles: Article[] = await res.json();
     return { props: { articles } };

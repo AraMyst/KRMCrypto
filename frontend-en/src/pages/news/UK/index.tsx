@@ -44,7 +44,7 @@ export default function UKNewsPage({ articles }: UKNewsPageProps) {
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/news?category=uk`
+      `${process.env.NEXT_PUBLIC_API_URL}/api/posts?category=uk`
     );
     const articles: Article[] = await res.json();
     return { props: { articles } };

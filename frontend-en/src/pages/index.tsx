@@ -15,7 +15,7 @@ export default function HomePage() {
     categories.forEach((cat: Category) => {
       // busca 5 artigos recentes para cada categoria
       apiClient
-        .get<Article[]>(`/api/news?category=${encodeURIComponent(cat.slug)}&limit=5`)
+        .get<Article[]>(`/api/posts?category=${encodeURIComponent(cat.slug)}&limit=5`)
         .then((resp) => {
           setArticlesMap((prev) => ({
             ...prev,
