@@ -5,7 +5,7 @@ const PaymentSchema = new mongoose.Schema({
   user:        { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   plan:        {
                   type: String,
-                  enum: ['diario','semanal','quinzenal','mensal','bimestral','trimestral'],
+                  enum: ['daily','weekly','biweekly','monthly','bimonthly','quarterly'],
                   required: true
                 },
   amount:      { type: Number, required: true },     // valor em local currency

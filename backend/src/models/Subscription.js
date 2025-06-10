@@ -12,12 +12,12 @@ const SubscriptionSchema = new mongoose.Schema({
     type: String,
     required: true,
     enum: [
-      'diario',
-      'semanal',
-      'quinzenal',
-      'mensal',
-      'bimestral',
-      'trimestral'
+      'daily',
+      'weekly',
+      'biweekly',
+      'monthly',
+      'bimonthly',
+      'quarterly'
     ]
   },
   status: {

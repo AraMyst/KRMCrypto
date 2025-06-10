@@ -1,20 +1,20 @@
 const Subscription = require('../models/Subscription');
 const paymentService = require('./payment.service');
 
-// Preços de exemplo por plano (em USD)
+// Example prices per plan (in USD)
 const planPrices = {
-  diario: 5,
-  semanal: 10,
-  quinzenal: 15,
-  mensal: 20,
-  bimestral: 35,
-  trimestral: 50
+  daily: 5,
+  weekly: 10,
+  biweekly: 15,
+  monthly: 20,
+  bimonthly: 35,
+  quarterly: 50
 };
 const DEFAULT_CURRENCY = 'USD';
 
 async function createSubscription(userId, plan) {
   if (!planPrices[plan]) {
-    throw new Error('Plano inválido');
+    throw new Error('Invalid plan');
   }
 
   let subscription = await Subscription.findOne({ user: userId });

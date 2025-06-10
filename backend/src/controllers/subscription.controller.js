@@ -5,7 +5,7 @@ const subscriptionService = require('../services/subscription.service');
 exports.createSubscription = async (req, res, next) => {
   try {
     const userId = req.user.id;
-    const { plan } = req.body; // ex: 'diario', 'semanal', ...
+    const { plan } = req.body; // e.g. 'daily', 'weekly', ...
     const { subscription, paymentLink } = await subscriptionService.createSubscription(userId, plan);
     res.status(201).json({ subscription, paymentLink });
   } catch (err) {
