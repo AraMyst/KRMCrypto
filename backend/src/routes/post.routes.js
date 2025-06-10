@@ -5,7 +5,7 @@ const postController = require('../controllers/post.controller');
 const { protect, authorize } = require('../middlewares/auth.middleware');
 
 // leitura pública (com busca por ?q=palavra-chave)
-router.get('/',        postController.getAllPosts);
+router.get('/',        postController.getPosts);
 router.get('/:slug',   postController.getPostBySlug);
 
 // apenas admin pode gerenciar conteúdo
