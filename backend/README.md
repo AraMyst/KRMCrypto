@@ -44,7 +44,7 @@ PORT=3000
 # Email (Brevo)\ n SMTP_HOST=smtp-relay.sendinblue.com
 SMTP_PORT=587
 SMTP_USER=seu_usuario
-SMTP_PASS=sua_senha
+SMTP_PASSWORD=sua_senha
 BREVO_LIST_ID=KRMCrypto
 EMAIL_API_KEY=xkeysib-...
 
