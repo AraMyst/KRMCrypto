@@ -1,9 +1,12 @@
 import apiClient from './apiClient';
 
 export interface GeoData {
-  country: string;
-  region?: string;
-  city?: string;
+  ip: string;
+  countryCode2?: string;
+  countryName?: string;
+  continent?: string;
+  timezone?: string;
+  currency?: string;
 }
 
 /**
