@@ -1,5 +1,21 @@
 // src/server.js
 require('dotenv').config();           // carrega .env
+
+// Verifica variáveis de ambiente críticas
+const requiredEnv = [
+  'JWT_SECRET',
+  'SMTP_HOST',
+  'SMTP_PORT',
+  'SMTP_USER',
+  'SMTP_PASSWORD',
+  'EMAIL_FROM'
+];
+
+const missing = requiredEnv.filter((key) => !process.env[key]);
+if (missing.length) {
+  console.error(`❌  Missing required environment variables: ${missing.join(', ')}`);
+  process.exit(1);
+}
 require('./config/database');        // inicializa conexão com MongoDB
 
 const express = require('express');
