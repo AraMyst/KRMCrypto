@@ -77,7 +77,7 @@ npm start
 ├── routes/
 ├── services/
 ├── utils/
-├── app.js
+├── server.js
 └── package.json
 ```
 
