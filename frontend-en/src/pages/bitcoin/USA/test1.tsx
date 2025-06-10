@@ -1,14 +1,14 @@
-// src/pages/news/UK/[slug].tsx
+// src/pages/news/USA/[slug].tsx
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { Article } from '../../../types';
 import { formatDate } from '../../../utils/date';
 
-interface UKArticlePageProps {
+interface USAArticlePageProps {
   article: Article & { content: string };
 }
 
-export default function UKArticlePage({ article }: UKArticlePageProps) {
+export default function USAArticlePage({ article }: USAArticlePageProps) {
   return (
     <>
       <Head>
@@ -35,7 +35,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { slug } = ctx.params!;
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/posts/${encodeURIComponent(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/news/${encodeURIComponent(
         slug as string
       )}`
     );
@@ -45,7 +45,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const article: Article & { content: string } = await res.json();
     return { props: { article } };
   } catch (err) {
-    console.error('Error fetching UK article:', err);
+    console.error('Error fetching USA article:', err);
     return { notFound: true };
   }
 };
