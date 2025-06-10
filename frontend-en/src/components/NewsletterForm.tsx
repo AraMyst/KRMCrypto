@@ -1,25 +1,15 @@
 import { FormEvent, useState } from 'react';
-import apiClient from '../utils/apiClient';
+import { useNewsletter } from '../contexts/NewsletterContext';
 
 export default function NewsletterForm() {
   const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [message, setMessage] = useState('');
+  const { subscribe, loading, success, error } = useNewsletter();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!email.trim()) return;
-    setStatus('loading');
-    try {
-      await apiClient.post('/api/newsletter/subscribe', { email: email.trim() });
-      setStatus('success');
-      setMessage('Subscribed successfully!');
-      setEmail('');
-    } catch (err) {
-      console.error('Newsletter subscribe error', err);
-      setStatus('error');
-      setMessage('Oops, something went wrong.');
-    }
+    await subscribe(email.trim());
+    setEmail('');
   };
 
   return (
@@ -40,18 +30,14 @@ export default function NewsletterForm() {
 
       <button
         type="submit"
-        disabled={status === 'loading'}
+        disabled={loading}
         className="w-full bg-primary text-white py-2 rounded hover:bg-primary-dark transition disabled:opacity-50"
       >
-        {status === 'loading' ? 'Submitting…' : 'Subscribe'}
+        {loading ? 'Submitting…' : 'Subscribe'}
       </button>
 
-      {status === 'success' && (
-        <p className="mt-2 text-green-600 text-sm">{message}</p>
-      )}
-      {status === 'error' && (
-        <p className="mt-2 text-red-600 text-sm">{message}</p>
-      )}
+      {success && <p className="mt-2 text-green-600 text-sm">{success}</p>}
+      {error && <p className="mt-2 text-red-600 text-sm">{error}</p>}
     </form>
   );
 }
