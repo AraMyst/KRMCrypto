@@ -1,27 +1,27 @@
-// src/pages/news/UK/test2.tsx
+// src/pages/bitcoin/Global/test1.tsx
 import Head from 'next/head';
 import { formatDate } from '../../../utils/date';
 
-export default function UKTest2Page() {
+export default function BitcoinGlobalTest1Page() {
   const now = new Date().toISOString();
   return (
     <>
       <Head>
-        <title>test2 – iDontKnowCrypto</title>
-        <meta name="description" content="test2" />
+        <title>test1 – iDontKnowCrypto</title>
+        <meta name="description" content="test1" />
       </Head>
       <article className="prose lg:prose-xl max-w-3xl mx-auto px-4 py-8">
-        <h1>test2</h1>
+        <h1>test1</h1>
         <p className="text-sm text-gray-500">
-          {formatDate(now)} in UK
+          {formatDate(now)} in Global
         </p>
         <img
-          src="/images/test2-uk.png"
-          alt="test2"
+          src="/images/test1-global.png"
+          alt="test1"
           className="w-full h-auto rounded my-6"
         />
         <div>
-          <p>test2</p>
+          <p>test1</p>
         </div>
       </article>
     </>

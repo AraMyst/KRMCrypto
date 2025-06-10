@@ -1,40 +1,62 @@
-// src/pages/news/USA/index.tsx
+// src/pages/presale/USA/index.tsx
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import ArticleCard from '../../../components/ArticleCard';
 import { Article } from '../../../types';
 
-interface USANewsPageProps {
+const testArticles: Article[] = [
+  {
+    slug: 'test1',
+    category: 'USA',
+    title: 'test1',
+    excerpt: 'test1',
+    imageUrl: '/images/test1-usa.png',
+  },
+  {
+    slug: 'test2',
+    category: 'USA',
+    title: 'test2',
+    excerpt: 'test2',
+    imageUrl: '/images/test2-usa.png',
+  },
+  {
+    slug: 'test3',
+    category: 'USA',
+    title: 'test3',
+    excerpt: 'test3',
+    imageUrl: '/images/test3-usa.png',
+  },
+];
+
+interface USAPresaleTestIndexProps {
   articles: Article[];
 }
 
-export default function USANewsPage({ articles }: USANewsPageProps) {
+export default function USAPresaleTestIndex({
+  articles,
+}: USAPresaleTestIndexProps) {
   return (
     <>
       <Head>
-        <title>USA News – iDontKnowCrypto</title>
+        <title>USA Presale – iDontKnowCrypto (Test)</title>
         <meta
           name="description"
-          content="Stay up to date with the latest USA crypto news."
+          content="Página de teste USA Presale com artigos estáticos."
         />
       </Head>
       <main className="max-w-5xl mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-6">USA News</h1>
+        <h1 className="text-3xl font-bold mb-6">USA Presale (Test)</h1>
         <div className="space-y-6">
-          {articles.length > 0 ? (
-            articles.map((article) => (
-              <ArticleCard
-                key={article.slug}
-                slug={article.slug}
-                category={article.category}
-                title={article.title}
-                excerpt={article.excerpt}
-                imageUrl={article.imageUrl}
-              />
-            ))
-          ) : (
-            <p>No articles found in the USA category.</p>
-          )}
+          {articles.map((article) => (
+            <ArticleCard
+              key={article.slug}
+              slug={article.slug}
+              category={article.category}
+              title={article.title}
+              excerpt={article.excerpt}
+              imageUrl={article.imageUrl}
+            />
+          ))}
         </div>
       </main>
     </>
@@ -42,14 +64,9 @@ export default function USANewsPage({ articles }: USANewsPageProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/news?category=usa`
-    );
-    const articles: Article[] = await res.json();
-    return { props: { articles } };
-  } catch (err) {
-    console.error('Error fetching USA articles:', err);
-    return { props: { articles: [] } };
-  }
+  return {
+    props: {
+      articles: testArticles,
+    },
+  };
 };

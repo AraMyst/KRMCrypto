@@ -1,4 +1,4 @@
-// src/pages/news/UK/test1.tsx
+// src/pages/presale/UK/test1.tsx
 import Head from 'next/head';
 import { formatDate } from '../../../utils/date';
 

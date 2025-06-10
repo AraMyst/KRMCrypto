@@ -1,49 +1,29 @@
-// src/pages/news/Global/[slug].tsx
-import { GetServerSideProps } from 'next';
+// src/pages/bitcoin/Global/test1.tsx
 import Head from 'next/head';
-import { Article } from '../../../types';
 import { formatDate } from '../../../utils/date';
 
-interface ArticlePageProps {
-  article: Article & { content: string };
-}
-
-export default function GlobalArticlePage({ article }: ArticlePageProps) {
+export default function BitcoinGlobalTest1Page() {
+  const now = new Date().toISOString();
   return (
     <>
       <Head>
-        <title>{article.title} – iDontKnowCrypto</title>
-        <meta name="description" content={article.excerpt} />
+        <title>test1 – iDontKnowCrypto</title>
+        <meta name="description" content="test1" />
       </Head>
       <article className="prose lg:prose-xl max-w-3xl mx-auto px-4 py-8">
-        <h1>{article.title}</h1>
+        <h1>test1</h1>
         <p className="text-sm text-gray-500">
-          {formatDate(article.publishedAt)} in {article.category}
+          {formatDate(now)} in Global
         </p>
         <img
-          src={article.imageUrl}
-          alt={article.title}
+          src="/images/test1-global.png"
+          alt="test1"
           className="w-full h-auto rounded my-6"
         />
-        <div dangerouslySetInnerHTML={{ __html: article.content }} />
+        <div>
+          <p>test1</p>
+        </div>
       </article>
     </>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { slug } = ctx.params!;
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/news/${encodeURIComponent(slug as string)}`
-    );
-    if (!res.ok) {
-      return { notFound: true };
-    }
-    const article: Article & { content: string } = await res.json();
-    return { props: { article } };
-  } catch (err) {
-    console.error('Error fetching article:', err);
-    return { notFound: true };
-  }
-};
