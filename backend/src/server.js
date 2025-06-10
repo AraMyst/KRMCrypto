@@ -31,12 +31,20 @@ const subscriptionRoutes = require('./routes/subscription.routes');
 const cryptoRoutes     = require('./routes/crypto.routes');
 const newsletterRoutes = require('./routes/newsletter.routes');
 const paymentRoutes    = require('./routes/payment.routes');
+const categoryRoutes   = require('./routes/category.routes');
+const postRoutes       = require('./routes/post.routes');
+const userRoutes       = require('./routes/user.routes');
+const geoRoutes        = require('./routes/geo.routes');
 
 app.use('/api/auth',        authRoutes);
 app.use('/api/subscriptions', subscriptionRoutes);
 app.use('/api/crypto',     cryptoRoutes);
 app.use('/api/newsletter', newsletterRoutes);
 app.use('/api/payments',   paymentRoutes);
+app.use('/api/categories', categoryRoutes);
+app.use('/api/posts',      postRoutes);
+app.use('/api/users',      userRoutes);
+app.use('/api/geo',        geoRoutes);
 
 // health-check
 app.get('/', (req, res) => {

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import apiClient from '../utils/apiClient';
+import { fetchUserGeo } from '../utils/geo';
 
 export interface Category {
   name: string;
@@ -27,9 +28,24 @@ export default function useGeoCategories(): GeoCategoriesHook {
       try {
         // Busca todas as categorias disponíveis
         const catRes = await apiClient.get<Category[]>('/api/categories');
-        const fetched = catRes.data;
+        let fetched = catRes.data;
 
-        // Sem geolocalização, apenas usa a ordem vinda da API
+        try {
+          const geo = await fetchUserGeo();
+          const country = geo.countryName?.toLowerCase();
+          if (country) {
+            fetched = [...fetched].sort((a, b) => {
+              const aMatch = a.name.toLowerCase() === country || a.slug.toLowerCase() === country;
+              const bMatch = b.name.toLowerCase() === country || b.slug.toLowerCase() === country;
+              if (aMatch && !bMatch) return -1;
+              if (!aMatch && bMatch) return 1;
+              return 0;
+            });
+          }
+        } catch (geoErr) {
+          // falha ao obter geolocalização não bloqueia
+        }
+
         setCategories(fetched);
       } catch (err: any) {
         console.error('useGeoCategories error:', err);

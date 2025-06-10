@@ -3,9 +3,10 @@ const express = require('express');
 const router = express.Router();
 const categoryController = require('../controllers/category.controller');
 const { protect, authorize } = require('../middlewares/auth.middleware');
+const locationMiddleware = require('../middlewares/location.middleware');
 
 // leitura pública
-router.get('/',        categoryController.getAllCategories);
+router.get('/', locationMiddleware, categoryController.getAllCategories);
 router.get('/:slug',   categoryController.getCategoryBySlug);
 
 // apenas admin pode modificar

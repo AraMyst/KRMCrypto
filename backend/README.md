@@ -52,6 +52,8 @@ EMAIL_API_KEY=xkeysib-...
 COINBASE_API_KEY=579038d7-0e41-47f9-b643-04a51447220f
 # CoinGecko Demo API
 COINGECKO_API_KEY=your_coingecko_key
+# IP Geolocation
+IPGEO_API_KEY=your_ipgeolocation_key
 ```
 
 ## Executando

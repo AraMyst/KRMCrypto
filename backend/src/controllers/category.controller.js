@@ -24,7 +24,32 @@ exports.createCategory = async (req, res) => {
 // Lista todas as categorias
 exports.getAllCategories = async (req, res) => {
   try {
-    const categories = await Category.find().lean();
+    let categories = await Category.find().sort({ name: 1 }).lean();
+
+    // If geolocation info is available, prioritize the matching country
+    if (req.location) {
+      const countryName = req.location.countryName?.toLowerCase();
+      const countryCode = req.location.countryCode2?.toLowerCase();
+
+      const priority = [];
+      const others = [];
+      categories.forEach((cat) => {
+        const slug = cat.slug.toLowerCase();
+        const name = cat.name.toLowerCase();
+        if (
+          slug === countryName ||
+          slug === countryCode ||
+          name === countryName ||
+          name === countryCode
+        ) {
+          priority.push(cat);
+        } else {
+          others.push(cat);
+        }
+      });
+      categories = [...priority, ...others];
+    }
+
     res.json(categories);
   } catch {
     res.status(500).json({ message: 'Erro no servidor.' });
