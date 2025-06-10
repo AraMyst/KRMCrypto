@@ -12,13 +12,16 @@ exports.subscribe = async (req, res) => {
   }
 
   try {
+    const [firstName, ...rest] = name.trim().split(' ');
+    const lastName = rest.join(' ');
+
     // 1) Salva no Mongo com status 'pending'
-    let subscriber = await NewsletterSubscriber.create({ name, email, status: 'pending' });
+    let subscriber = await NewsletterSubscriber.create({ firstName, lastName, email, status: 'pending' });
 
     // 2) Chama API Brevo para criar/adicionar na lista
     const createContact = new SibApiV3Sdk.CreateContact();
     createContact.email = email;
-    createContact.attributes = { FIRSTNAME: name };
+    createContact.attributes = { FIRSTNAME: firstName, LASTNAME: lastName };
     createContact.listIds = [BREVO_LIST_ID];
     createContact.updateEnabled = false; // não sobrescrever contatos existentes
 
@@ -32,7 +35,8 @@ exports.subscribe = async (req, res) => {
       message: 'Inscrição realizada com sucesso!',
       subscriber: {
         id: subscriber._id,
-        name: subscriber.name,
+        firstName: subscriber.firstName,
+        lastName: subscriber.lastName,
         email: subscriber.email,
         status: subscriber.status
       }

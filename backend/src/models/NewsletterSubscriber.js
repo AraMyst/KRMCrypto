@@ -2,10 +2,15 @@
 const mongoose = require('mongoose');
 
 const NewsletterSubscriberSchema = new mongoose.Schema({
-  name: {
+  firstName: {
     type: String,
     required: true,
     trim: true
+  },
+  lastName: {
+    type: String,
+    trim: true,
+    default: ''
   },
   email: {
     type: String,
