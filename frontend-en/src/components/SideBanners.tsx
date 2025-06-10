@@ -5,7 +5,7 @@ import { useNewsletter } from '../contexts/NewsletterContext';
 
 export default function SideBanners() {
   const { user } = useAuth();
-  const { subscribe, isSubscribed, loading } = useNewsletter();
+  const { subscribe, isSubscribed, loading, error, success } = useNewsletter();
   const [email, setEmail] = useState(user?.email ?? '');
 
   const handleSubmit = async (e: FormEvent) => {
@@ -20,8 +20,10 @@ export default function SideBanners() {
       {/* Banner Newsletter */}
       <div className="block w-40 p-4 bg-primary text-white rounded-l-lg shadow text-center">
         <h3 className="font-bold mb-1 text-center">Newsletter</h3>
-        {user && isSubscribed ? (
-          <p className="text-sm">Congrats, you're already subscribed!</p>
+        {success ? (
+          <p className="text-sm">{success}</p>
+        ) : isSubscribed ? (
+          <p className="text-sm">Você já está cadastrado na nossa newsletter.</p>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-2">
             <input
@@ -39,6 +41,9 @@ export default function SideBanners() {
             >
               {loading ? 'Submitting…' : 'Subscribe'}
             </button>
+            {error && (
+              <p className="text-xs text-red-300 text-center mt-1">{error}</p>
+            )}
           </form>
         )}
       </div>

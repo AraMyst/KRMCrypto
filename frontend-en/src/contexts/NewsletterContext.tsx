@@ -11,6 +11,7 @@ interface NewsletterContextType {
   isSubscribed: boolean;
   loading: boolean;
   error: string | null;
+  success: string | null;
   subscribe: (email: string) => Promise<void>;
 }
 
@@ -22,6 +23,7 @@ export function NewsletterProvider({ children }: { children: ReactNode }) {
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
 
   // Tenta restaurar do localStorage se o usuário já se inscreveu antes
   useEffect(() => {
@@ -38,14 +40,21 @@ export function NewsletterProvider({ children }: { children: ReactNode }) {
   const subscribe = async (email: string) => {
     setLoading(true);
     setError(null);
+    setSuccess(null);
     try {
       await apiClient.post('/api/newsletter/subscribe', { email });
       setIsSubscribed(true);
+      setSuccess('Parabéns, você está inscrito na nossa newsletter!');
       localStorage.setItem('newsletterSubscribed', 'true');
     } catch (err: any) {
-      setError(
-        err.response?.data?.message ?? 'Failed to subscribe. Try again.'
-      );
+      const msg = err.response?.data?.message;
+      if (msg && msg.includes('E-mail já cadastrado')) {
+        setIsSubscribed(true);
+        setSuccess('Você já está cadastrado na nossa newsletter.');
+        localStorage.setItem('newsletterSubscribed', 'true');
+      } else {
+        setError(msg ?? 'Failed to subscribe. Try again.');
+      }
     } finally {
       setLoading(false);
     }
@@ -53,7 +62,7 @@ export function NewsletterProvider({ children }: { children: ReactNode }) {
 
   return (
     <NewsletterContext.Provider
-      value={{ isSubscribed, loading, error, subscribe }}
+      value={{ isSubscribed, loading, error, success, subscribe }}
     >
       {children}
     </NewsletterContext.Provider>
