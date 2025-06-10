@@ -6,7 +6,10 @@ const apiKey = defaultClient.authentications['api-key'];
 
 // Tome cuidado de NÃO comitar sua chave no repo.
 // Defina em .env: BREVO_API_KEY=xkeysib-...
-apiKey.apiKey = process.env.BREVO_API_KEY || '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';
+apiKey.apiKey = process.env.BREVO_API_KEY;
+if (!apiKey.apiKey) {
+  console.warn('⚠️  BREVO_API_KEY not set. Newsletter emails will fail.');
+}
 
 // O ID da lista KRMCrypto
 const BREVO_LIST_ID = Number(process.env.BREVO_LIST_ID) || 2;

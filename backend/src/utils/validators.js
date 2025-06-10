@@ -6,8 +6,8 @@ const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 // Valida planos de assinatura
 const validateSubscription = [
   body('plan')
-    .isIn(['daily', 'weekly', 'fortnightly', 'monthly', 'bimonthly', 'quarterly'])
-    .withMessage('Plan must be one of: daily, weekly, fortnightly, monthly, bimonthly, quarterly'),
+    .isIn(['daily', 'weekly', 'biweekly', 'monthly', 'bimonthly', 'quarterly'])
+    .withMessage('Plan must be one of: daily, weekly, biweekly, monthly, bimonthly, quarterly'),
 ];
 
 // Valida updates de usuário (admin)
