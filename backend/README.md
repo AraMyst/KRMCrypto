@@ -45,7 +45,7 @@ PORT=3000
 SMTP_PORT=587
 SMTP_USER=seu_usuario
 SMTP_PASS=sua_senha
-NEWSLETTER_LIST_ID=KRMCrypto
+BREVO_LIST_ID=KRMCrypto
 EMAIL_API_KEY=xkeysib-...
 
 # Coinbase Commerce

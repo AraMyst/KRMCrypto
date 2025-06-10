@@ -1,6 +1,6 @@
 // controllers/newsletter.controller.js
 const NewsletterSubscriber = require('../models/NewsletterSubscriber');
-const { SibApiV3Sdk, NEWSLETTER_LIST_ID } = require('../config/newsletter');
+const { SibApiV3Sdk, BREVO_LIST_ID } = require('../config/newsletter');
 
 const contactsApi = new SibApiV3Sdk.ContactsApi();
 
@@ -19,7 +19,7 @@ exports.subscribe = async (req, res) => {
     const createContact = new SibApiV3Sdk.CreateContact();
     createContact.email = email;
     createContact.attributes = { FIRSTNAME: name };
-    createContact.listIds = [NEWSLETTER_LIST_ID];
+    createContact.listIds = [BREVO_LIST_ID];
     createContact.updateEnabled = false; // não sobrescrever contatos existentes
 
     await contactsApi.createContact(createContact);

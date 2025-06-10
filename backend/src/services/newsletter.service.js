@@ -1,4 +1,4 @@
-const SibApiV3Sdk = require('sib-api-v3-sdk');
+const { SibApiV3Sdk, BREVO_LIST_ID } = require('../config/newsletter');
 const NewsletterSubscriber = require('../models/NewsletterSubscriber');
 const { sendEmail } = require('../utils/email.util');
 
@@ -26,7 +26,7 @@ async function subscribe({ firstName, lastName, email }) {
   const createContact = new SibApiV3Sdk.CreateContact();
   createContact.email = email;
   createContact.attributes = { FIRSTNAME: firstName, LASTNAME: lastName };
-  createContact.listIds = [ Number(process.env.NEWSLETTER_LIST_ID) ];
+  createContact.listIds = [ BREVO_LIST_ID ];
   createContact.updateEnabled = false;
 
   try {
@@ -35,7 +35,7 @@ async function subscribe({ firstName, lastName, email }) {
     // se já existe no Brevo, apenas adiciona à lista
     if (err.response && err.response.body.code === 'duplicate_parameter') {
       const updateContact = new SibApiV3Sdk.UpdateContact();
-      updateContact.listIds = [ Number(process.env.NEWSLETTER_LIST_ID) ];
+      updateContact.listIds = [ BREVO_LIST_ID ];
       await contactsApi.updateContact(email, updateContact);
     } else {
       throw err;
