@@ -11,6 +11,7 @@ const testArticles: Article[] = [
     title: 'test1',
     excerpt: 'test1',
     imageUrl: '/images/test1-global.png',
+    publishedAt: '2023-01-01',
   },
   {
     slug: 'test2',
@@ -18,6 +19,7 @@ const testArticles: Article[] = [
     title: 'test2',
     excerpt: 'test2',
     imageUrl: '/images/test2-global.png',
+    publishedAt: '2023-01-02',
   },
   {
     slug: 'test3',
@@ -25,6 +27,7 @@ const testArticles: Article[] = [
     title: 'test3',
     excerpt: 'test3',
     imageUrl: '/images/test3-global.png',
+    publishedAt: '2023-01-03',
   },
 ];
 

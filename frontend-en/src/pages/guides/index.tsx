@@ -1,6 +1,6 @@
 // src/pages/bitcoin/Global/test1.tsx
 import Head from 'next/head';
-import { formatDate } from '../../../utils/date';
+import { formatDate } from '../../utils/date';
 
 export default function BitcoinGlobalTest1Page() {
   const now = new Date().toISOString();
