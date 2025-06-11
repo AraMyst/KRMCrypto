@@ -86,7 +86,7 @@ npm start
 * `POST /api/auth/register` – cadastro de usuário
 * `POST /api/auth/login` – login JWT
 * `GET /api/subscriptions/me` – dados da assinatura do usuário
-* `POST /api/newsletter/subscribe` – cadastra email na newsletter
+* `POST /api/newsletter/subscribe` – cadastra email na newsletter. Envie `{ email, name? }` no corpo (nome opcional)
 * `GET /api/crypto/prices` – lista de preços de criptos
 
 Para detalhes de todas as rotas, veja a documentação Swagger (se implementado).
