@@ -3,14 +3,15 @@ const express = require('express');
 const router = express.Router();
 const newsletterService = require('../services/newsletter.service');
 
-router.post('/', async (req, res) => {
+// accepts optional name and required email
+router.post('/subscribe', async (req, res) => {
   const { name, email } = req.body;
-  if (!name || !email) {
-    return res.status(400).json({ message: 'Nome e e-mail são obrigatórios.' });
+  if (!email) {
+    return res.status(400).json({ message: 'E-mail é obrigatório.' });
   }
 
   try {
-    const [firstName, ...rest] = name.trim().split(' ');
+    const [firstName, ...rest] = (name || '').trim().split(' ');
     const lastName = rest.join(' ');
 
     const subscriber = await newsletterService.subscribe({ firstName, lastName, email });

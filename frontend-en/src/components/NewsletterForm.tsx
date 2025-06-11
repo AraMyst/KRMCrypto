@@ -15,6 +15,7 @@ export default function NewsletterForm() {
   return (
     <form
       onSubmit={handleSubmit}
+      noValidate
       className="w-full max-w-sm bg-white p-4 rounded-lg shadow"
     >
       <h3 className="text-lg font-semibold mb-2">Join our Newsletter</h3>

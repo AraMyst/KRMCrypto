@@ -25,7 +25,7 @@ export default function SideBanners() {
         ) : isSubscribed ? (
           <p className="text-sm">Você já está cadastrado na nossa newsletter.</p>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-2">
+          <form onSubmit={handleSubmit} noValidate className="space-y-2">
             <input
               type="email"
               value={email}
