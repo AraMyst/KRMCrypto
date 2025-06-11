@@ -52,6 +52,8 @@ export function NewsletterProvider({ children }: { children: ReactNode }) {
         setIsSubscribed(true);
         setSuccess('Você já está cadastrado na nossa newsletter.');
         localStorage.setItem('newsletterSubscribed', 'true');
+      } else if (!err.response) {
+        setError('Não foi possível conectar ao servidor. Tente novamente mais tarde.');
       } else {
         setError(msg ?? 'Failed to subscribe. Try again.');
       }
