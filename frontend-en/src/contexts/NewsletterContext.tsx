@@ -44,16 +44,16 @@ export function NewsletterProvider({ children }: { children: ReactNode }) {
     try {
       await apiClient.post('/api/newsletter/subscribe', { email });
       setIsSubscribed(true);
-      setSuccess('Parabéns, você está inscrito na nossa newsletter!');
+      setSuccess('Congrats, you are subscribed to our newsletter!');
       localStorage.setItem('newsletterSubscribed', 'true');
     } catch (err: any) {
       const msg = err.response?.data?.message;
-      if (msg && msg.includes('E-mail já cadastrado')) {
+      if (msg && msg.includes('Email already subscribed')) {
         setIsSubscribed(true);
-        setSuccess('Você já está cadastrado na nossa newsletter.');
+        setSuccess('You are already subscribed to our newsletter.');
         localStorage.setItem('newsletterSubscribed', 'true');
       } else if (!err.response) {
-        setError('Não foi possível conectar ao servidor. Tente novamente mais tarde.');
+        setError('Could not connect to the server. Please try again later.');
       } else {
         setError(msg ?? 'Failed to subscribe. Try again.');
       }

@@ -48,19 +48,19 @@ app.use('/api/geo',        geoRoutes);
 
 // health-check
 app.get('/', (req, res) => {
-  res.send('🟢 API rodando');
+  res.send('🟢 API running');
 });
 
 // error handler genérico
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(err.status || 500).json({
-    error: err.message || 'Erro interno de servidor'
+    error: err.message || 'Internal server error'
   });
 });
 
 // start
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`🚀  Server up na porta ${PORT}`);
+  console.log(`🚀  Server up on port ${PORT}`);
 });

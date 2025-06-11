@@ -15,14 +15,14 @@ export default function ForgotPasswordPage() {
     setStatus('loading');
     setMessage('');
     try {
-      // endpoint que dispara email com link de reset
+      // Endpoint that sends an email with the reset link
       await apiClient.post('/api/auth/forgot-password', { email: email.trim() });
       setStatus('sent');
-      setMessage('Se o e-mail existir em nosso sistema, você receberá instruções para redefinir sua senha.');
+      setMessage('If the email exists in our system, you will receive instructions to reset your password.');
     } catch (err: any) {
       console.error('Forgot password error', err);
       setStatus('error');
-      setMessage('Não foi possível processar sua solicitação. Tente novamente mais tarde.');
+      setMessage('Unable to process your request. Please try again later.');
     }
   }
 

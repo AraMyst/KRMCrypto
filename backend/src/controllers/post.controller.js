@@ -31,7 +31,7 @@ exports.createPost = async (req, res) => {
     res.status(201).json(post);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Erro no servidor.' });
+    res.status(500).json({ message: 'Server error.' });
   }
 };
 
@@ -53,17 +53,17 @@ exports.getPosts = async (req, res) => {
     res.json(posts);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Erro no servidor.' });
+    res.status(500).json({ message: 'Server error.' });
   }
 };
 
 exports.getPostBySlug = async (req, res) => {
   try {
     const post = await Post.findOne({ slug: req.params.slug }).lean();
-    if (!post) return res.status(404).json({ message: 'Post não encontrado.' });
+    if (!post) return res.status(404).json({ message: 'Post not found.' });
     res.json(post);
   } catch {
-    res.status(500).json({ message: 'Erro no servidor.' });
+    res.status(500).json({ message: 'Server error.' });
   }
 };
 
@@ -79,19 +79,19 @@ exports.updatePost = async (req, res) => {
     }
 
     const post = await Post.findByIdAndUpdate(req.params.id, updates, { new: true });
-    if (!post) return res.status(404).json({ message: 'Post não encontrado.' });
+    if (!post) return res.status(404).json({ message: 'Post not found.' });
     res.json(post);
   } catch {
-    res.status(500).json({ message: 'Erro no servidor.' });
+    res.status(500).json({ message: 'Server error.' });
   }
 };
 
 exports.deletePost = async (req, res) => {
   try {
     const post = await Post.findByIdAndDelete(req.params.id);
-    if (!post) return res.status(404).json({ message: 'Post não encontrado.' });
-    res.json({ message: 'Post removido.' });
+    if (!post) return res.status(404).json({ message: 'Post not found.' });
+    res.json({ message: 'Post removed.' });
   } catch {
-    res.status(500).json({ message: 'Erro no servidor.' });
+    res.status(500).json({ message: 'Server error.' });
   }
 };

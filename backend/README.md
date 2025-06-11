@@ -56,6 +56,8 @@ COINGECKO_API_KEY=your_coingecko_key
 IPGEO_API_KEY=your_ipgeolocation_key
 ```
 
+Ensure `MONGODB_URI` points to a running MongoDB instance. Without it the newsletter subscription route will return a server error.
+
 ## Executando
 
 ```bash
@@ -86,7 +88,7 @@ npm start
 * `POST /api/auth/register` – cadastro de usuário
 * `POST /api/auth/login` – login JWT
 * `GET /api/subscriptions/me` – dados da assinatura do usuário
-* `POST /api/newsletter/subscribe` – cadastra email na newsletter. Envie `{ email, name? }` no corpo (nome opcional)
+* `POST /api/newsletter/subscribe` – subscribe an email to the newsletter. Send `{ email, name? }` in the body (name optional)
 * `GET /api/crypto/prices` – lista de preços de criptos
 
 Para detalhes de todas as rotas, veja a documentação Swagger (se implementado).

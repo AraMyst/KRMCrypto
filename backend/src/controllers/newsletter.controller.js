@@ -8,7 +8,7 @@ exports.subscribe = async (req, res) => {
   const { name, email } = req.body;
 
   if (!name || !email) {
-    return res.status(400).json({ message: 'Nome e e-mail são obrigatórios.' });
+    return res.status(400).json({ message: 'Name and email are required.' });
   }
 
   try {
@@ -23,7 +23,7 @@ exports.subscribe = async (req, res) => {
     createContact.email = email;
     createContact.attributes = { FIRSTNAME: firstName, LASTNAME: lastName };
     createContact.listIds = [BREVO_LIST_ID];
-    createContact.updateEnabled = false; // não sobrescrever contatos existentes
+    createContact.updateEnabled = false; // do not overwrite existing contacts
 
     await contactsApi.createContact(createContact);
 
@@ -32,7 +32,7 @@ exports.subscribe = async (req, res) => {
     await subscriber.save();
 
     return res.status(201).json({
-      message: 'Inscrição realizada com sucesso!',
+      message: 'Subscription successful!',
       subscriber: {
         id: subscriber._id,
         firstName: subscriber.firstName,
@@ -42,13 +42,13 @@ exports.subscribe = async (req, res) => {
       }
     });
   } catch (err) {
-    console.error('Erro ao inscrever na newsletter:', err);
+    console.error('Error subscribing to newsletter:', err);
 
     // Se já existir, podemos devolver 409
     if (err.code === 11000) {
-      return res.status(409).json({ message: 'E-mail já cadastrado.' });
+      return res.status(409).json({ message: 'Email already subscribed.' });
     }
 
-    return res.status(500).json({ message: 'Erro interno ao processar inscrição.' });
+    return res.status(500).json({ message: 'Internal error processing subscription.' });
   }
 };

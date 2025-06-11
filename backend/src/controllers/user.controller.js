@@ -61,7 +61,7 @@ exports.getAllUsers = async (req, res, next) => {
 exports.getUserById = async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id).select('-password');
-    if (!user) return res.status(404).json({ message: 'Usuário não encontrado.' });
+    if (!user) return res.status(404).json({ message: 'User not found.' });
     res.json({ user });
   } catch (err) {
     next(err);
@@ -83,7 +83,7 @@ exports.updateUser = async (req, res, next) => {
       context: 'query'
     }).select('-password');
 
-    if (!user) return res.status(404).json({ message: 'Usuário não encontrado.' });
+    if (!user) return res.status(404).json({ message: 'User not found.' });
     res.json({ user });
   } catch (err) {
     next(err);
@@ -94,7 +94,7 @@ exports.updateUser = async (req, res, next) => {
 exports.deleteUser = async (req, res, next) => {
   try {
     const user = await User.findByIdAndDelete(req.params.id);
-    if (!user) return res.status(404).json({ message: 'Usuário não encontrado.' });
+    if (!user) return res.status(404).json({ message: 'User not found.' });
     res.status(204).send();
   } catch (err) {
     next(err);
