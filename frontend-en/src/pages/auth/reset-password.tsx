@@ -25,7 +25,7 @@ export default function ResetPasswordPage() {
     e.preventDefault();
     if (password !== confirm) {
       setStatus('error');
-      setMessage('As senhas não coincidem.');
+      setMessage('Passwords do not match.');
       return;
     }
     setStatus('submitting');
@@ -36,13 +36,13 @@ export default function ResetPasswordPage() {
         newPassword: password,
       });
       setStatus('success');
-      setMessage('Senha redefinida com sucesso! Você pode fazer login agora.');
+      setMessage('Password reset successfully! You can log in now.');
     } catch (err: any) {
       console.error('Reset password error', err);
       setStatus('error');
       setMessage(
         err.response?.data?.message ||
-        'Não foi possível redefinir a senha. O link pode ter expirado.'
+        'Unable to reset password. The link may have expired.'
       );
     }
   }

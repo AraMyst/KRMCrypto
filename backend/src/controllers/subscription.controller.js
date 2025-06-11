@@ -18,7 +18,7 @@ exports.getMySubscription = async (req, res, next) => {
     const userId = req.user.id;
     const subscription = await subscriptionService.getSubscriptionByUser(userId);
     if (!subscription) {
-      return res.status(404).json({ message: 'Assinatura não encontrada.' });
+      return res.status(404).json({ message: 'Subscription not found.' });
     }
     res.json({ subscription });
   } catch (err) {
@@ -62,7 +62,7 @@ exports.getSubscriptionById = async (req, res, next) => {
   try {
     const subscription = await subscriptionService.getSubscriptionById(req.params.id);
     if (!subscription) {
-      return res.status(404).json({ message: 'Assinatura não encontrada.' });
+      return res.status(404).json({ message: 'Subscription not found.' });
     }
     res.json({ subscription });
   } catch (err) {

@@ -7,7 +7,7 @@ const newsletterService = require('../services/newsletter.service');
 router.post('/subscribe', async (req, res) => {
   const { name, email } = req.body;
   if (!email) {
-    return res.status(400).json({ message: 'E-mail é obrigatório.' });
+    return res.status(400).json({ message: 'Email is required.' });
   }
 
   try {
@@ -16,7 +16,7 @@ router.post('/subscribe', async (req, res) => {
 
     const subscriber = await newsletterService.subscribe({ firstName, lastName, email });
     return res.status(201).json({
-      message: 'Inscrição realizada com sucesso!',
+      message: 'Subscription successful!',
       subscriber: {
         id: subscriber._id,
         firstName: subscriber.firstName,
@@ -26,11 +26,11 @@ router.post('/subscribe', async (req, res) => {
       }
     });
   } catch (err) {
-    if (err.message === 'E-mail já cadastrado.') {
+    if (err.message === 'Email already subscribed.') {
       return res.status(409).json({ message: err.message });
     }
     console.error(err);
-    return res.status(500).json({ message: 'Erro ao processar inscrição.' });
+    return res.status(500).json({ message: 'Failed to process subscription.' });
   }
 });
 

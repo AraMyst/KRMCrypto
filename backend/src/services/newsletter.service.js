@@ -8,9 +8,9 @@ defaultClient.authentications['api-key'].apiKey = process.env.BREVO_API_KEY;
 const contactsApi = new SibApiV3Sdk.ContactsApi();
 
 async function subscribe({ firstName, lastName, email }) {
-  // 1) Verifica duplicado no Mongo
+  // 1) Check for duplicates in MongoDB
   if (await NewsletterSubscriber.findOne({ email })) {
-    throw new Error('E-mail já cadastrado.');
+    throw new Error('Email already subscribed.');
   }
 
   // 2) Cria no Mongo com status pending
@@ -46,14 +46,14 @@ async function subscribe({ firstName, lastName, email }) {
   subscriber.status = 'subscribed';
   await subscriber.save();
 
-  // 5) Envia e-mail de boas-vindas
+  // 5) Send welcome email
   await sendEmail({
     to: email,
-    subject: '🎉 Bem-vindo à nossa newsletter!',
+    subject: '🎉 Welcome to our newsletter!',
     html: `
-      <p>Olá ${firstName},</p>
-      <p>Obrigado por se inscrever na nossa newsletter KRMCrypto!</p>
-      <p>Em breve você receberá as novidades.</p>
+      <p>Hello ${firstName},</p>
+      <p>Thank you for subscribing to the KRMCrypto newsletter!</p>
+      <p>You will start receiving updates soon.</p>
     `
   });
 

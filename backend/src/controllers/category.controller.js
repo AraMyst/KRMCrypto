@@ -17,7 +17,7 @@ exports.createCategory = async (req, res) => {
     res.status(201).json(category);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Erro no servidor.' });
+    res.status(500).json({ message: 'Server error.' });
   }
 };
 
@@ -52,7 +52,7 @@ exports.getAllCategories = async (req, res) => {
 
     res.json(categories);
   } catch {
-    res.status(500).json({ message: 'Erro no servidor.' });
+    res.status(500).json({ message: 'Server error.' });
   }
 };
 
@@ -63,20 +63,20 @@ exports.getCategories = exports.getAllCategories;
 exports.getCategoryBySlug = async (req, res) => {
   try {
     const cat = await Category.findOne({ slug: req.params.slug }).lean();
-    if (!cat) return res.status(404).json({ message: 'Categoria não encontrada.' });
+    if (!cat) return res.status(404).json({ message: 'Category not found.' });
     res.json(cat);
   } catch {
-    res.status(500).json({ message: 'Erro no servidor.' });
+    res.status(500).json({ message: 'Server error.' });
   }
 };
 
 exports.getCategoryById = async (req, res) => {
   try {
     const cat = await Category.findById(req.params.id).lean();
-    if (!cat) return res.status(404).json({ message: 'Categoria não encontrada.' });
+    if (!cat) return res.status(404).json({ message: 'Category not found.' });
     res.json(cat);
   } catch {
-    res.status(500).json({ message: 'Erro no servidor.' });
+    res.status(500).json({ message: 'Server error.' });
   }
 };
 
@@ -88,19 +88,19 @@ exports.updateCategory = async (req, res) => {
     if (parentId !== undefined) updates.parent = parentId;
 
     const cat = await Category.findByIdAndUpdate(req.params.id, updates, { new: true });
-    if (!cat) return res.status(404).json({ message: 'Categoria não encontrada.' });
+    if (!cat) return res.status(404).json({ message: 'Category not found.' });
     res.json(cat);
   } catch {
-    res.status(500).json({ message: 'Erro no servidor.' });
+    res.status(500).json({ message: 'Server error.' });
   }
 };
 
 exports.deleteCategory = async (req, res) => {
   try {
     const cat = await Category.findByIdAndDelete(req.params.id);
-    if (!cat) return res.status(404).json({ message: 'Categoria não encontrada.' });
-    res.json({ message: 'Categoria removida.' });
+    if (!cat) return res.status(404).json({ message: 'Category not found.' });
+    res.json({ message: 'Category removed.' });
   } catch {
-    res.status(500).json({ message: 'Erro no servidor.' });
+    res.status(500).json({ message: 'Server error.' });
   }
 };
