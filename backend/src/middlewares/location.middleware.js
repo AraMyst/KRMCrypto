@@ -11,14 +11,15 @@ async function locationMiddleware(req, res, next) {
   const ip = forwarded
     ? forwarded.split(',')[0].trim()
     : req.connection.remoteAddress;
-  
+
+ 
    console.log('Attempting to geolocate IP:', ip);
 
   try {
     const geo = await geoService.getGeolocation(ip);
     // Ajuste os campos de acordo com o que você precisa na ordenação das categorias
     req.location = {
-      ip:             geo.ip || ip,
+      ip:             geo.ip,
       countryCode2:   geo.country_code2,
       countryName:    geo.country_name,
       continent:      geo.continent_name,
