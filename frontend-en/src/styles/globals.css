@@ -1,13 +1,14 @@
 /* 1. Tailwind’s base reset + components + utilities */
-@tailwind base;
-@tailwind components;
-
-/* 2. Component-level CSS (each uses @layer components) */
 @import './_navbar.css';
 @import './_ticker.css';
 @import './_carousel.css';
 @import './_banners.css';
 @import './_footer.css';
+
+@tailwind base;
+@tailwind components;
+
+/* 2. Component-level CSS (each uses @layer components) */
 
 @tailwind utilities;
 

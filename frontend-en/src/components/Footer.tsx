@@ -8,14 +8,14 @@ export default function Footer() {
           This site provides information for educational purposes only. Not financial advice.
         </p>
         <div className="flex justify-center space-x-6">
-          <Link href="/about">
-            <a className="hover:underline">About Us</a>
+          <Link className="hover:underline" href="/about">
+          About Us
           </Link>
-          <Link href="/terms">
-            <a className="hover:underline">Terms &amp; Conditions</a>
+          <Link className="hover:underline" href="/terms">
+          Terms &amp; Conditions
           </Link>
-          <Link href="/contact">
-            <a className="hover:underline">Contact</a>
+          <Link className="hover:underline" href="/contact">
+          Contact
           </Link>
         </div>
         <p className="text-center text-sm">© 2025 iDontKnowCrypto. All rights reserved.</p>

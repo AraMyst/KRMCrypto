@@ -35,8 +35,7 @@ export default function Navbar() {
       <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 bg-white shadow">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/">
-            <a className="flex-shrink-0">
+          <Link className="flex-shrink-0" href="/">
               <Image
                 src="/images/idontknowcrypto-logo.png"
                 alt="iDontKnowCrypto"
@@ -44,16 +43,13 @@ export default function Navbar() {
                 height={40}
                 priority
               />
-            </a>
           </Link>
 
           {/* Nav links desktop */}
           <div className="hidden md:flex space-x-8">
             {NAV_LINKS.map((link) => (
-              <Link key={link.href} href={link.href}>
-                <a className="text-gray-700 hover:text-primary font-medium">
+              <Link className="text-gray-700 hover:text-primary font-medium" key={link.href} href={link.href}>
                   {link.label}
-                </a>
               </Link>
             ))}
           </div>
@@ -117,13 +113,9 @@ export default function Navbar() {
         {isMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow border-t z-40">
             {NAV_LINKS.map((link) => (
-              <Link key={link.href} href={link.href}>
-                <a
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                  onClick={() => setIsMenuOpen(false)}
-                >
+              <Link key={link.href} href={link.href} className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  onClick={() => setIsMenuOpen(false)}>
                   {link.label}
-                </a>
               </Link>
             ))}
           </div>

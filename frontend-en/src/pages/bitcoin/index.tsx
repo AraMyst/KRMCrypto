@@ -117,8 +117,8 @@ function CarouselSection({ country }: { country: 'UK' | 'USA' | 'Global' }) {
               key={art.slug}
               href={`/news/${country}/${art.slug}`}
               passHref
+              className="relative flex-shrink-0 w-64 h-40 rounded overflow-hidden"
             >
-              <a className="relative flex-shrink-0 w-64 h-40 rounded overflow-hidden">
                 <img
                   src={art.imageUrl}
                   alt={art.title}
@@ -127,7 +127,6 @@ function CarouselSection({ country }: { country: 'UK' | 'USA' | 'Global' }) {
                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-white text-lg font-semibold">
                   {art.title}
                 </div>
-              </a>
             </Link>
           ))}
         </div>

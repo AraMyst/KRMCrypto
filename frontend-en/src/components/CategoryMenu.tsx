@@ -25,10 +25,8 @@ export default function CategoryMenu() {
       <ul className="flex space-x-4 px-4">
         {categories.map((cat: Category) => (
           <li key={cat.slug}>
-            <Link href={`/news/${cat.slug}`}>
-              <a className="block py-2 text-gray-700 hover:text-primary capitalize whitespace-nowrap">
+            <Link className="block py-2 text-gray-700 hover:text-primary capitalize whitespace-nowrap" href={`/news/${cat.slug}`}>
                 {cat.name}
-              </a>
             </Link>
           </li>
         ))}

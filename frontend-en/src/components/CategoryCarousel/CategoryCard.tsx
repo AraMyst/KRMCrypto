@@ -8,8 +8,7 @@ interface CategoryCardProps {
 
 export default function CategoryCard({ article }: CategoryCardProps) {
   return (
-    <Link href={`/news/${article.category}/${article.slug}`}>
-      <a className="relative block w-48 h-32 rounded overflow-hidden shadow-lg hover:shadow-xl transition">
+    <Link className="relative block w-48 h-32 rounded overflow-hidden shadow-lg hover:shadow-xl transition" href={`/news/${article.category}/${article.slug}`}>
         <Image
           src={article.imageUrl}
           alt={article.title}
@@ -22,7 +21,6 @@ export default function CategoryCard({ article }: CategoryCardProps) {
             {article.title}
           </p>
         </div>
-      </a>
     </Link>
   );
 }
