@@ -1,7 +1,9 @@
 // src/server.js
-require('dotenv').config();           // carrega .env
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 // Verifica variáveis de ambiente críticas
+
 const requiredEnv = [
   'JWT_SECRET',
   'SMTP_HOST',
@@ -10,7 +12,6 @@ const requiredEnv = [
   'SMTP_PASSWORD',
   'EMAIL_FROM'
 ];
-
 const missing = requiredEnv.filter((key) => !process.env[key]);
 if (missing.length) {
   console.error(`❌  Missing required environment variables: ${missing.join(', ')}`);
