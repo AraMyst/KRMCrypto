@@ -1,5 +1,5 @@
 // src/services/geo.service.js
-const ipgeolocationApi = require('../config/geolocation');
+const ipgeolocationApi = require('../config/geoLocation');
 const GeolocationParams = require('ip-geolocation-api-javascript-sdk/GeolocationParams.js');
 
 /**
