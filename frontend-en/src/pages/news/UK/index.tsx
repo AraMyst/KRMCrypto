@@ -24,27 +24,26 @@ export default function UKNewsIndexPage({ articles }: UKNewsIndexProps) {
         <title>UK News – iDontKnowCrypto</title>
         <meta
           name="description"
-          content="Últimas notícias do UK – iDontKnowCrypto"
+          content="As últimas notícias do UK, com destaques e lista completa."
         />
       </Head>
       <main className="max-w-5xl mx-auto px-4 py-8 space-y-12">
         <h1 className="text-3xl font-bold">UK News</h1>
 
-        {/* Destaques */}
+        {/* Destaques: três mais recentes com imagem grande, título sobreposto e excerpt abaixo */}
         <div className="space-y-12">
           {featured.map((article) => (
             <article key={article.slug}>
               <Link href={`/news/UK/${article.slug}`}>
                 <a className="block relative">
-                  <div className="w-full h-64 relative">
+                  <div className="w-full h-64 relative rounded overflow-hidden">
                     <Image
                       src={article.imageUrl}
                       alt={article.title}
                       layout="fill"
                       objectFit="cover"
-                      className="rounded"
                     />
-                    <h2 className="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white text-2xl p-4 font-semibold w-full">
+                    <h2 className="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 text-white text-2xl p-4 font-semibold">
                       {article.title}
                     </h2>
                   </div>
@@ -55,7 +54,7 @@ export default function UKNewsIndexPage({ articles }: UKNewsIndexProps) {
           ))}
         </div>
 
-        {/* Outros artigos */}
+        {/* Outros artigos: grid de cards menores */}
         {others.length > 0 && (
           <section>
             <h2 className="text-2xl font-semibold mb-6">More UK News</h2>
