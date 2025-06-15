@@ -1,4 +1,4 @@
-// pages/news/index.tsx
+// src/pages/news/index.tsx
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRef, useState, useEffect } from 'react'
@@ -9,34 +9,188 @@ const CARD_WIDTH = 256
 const GAP = 16
 const FULL_WIDTH = CARD_WIDTH + GAP
 
-// Dados de teste — substitua pela sua fonte real (API, getStaticProps etc.)
+// Substitua estes dados de teste pelos artigos reais ou carregue via API/getStaticProps etc.
 const testArticles: Record<string, Article[]> = {
   uk: [
-    { slug: 'test7', category: 'UK', title: 'test7', excerpt: 'excerpt7', imageUrl: '/images/test7-uk.png', publishedAt: '2023-01-07' },
-    { slug: 'test6', category: 'UK', title: 'test6', excerpt: 'excerpt6', imageUrl: '/images/test6-uk.png', publishedAt: '2023-01-06' },
-    { slug: 'test5', category: 'UK', title: 'test5', excerpt: 'excerpt5', imageUrl: '/images/test5-uk.png', publishedAt: '2023-01-05' },
-    { slug: 'test4', category: 'UK', title: 'test4', excerpt: 'excerpt4', imageUrl: '/images/test4-uk.png', publishedAt: '2023-01-04' },
-    { slug: 'test3', category: 'UK', title: 'test3', excerpt: 'excerpt3', imageUrl: '/images/test3-uk.png', publishedAt: '2023-01-03' },
-    { slug: 'test2', category: 'UK', title: 'test2', excerpt: 'excerpt2', imageUrl: '/images/test2-uk.png', publishedAt: '2023-01-02' },
-    { slug: 'test1', category: 'UK', title: 'test1', excerpt: 'excerpt1', imageUrl: '/images/test1-uk.png', publishedAt: '2023-01-01' },
+    {
+      slug: 'uk-crypto-investigator-insolvency-cases',
+      category: 'UK',
+      title: 'UK Strengthens Efforts to Recover Crypto from Insolvency and Criminal Cases',
+      excerpt:
+        'In response to a dramatic surge in insolvency cases involving cryptocurrencies, the UK Insolvency Service has recently appointed its first dedicated crypto specialist, bolstering its capabilities to recover digital assets from failed businesses and criminal investigations.',
+      imageUrl: '/images/uk-crypto-investigator-insolvency-cases1.png',
+      publishedAt: '2025-06-15',
+    },
+    {
+      slug: 'uk-fca-crypto-etns-retail-investors',
+      category: 'UK',
+      title: "UK's FCA Proposes Removing Ban on Crypto ETNs for Retail Investors",
+      excerpt:
+        "The UK's Financial Conduct Authority (FCA) has proposed ending its prohibition on retail investors accessing cryptocurrency exchange‐traded notes (ETNs), marking a significant policy shift in the UK’s approach towards regulated crypto investments.",
+      imageUrl: '/images/uk-fca-crypto-etns-retail-investors1.png',
+      publishedAt: '2025-06-15',
+    },
+    {
+      slug: 'ig-group-crypto-trading-uk-retail-investors',
+      category: 'UK',
+      title: 'IG Group Introduces Direct Crypto Trading for UK Retail Investors',
+      excerpt:
+        "IG Group, the prominent UK-based trading and financial services provider, has officially launched direct cryptocurrency trading for retail investors, moving beyond its earlier CFD offerings.",
+      imageUrl: '/images/ig-group-crypto-trading-uk-retail-investors1.png',
+      publishedAt: '2025-06-15',
+    },
+    {
+      slug: 'reform-uk-accepts-crypto-donations-nigel-farage',
+      category: 'UK',
+      title: 'Reform UK Embraces Crypto Donations, Announces Ambitious Digital Finance Agenda',
+      excerpt:
+        'Nigel Farage announced a landmark decision allowing Reform UK to accept cryptocurrency donations, making it the first major British political party to officially adopt digital currencies.',
+      imageUrl: '/images/reform-uk-accepts-crypto-donations-nigel-farage1.png',
+      publishedAt: '2025-06-15',
+    },
+    {
+      slug: 'uk-fca-stablecoin-crypto-custody-regulation',
+      category: 'UK',
+      title: 'UK’s FCA Opens Consultation on Stablecoin and Crypto Custody Regulations',
+      excerpt:
+        'The Financial Conduct Authority (FCA) has opened a consultation to gather feedback on proposed regulations for stablecoin issuers and crypto custody providers.',
+      imageUrl: '/images/uk-fca-stablecoin-crypto-custody-regulation1.png',
+      publishedAt: '2025-06-15',
+    },
+    {
+      slug: 'uk-crypto-ownership-growth-2025',
+      category: 'UK',
+      title: 'UK Tops Global Crypto Ownership Growth in 2025 Amid Regulatory Ambiguity',
+      excerpt:
+        'In 2025, the UK recorded the sharpest year-over-year increase in crypto ownership, outpacing major economies despite ongoing regulatory uncertainty.',
+      imageUrl: '/images/uk-crypto-ownership-growth-20251.png',
+      publishedAt: '2025-06-15',
+    },
+    {
+      slug: 'bcp-technologies-pound-stablecoin-launch',
+      category: 'UK',
+      title: 'BCP Technologies Introduces New British Pound-Backed Stablecoin',
+      excerpt:
+        'BCP Technologies has launched tGBP, a pound-backed stablecoin designed to serve as a blueprint for future FCA stablecoin regulations.',
+      imageUrl: '/images/bcp-technologies-pound-stablecoin-launch1.png',
+      publishedAt: '2025-06-15',
+    },
   ],
   usa: [
-    { slug: 'test7', category: 'USA', title: 'test7', excerpt: 'excerpt7', imageUrl: '/images/test7-usa.png', publishedAt: '2023-01-07' },
-    { slug: 'test6', category: 'USA', title: 'test6', excerpt: 'excerpt6', imageUrl: '/images/test6-usa.png', publishedAt: '2023-01-06' },
-    { slug: 'test5', category: 'USA', title: 'test5', excerpt: 'excerpt5', imageUrl: '/images/test5-usa.png', publishedAt: '2023-01-05' },
-    { slug: 'test4', category: 'USA', title: 'test4', excerpt: 'excerpt4', imageUrl: '/images/test4-usa.png', publishedAt: '2023-01-04' },
-    { slug: 'test3', category: 'USA', title: 'test3', excerpt: 'excerpt3', imageUrl: '/images/test3-usa.png', publishedAt: '2023-01-03' },
-    { slug: 'test2', category: 'USA', title: 'test2', excerpt: 'excerpt2', imageUrl: '/images/test2-usa.png', publishedAt: '2023-01-02' },
-    { slug: 'test1', category: 'USA', title: 'test1', excerpt: 'excerpt1', imageUrl: '/images/test1-usa.png', publishedAt: '2023-01-01' },
+    {
+      slug: 'test7',
+      category: 'USA',
+      title: 'test7',
+      excerpt: 'test7',
+      imageUrl: '/images/test7-usa.png',
+      publishedAt: '2023-01-07',
+    },
+    {
+      slug: 'test6',
+      category: 'USA',
+      title: 'test6',
+      excerpt: 'test6',
+      imageUrl: '/images/test6-usa.png',
+      publishedAt: '2023-01-06',
+    },
+    {
+      slug: 'test5',
+      category: 'USA',
+      title: 'test5',
+      excerpt: 'test5',
+      imageUrl: '/images/test5-usa.png',
+      publishedAt: '2023-01-05',
+    },
+    {
+      slug: 'test4',
+      category: 'USA',
+      title: 'test4',
+      excerpt: 'test4',
+      imageUrl: '/images/test4-usa.png',
+      publishedAt: '2023-01-04',
+    },
+    {
+      slug: 'test3',
+      category: 'USA',
+      title: 'test3',
+      excerpt: 'test3',
+      imageUrl: '/images/test3-usa.png',
+      publishedAt: '2023-01-03',
+    },
+    {
+      slug: 'test2',
+      category: 'USA',
+      title: 'test2',
+      excerpt: 'test2',
+      imageUrl: '/images/test2-usa.png',
+      publishedAt: '2023-01-02',
+    },
+    {
+      slug: 'test1',
+      category: 'USA',
+      title: 'test1',
+      excerpt: 'test1',
+      imageUrl: '/images/test1-usa.png',
+      publishedAt: '2023-01-01',
+    },
   ],
   global: [
-    { slug: 'test7', category: 'Global', title: 'test7', excerpt: 'excerpt7', imageUrl: '/images/test7-global.png', publishedAt: '2023-01-07' },
-    { slug: 'test6', category: 'Global', title: 'test6', excerpt: 'excerpt6', imageUrl: '/images/test6-global.png', publishedAt: '2023-01-06' },
-    { slug: 'test5', category: 'Global', title: 'test5', excerpt: 'excerpt5', imageUrl: '/images/test5-global.png', publishedAt: '2023-01-05' },
-    { slug: 'test4', category: 'Global', title: 'test4', excerpt: 'excerpt4', imageUrl: '/images/test4-global.png', publishedAt: '2023-01-04' },
-    { slug: 'test3', category: 'Global', title: 'test3', excerpt: 'excerpt3', imageUrl: '/images/test3-global.png', publishedAt: '2023-01-03' },
-    { slug: 'test2', category: 'Global', title: 'test2', excerpt: 'excerpt2', imageUrl: '/images/test2-global.png', publishedAt: '2023-01-02' },
-    { slug: 'test1', category: 'Global', title: 'test1', excerpt: 'excerpt1', imageUrl: '/images/test1-global.png', publishedAt: '2023-01-01' },
+    {
+      slug: 'test7',
+      category: 'Global',
+      title: 'test7',
+      excerpt: 'test7',
+      imageUrl: '/images/test7-global.png',
+      publishedAt: '2023-01-07',
+    },
+    {
+      slug: 'test6',
+      category: 'Global',
+      title: 'test6',
+      excerpt: 'test6',
+      imageUrl: '/images/test6-global.png',
+      publishedAt: '2023-01-06',
+    },
+    {
+      slug: 'test5',
+      category: 'Global',
+      title: 'test5',
+      excerpt: 'test5',
+      imageUrl: '/images/test5-global.png',
+      publishedAt: '2023-01-05',
+    },
+    {
+      slug: 'test4',
+      category: 'Global',
+      title: 'test4',
+      excerpt: 'test4',
+      imageUrl: '/images/test4-global.png',
+      publishedAt: '2023-01-04',
+    },
+    {
+      slug: 'test3',
+      category: 'Global',
+      title: 'test3',
+      excerpt: 'test3',
+      imageUrl: '/images/test3-global.png',
+      publishedAt: '2023-01-03',
+    },
+    {
+      slug: 'test2',
+      category: 'Global',
+      title: 'test2',
+      excerpt: 'test2',
+      imageUrl: '/images/test2-global.png',
+      publishedAt: '2023-01-02',
+    },
+    {
+      slug: 'test1',
+      category: 'Global',
+      title: 'test1',
+      excerpt: 'test1',
+      imageUrl: '/images/test1-global.png',
+      publishedAt: '2023-01-01',
+    },
   ],
 }
 
@@ -77,7 +231,7 @@ function CarouselSection({ country }: { country: 'UK' | 'USA' | 'Global' }) {
       </h2>
 
       <div className="relative">
-        {/* seta esquerda fixa na borda */}
+        {/* seta esquerda */}
         <button
           onClick={() => setStart(s => Math.max(0, s - 1))}
           disabled={prevDisabled}
@@ -114,7 +268,7 @@ function CarouselSection({ country }: { country: 'UK' | 'USA' | 'Global' }) {
           ))}
         </div>
 
-        {/* seta direita ajustada mais próxima ao último card */}
+        {/* seta direita */}
         <button
           onClick={() => setStart(s => Math.min(maxStart, s + 1))}
           disabled={nextDisabled}
@@ -147,7 +301,7 @@ export default function NewsIndexPage() {
         const all: ('UK' | 'USA' | 'Global')[] = ['UK', 'USA', 'Global']
         setRankedCountries([primary, ...all.filter(c => c !== primary)])
       } catch {
-        console.error('Falha na geo — usando ordem padrão.')
+        console.error('Geo lookup failed — default order used.')
       }
     })()
   }, [])
@@ -158,7 +312,7 @@ export default function NewsIndexPage() {
         <title>News – iDontKnowCrypto</title>
         <meta
           name="description"
-          content="Últimas notícias: UK, USA e Global, com navegação em carrossel."
+          content="Latest news: UK, USA, and Global, with carousel navigation."
         />
       </Head>
       <main className="max-w-7xl mx-auto px-4 py-8">
