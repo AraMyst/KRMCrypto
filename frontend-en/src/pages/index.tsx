@@ -1,58 +1,102 @@
 // src/pages/index.tsx
-import { useState, useEffect } from 'react';
-import useGeoCategories, { Category } from '../hooks/useGeoCategories';
-import CategoryCarousel, { Article } from '../components/CategoryCarousel/CategoryCarousel';
-import apiClient from '../utils/apiClient';
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import CategoryCarousel, { Article } from '../components/CategoryCarousel/CategoryCarousel'
+import apiClient from '../utils/apiClient'
+import { fetchUserGeo } from '../utils/geo'
 
 export default function HomePage() {
-  const { categories, loading, error } = useGeoCategories();
-  const [articlesMap, setArticlesMap] = useState<Record<string, Article[]>>({});
+  // Define a região para o News: 'uk' | 'europe' | 'global'
+  const [region, setRegion] = useState<'uk' | 'europe' | 'global'>('global')
+  const [newsPosts, setNewsPosts] = useState<Article[]>([])
+  const [articlesMap, setArticlesMap] = useState<Record<string, Article[]>>({})
 
-  // Carrega os artigos para cada categoria assim que elas chegam
+  // Determina a região do usuário
   useEffect(() => {
-    if (loading || error) return;
+    async function determineRegion() {
+      try {
+        const { countryCode2 } = await fetchUserGeo()
+        const europeCodes = [
+          'AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR',
+          'DE','GR','HU','IE','IT','LV','LT','LU','MT','NL',
+          'PL','PT','RO','SK','SI','ES','SE'
+        ]
+        if (countryCode2 === 'GB') {
+          setRegion('uk')
+        } else if (europeCodes.includes(countryCode2)) {
+          setRegion('europe')
+        } else {
+          setRegion('global')
+        }
+      } catch (err) {
+        console.error('Erro ao determinar região, usando global', err)
+        setRegion('global')
+      }
+    }
+    determineRegion()
+  }, [])
 
-    categories.forEach((cat: Category) => {
-      // busca 5 artigos recentes para cada categoria
+  // Busca as 3 últimas notícias de acordo com a região
+  useEffect(() => {
+    apiClient
+      .get<Article[]>(`/api/posts?category=news&region=${region}&limit=3`)
+      .then(resp => setNewsPosts(resp.data))
+      .catch(err => {
+        console.error('Falha ao buscar News', err)
+        setNewsPosts([])
+      })
+  }, [region])
+
+  // Configuração das outras quatro categorias
+  const otherCats = [
+    { slug: 'guides', name: 'Guides' },
+    { slug: 'airdrops', name: 'Airdrops' },
+    { slug: 'bitcoin', name: 'Bitcoin' },
+    { slug: 'presale', name: 'Presale' },
+  ]
+
+  // Busca as 4 últimas publicações de cada uma
+  useEffect(() => {
+    otherCats.forEach(cat => {
       apiClient
-        .get<Article[]>(`/api/posts?category=${encodeURIComponent(cat.slug)}&limit=5`)
-        .then((resp) => {
-          setArticlesMap((prev) => ({
-            ...prev,
-            [cat.slug]: resp.data,
-          }));
+        .get<Article[]>(`/api/posts?category=${encodeURIComponent(cat.slug)}&limit=4`)
+        .then(resp => {
+          setArticlesMap(prev => ({ ...prev, [cat.slug]: resp.data }))
         })
-        .catch((err) => {
-          console.error(`Failed fetching articles for ${cat.slug}:`, err);
-          setArticlesMap((prev) => ({
-            ...prev,
-            [cat.slug]: [],
-          }));
-        });
-    });
-  }, [categories, loading, error]);
-
-  if (loading) {
-    return <div className="pt-24 text-center">Loading categories…</div>;
-  }
-
-  if (error) {
-    return (
-      <div className="pt-24 text-center text-red-600">
-        Error loading categories: {error}
-      </div>
-    );
-  }
+        .catch(err => {
+          console.error(`Falha ao buscar ${cat.slug}`, err)
+          setArticlesMap(prev => ({ ...prev, [cat.slug]: [] }))
+        })
+    })
+  }, [])
 
   return (
-    <main className="max-w-7xl mx-auto px-4 pt-8 pb-16">
-      {categories.map((cat: Category) => (
-        <CategoryCarousel
-          key={cat.slug}
-          country={cat.name}
-          articles={articlesMap[cat.slug] || []}
-        />
+    <main className="max-w-7xl mx-auto px-4 pt-8 pb-16 space-y-16">
+      {/* News */}
+      <section>
+        <Link href="/news">
+          <a className="text-3xl font-bold mb-4 inline-block hover:underline">
+            News
+          </a>
+        </Link>
+        {/* passa bigCards para renderizar cards maiores */}
+        <CategoryCarousel country="News" articles={newsPosts} bigCards />
+      </section>
+
+      {/* Guides, Airdrops, Bitcoin, Presale */}
+      {otherCats.map(cat => (
+        <section key={cat.slug}>
+          <Link href={`/${cat.slug}`}>
+            <a className="text-3xl font-bold mb-4 inline-block hover:underline">
+              {cat.name}
+            </a>
+          </Link>
+          <CategoryCarousel
+            country={cat.name}
+            articles={articlesMap[cat.slug] || []}
+          />
+        </section>
       ))}
     </main>
-  );
+  )
 }
