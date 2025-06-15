@@ -1,8 +1,9 @@
-// src/pages/news/index.tsx
 import Head from 'next/head';
 import Link from 'next/link';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Article } from '../../types';
+import { fetchUserGeo } from '../../utils/geo';
+
 
 const testArticles: Record<string, Article[]> = {
   uk: [
@@ -99,15 +100,12 @@ function CarouselSection({ country }: { country: 'UK' | 'USA' | 'Global' }) {
     <section className="mb-12">
       <h2 className="text-2xl font-bold mb-4">{country} News (Test)</h2>
       <div className="relative">
-        {/* seta esquerda */}
         <button
           onClick={() => scroll(-1)}
           className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-75 p-2 rounded-full"
         >
           ‹
         </button>
-
-        {/* container rolável */}
         <div
           ref={ref}
           className="flex overflow-x-auto space-x-4 scroll-smooth py-2"
@@ -130,8 +128,6 @@ function CarouselSection({ country }: { country: 'UK' | 'USA' | 'Global' }) {
             </Link>
           ))}
         </div>
-
-        {/* seta direita */}
         <button
           onClick={() => scroll(1)}
           className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-75 p-2 rounded-full"
@@ -143,7 +139,41 @@ function CarouselSection({ country }: { country: 'UK' | 'USA' | 'Global' }) {
   );
 }
 
+
+
 export default function NewsIndexPage() {
+  const [rankedCountries, setRankedCountries] = useState<('UK' | 'USA' | 'Global')[]>(['Global', 'UK', 'USA']);
+  useEffect(() => {
+    const determineCountryOrder = async () => {
+      try {
+        const geoData = await fetchUserGeo();
+        const countryCode = geoData.countryCode2;
+
+        let primaryCountry: 'UK' | 'USA' | 'Global' = 'Global';
+
+        if (countryCode === 'GB') {
+          primaryCountry = 'UK';
+        } else if (countryCode === 'US') { 
+          primaryCountry = 'USA';
+        }
+        
+        const allCountries: ('UK' | 'USA' | 'Global')[] = ['UK', 'USA', 'Global'];
+        const newOrder = [
+            primaryCountry, 
+            ...allCountries.filter(c => c !== primaryCountry)
+        ];
+        
+
+        setRankedCountries(newOrder as ('UK' | 'USA' | 'Global')[]);
+
+      } catch (error) {
+        console.error('Failed to fetch user geolocation, using default order.', error);
+      }
+    };
+
+    determineCountryOrder();
+  }, []); 
+
   return (
     <>
       <Head>
@@ -154,9 +184,10 @@ export default function NewsIndexPage() {
         />
       </Head>
       <main className="max-w-7xl mx-auto px-4 py-8">
-        <CarouselSection country="UK" />
-        <CarouselSection country="USA" />
-        <CarouselSection country="Global" />
+        {}
+        {rankedCountries.map(country => (
+          <CarouselSection key={country} country={country} />
+        ))}
       </main>
     </>
   );
