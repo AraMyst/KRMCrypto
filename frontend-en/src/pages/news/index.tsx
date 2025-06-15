@@ -54,7 +54,7 @@ function CarouselSection({ country }: { country: 'UK' | 'USA' | 'Global' }) {
     function updateCount() {
       if (!containerRef.current) return
       const width = containerRef.current.clientWidth
-      const count = Math.max(1, Math.floor(width / FULL_WIDTH))
+      const count = Math.max(1, Math.min(4, Math.floor(width / FULL_WIDTH)))
       setVisibleCount(count)
       setStart(s => Math.min(s, items.length - count))
     }
@@ -68,10 +68,9 @@ function CarouselSection({ country }: { country: 'UK' | 'USA' | 'Global' }) {
   const nextDisabled = start >= maxStart
   const visibleItems = items.slice(start, start + visibleCount)
 
-  // centraliza o botão sobre o primeiro e o último card
+  // posições sobre o centro do primeiro e do último card
   const leftArrowPos = CARD_WIDTH / 2
   const rightArrowPos = (visibleCount - 1) * FULL_WIDTH + CARD_WIDTH / 2
-  const arrowStyle = { color: '#5293C6' }
 
   return (
     <section className="mb-12">
@@ -86,9 +85,9 @@ function CarouselSection({ country }: { country: 'UK' | 'USA' | 'Global' }) {
         <button
           onClick={() => setStart(s => Math.max(0, s - 1))}
           disabled={prevDisabled}
-          style={{ left: leftArrowPos, ...arrowStyle }}
+          style={{ left: leftArrowPos, color: '#5293C6' }}
           className={`
-            absolute top-1/2 transform -translate-x-1/2 -translate-y-1/2
+            absolute z-10 top-1/2 transform -translate-x-1/2 -translate-y-1/2
             bg-white bg-opacity-75 p-2 rounded-full
             ${prevDisabled ? 'opacity-50 cursor-not-allowed' : ''}
           `}
@@ -123,9 +122,9 @@ function CarouselSection({ country }: { country: 'UK' | 'USA' | 'Global' }) {
         <button
           onClick={() => setStart(s => Math.min(maxStart, s + 1))}
           disabled={nextDisabled}
-          style={{ left: rightArrowPos, ...arrowStyle }}
+          style={{ left: rightArrowPos, color: '#5293C6' }}
           className={`
-            absolute top-1/2 transform -translate-x-1/2 -translate-y-1/2
+            absolute z-10 top-1/2 transform -translate-x-1/2 -translate-y-1/2
             bg-white bg-opacity-75 p-2 rounded-full
             ${nextDisabled ? 'opacity-50 cursor-not-allowed' : ''}
           `}
