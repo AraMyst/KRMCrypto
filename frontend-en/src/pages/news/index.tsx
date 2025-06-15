@@ -68,10 +68,6 @@ function CarouselSection({ country }: { country: 'UK' | 'USA' | 'Global' }) {
   const nextDisabled = start >= maxStart
   const visibleItems = items.slice(start, start + visibleCount)
 
-  // posições sobre o centro do primeiro e do último card
-  const leftArrowPos = CARD_WIDTH / 2
-  const rightArrowPos = (visibleCount - 1) * FULL_WIDTH + CARD_WIDTH / 2
-
   return (
     <section className="mb-12">
       <h2 className="text-2xl font-bold mb-4">
@@ -81,14 +77,14 @@ function CarouselSection({ country }: { country: 'UK' | 'USA' | 'Global' }) {
       </h2>
 
       <div className="relative">
-        {/* seta esquerda */}
+        {/* seta esquerda fixa na borda */}
         <button
           onClick={() => setStart(s => Math.max(0, s - 1))}
           disabled={prevDisabled}
-          style={{ left: leftArrowPos, color: '#5293C6' }}
+          style={{ color: '#5293C6' }}
           className={`
-            absolute z-10 top-1/2 transform -translate-x-1/2 -translate-y-1/2
-            bg-white bg-opacity-75 p-2 rounded-full
+            absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2
+            z-10 bg-white bg-opacity-75 p-2 rounded-full
             ${prevDisabled ? 'opacity-50 cursor-not-allowed' : ''}
           `}
         >
@@ -118,14 +114,14 @@ function CarouselSection({ country }: { country: 'UK' | 'USA' | 'Global' }) {
           ))}
         </div>
 
-        {/* seta direita */}
+        {/* seta direita fixa na borda */}
         <button
           onClick={() => setStart(s => Math.min(maxStart, s + 1))}
           disabled={nextDisabled}
-          style={{ left: rightArrowPos, color: '#5293C6' }}
+          style={{ color: '#5293C6' }}
           className={`
-            absolute z-10 top-1/2 transform -translate-x-1/2 -translate-y-1/2
-            bg-white bg-opacity-75 p-2 rounded-full
+            absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2
+            z-10 bg-white bg-opacity-75 p-2 rounded-full
             ${nextDisabled ? 'opacity-50 cursor-not-allowed' : ''}
           `}
         >
