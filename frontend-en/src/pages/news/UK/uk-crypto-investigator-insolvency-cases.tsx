@@ -18,11 +18,9 @@ export default function UKCryptoInvestigatorInsolvencyCasesPage() {
         <h1 className="text-4xl font-serif font-bold">
           UK Strengthens Efforts to Recover Crypto from Insolvency and Criminal Cases
         </h1>
+
         <p className="text-sm text-gray-500">
-          Published on {formatDate('2025-06-15')} • Updated on {formatDate(now)}
-        </p>
-        <p className="text-sm text-gray-500">
-          By{' '}
+          Published on {formatDate('2025-06-15')} • Updated on {formatDate(now)} • By{' '}
           <Link href="/Authors/cora-elmwick">
             <a className="text-blue-600 hover:underline font-semibold">Cora Elmwick</a>
           </Link>
@@ -31,7 +29,7 @@ export default function UKCryptoInvestigatorInsolvencyCasesPage() {
         <img
           src="/images/uk-crypto-investigator-insolvency-cases1.png"
           alt="new crypto specialist investigator for the UK Insolvency Service"
-          className="w-full max-w-[800px] h-auto rounded mx-auto"
+          className="w-full max-w-[300px] h-auto rounded mx-auto"
         />
 
         <p>
@@ -54,7 +52,7 @@ export default function UKCryptoInvestigatorInsolvencyCasesPage() {
         <img
           src="/images/uk-crypto-investigator-insolvency-cases2.png"
           alt="Cryptocurrency coins and digital tokens representing various crypto assets"
-          className="w-full max-w-[500px] h-auto rounded mx-auto"
+          className="w-full max-w-[200px] h-auto rounded mx-auto"
         />
 
         <h2 className="text-3xl font-serif font-bold">
