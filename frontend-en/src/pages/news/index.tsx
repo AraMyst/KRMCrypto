@@ -5,7 +5,7 @@ import { useRef, useState, useEffect } from 'react'
 import { Article } from '../../types'
 import { fetchUserGeo } from '../../utils/geo'
 
-// Substitua estes dados de teste pelos artigos reais ou carregue via API/getStaticProps
+// Dados de teste — substitua por sua fonte real (API, getStaticProps etc.)
 const testArticles: Record<string, Article[]> = {
   uk: [
     { slug: 'test7', category: 'UK', title: 'test7', excerpt: 'excerpt7', imageUrl: '/images/test7-uk.png', publishedAt: '2023-01-07' },
@@ -37,40 +37,62 @@ const testArticles: Record<string, Article[]> = {
 }
 
 function CarouselSection({ country }: { country: 'UK' | 'USA' | 'Global' }) {
-  const ref = useRef<HTMLDivElement>(null)
   const key = country.toLowerCase()
-  // garante ordenação da mais nova para a mais antiga
+  // ordena do mais novo ao mais antigo
   const items = [...testArticles[key]].sort(
     (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
   )
 
-  const scroll = (delta: number) => {
-    if (!ref.current) return
-    // calcula largura de um cartão + gap (w-64 = 256px, space-x-4 = 16px)
-    const step = 256 + 16
-    ref.current.scrollBy({ left: delta * step, behavior: 'smooth' })
-  }
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [start, setStart] = useState(0)
+  const [visibleCount, setVisibleCount] = useState(4)
+
+  // calcula quantos cards cabem na largura disponível
+  useEffect(() => {
+    const CARD_WIDTH = 256 + 16 // w-64 + gap space-x-4
+    function updateCount() {
+      if (!containerRef.current) return
+      const width = containerRef.current.clientWidth
+      const count = Math.max(1, Math.floor(width / CARD_WIDTH))
+      setVisibleCount(count)
+      // garante que start não ultrapasse o máximo
+      setStart(s => Math.min(s, items.length - count))
+    }
+    updateCount()
+    window.addEventListener('resize', updateCount)
+    return () => window.removeEventListener('resize', updateCount)
+  }, [items.length])
+
+  const maxStart = items.length - visibleCount
+  const prevDisabled = start <= 0
+  const nextDisabled = start >= maxStart
+
+  const visibleItems = items.slice(start, start + visibleCount)
 
   return (
     <section className="mb-12">
       <h2 className="text-2xl font-bold mb-4">{country} News</h2>
       <div className="relative">
         <button
-          onClick={() => scroll(-1)}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-75 p-2 rounded-full"
+          onClick={() => setStart(s => Math.max(0, s - 1))}
+          disabled={prevDisabled}
+          className={`absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-75 p-2 rounded-full ${
+            prevDisabled ? 'opacity-50 cursor-not-allowed' : ''
+          }`}
         >
           ‹
         </button>
+
         <div
-          ref={ref}
-          className="flex overflow-x-auto space-x-4 scroll-smooth py-2"
+          ref={containerRef}
+          className="flex overflow-hidden space-x-4 py-2"
         >
-          {items.map((art) => (
+          {visibleItems.map(art => (
             <Link
               key={art.slug}
               href={`/news/${country}/${art.slug}`}
               passHref
-              className="carousel-item relative flex-shrink-0 w-64 h-40 rounded overflow-hidden"
+              className="relative flex-shrink-0 w-64 h-40 rounded overflow-hidden"
             >
               <img
                 src={art.imageUrl}
@@ -83,9 +105,13 @@ function CarouselSection({ country }: { country: 'UK' | 'USA' | 'Global' }) {
             </Link>
           ))}
         </div>
+
         <button
-          onClick={() => scroll(1)}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-75 p-2 rounded-full"
+          onClick={() => setStart(s => Math.min(maxStart, s + 1))}
+          disabled={nextDisabled}
+          className={`absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-75 p-2 rounded-full ${
+            nextDisabled ? 'opacity-50 cursor-not-allowed' : ''
+          }`}
         >
           ›
         </button>
@@ -103,14 +129,14 @@ export default function NewsIndexPage() {
     const determineCountryOrder = async () => {
       try {
         const geoData = await fetchUserGeo()
-        const countryCode = geoData.countryCode2
+        const code = geoData.countryCode2
         let primary: 'UK' | 'USA' | 'Global' = 'Global'
-        if (countryCode === 'GB') primary = 'UK'
-        else if (countryCode === 'US') primary = 'USA'
+        if (code === 'GB') primary = 'UK'
+        else if (code === 'US') primary = 'USA'
         const all: ('UK' | 'USA' | 'Global')[] = ['UK', 'USA', 'Global']
-        setRankedCountries([primary, ...all.filter((c) => c !== primary)])
-      } catch (err) {
-        console.error('Geo falhou, usando ordem padrão.', err)
+        setRankedCountries([primary, ...all.filter(c => c !== primary)])
+      } catch {
+        console.error('Geo falhou, usando ordem padrão.')
       }
     }
     determineCountryOrder()
@@ -122,12 +148,12 @@ export default function NewsIndexPage() {
         <title>News – iDontKnowCrypto</title>
         <meta
           name="description"
-          content="Todas as notícias: UK, USA e Global, do mais recente ao mais antigo."
+          content="Últimas notícias: UK, USA e Global, com navegação em carrossel."
         />
       </Head>
       <main className="max-w-7xl mx-auto px-4 py-8">
-        {rankedCountries.map((country) => (
-          <CarouselSection key={country} country={country} />
+        {rankedCountries.map(c => (
+          <CarouselSection key={c} country={c} />
         ))}
       </main>
     </>
