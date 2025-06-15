@@ -1,5 +1,6 @@
 // src/pages/news/UK/uk-crypto-investigator-insolvency-cases.tsx
 import Head from 'next/head'
+import Link from 'next/link'
 import { formatDate } from '../../../utils/date'
 
 export default function UKCryptoInvestigatorInsolvencyCasesPage() {
@@ -14,20 +15,32 @@ export default function UKCryptoInvestigatorInsolvencyCasesPage() {
         />
       </Head>
       <article className="prose lg:prose-xl max-w-3xl mx-auto px-4 py-8">
-        <h1>UK Strengthens Efforts to Recover Crypto from Insolvency and Criminal Cases</h1>
-        <p className="text-sm text-gray-500">{formatDate(now)} in UK</p>
+        <h1 className="text-4xl font-serif mb-2">
+          UK Strengthens Efforts to Recover Crypto from Insolvency and Criminal Cases
+        </h1>
+        <p className="text-sm text-gray-500 mb-1">
+          Publicado em {formatDate('2025-06-15')} • Atualizado em {formatDate(now)}
+        </p>
+        <p className="text-sm text-gray-500 mb-4">
+          Por{' '}
+          <Link href="/Authors/cora-elmwick">
+            <a className="text-blue-600 hover:underline">Cora Elmwick</a>
+          </Link>
+        </p>
 
         <img
           src="/images/uk-crypto-investigator-insolvency-cases1.png"
           alt="new crypto specialist investigator for the UK Insolvency Service"
-          className="w-full h-auto rounded my-6"
+          className="w-full max-w-[500px] h-auto rounded my-6 mx-auto"
         />
 
         <p>
           In response to a dramatic surge in insolvency cases involving cryptocurrencies, the UK Insolvency Service has recently appointed its first dedicated crypto specialist, bolstering its capabilities to recover digital assets from failed businesses and criminal investigations.
         </p>
 
-        <h2>Experienced Investigator Joins UK Insolvency Service</h2>
+        <h2 className="text-3xl font-serif mt-8 mb-2">
+          Experienced Investigator Joins UK Insolvency Service
+        </h2>
         <p>
           Andrew Small, previously a police investigator with extensive expertise in economic crime, has been recruited specifically to address the complex challenge of tracing and reclaiming cryptocurrencies. Small will leverage his background in forensic financial investigations to support the Insolvency Service's efforts to locate crypto assets that have been concealed or unreported in insolvency and criminal proceedings.
         </p>
@@ -38,7 +51,16 @@ export default function UKCryptoInvestigatorInsolvencyCasesPage() {
           Small stated, “The growth of cryptocurrency ownership in the UK has directly correlated with its increased presence in insolvency cases. Crypto assets, including everything from mainstream tokens like Bitcoin and Ethereum to more niche offerings like memecoins and NFTs, are recoverable, tangible assets.”
         </p>
 
-        <h2>Scope of Recoverable Crypto Assets Expands</h2>
+        {/* Segunda imagem no meio do texto */}
+        <img
+          src="/images/uk-crypto-investigator-insolvency-cases2.png"
+          alt="Cryptocurrency coins and digital tokens representing various crypto assets"
+          className="w-full max-w-[300px] h-auto rounded my-6 mx-auto"
+        />
+
+        <h2 className="text-3xl font-serif mt-8 mb-2">
+          Scope of Recoverable Crypto Assets Expands
+        </h2>
         <p>
           The Insolvency Service's expanded mandate now explicitly includes cryptocurrencies ranging from established tokens like Bitcoin (BTC) and Ethereum (ETH) to more speculative assets like Dogecoin (DOGE) and various non-fungible tokens (NFTs). Small’s role will involve not only asset recovery but also providing expertise to investigators regarding blockchain technology, asset tracking, and secure storage solutions.
         </p>
@@ -46,19 +68,15 @@ export default function UKCryptoInvestigatorInsolvencyCasesPage() {
           Neil Freebury, Head of Intelligence at the Insolvency Service, believes Small’s involvement will significantly enhance operational outcomes. “Andrew’s appointment will bolster our investigative capabilities, ensuring more effective recovery of assets and stronger collaborative efforts across related investigations,” said Freebury.
         </p>
 
-        <h2>Increasing Regulation Amid Rising Crypto Adoption</h2>
+        <h2 className="text-3xl font-serif mt-8 mb-2">
+          Increasing Regulation Amid Rising Crypto Adoption
+        </h2>
         <p>
           Crypto asset ownership continues to climb significantly among UK adults. According to the Financial Conduct Authority, crypto adoption tripled from 4% in 2021 to 12% in 2024, with the average asset holding now valued at around £1,842 ($2,496).
         </p>
         <p>
           This rapid growth is prompting further regulatory oversight. Starting from January 1, 2026, UK crypto companies will be mandated to report detailed customer transaction data, including names, addresses, tax identification numbers, and specifics about crypto assets transferred. This policy aligns with international efforts spearheaded by the Organisation for Economic Co-operation and Development (OECD) to enhance transparency and reduce tax evasion risks.
         </p>
-
-        <img
-          src="/images/uk-crypto-investigator-insolvency-cases2.png"
-          alt="Cryptocurrency coins and digital tokens representing various crypto assets"
-          className="w-full h-auto rounded my-6"
-        />
       </article>
     </>
   )
