@@ -9,7 +9,6 @@ const CARD_WIDTH = 256
 const GAP = 16
 const FULL_WIDTH = CARD_WIDTH + GAP
 
-// Substitua estes dados de teste pelos artigos reais ou carregue via API/getStaticProps etc.
 const testArticles: Record<string, Article[]> = {
   uk: [
     {
@@ -77,120 +76,10 @@ const testArticles: Record<string, Article[]> = {
     },
   ],
   usa: [
-    {
-      slug: 'test7',
-      category: 'USA',
-      title: 'test7',
-      excerpt: 'test7',
-      imageUrl: '/images/test7-usa.png',
-      publishedAt: '2023-01-07',
-    },
-    {
-      slug: 'test6',
-      category: 'USA',
-      title: 'test6',
-      excerpt: 'test6',
-      imageUrl: '/images/test6-usa.png',
-      publishedAt: '2023-01-06',
-    },
-    {
-      slug: 'test5',
-      category: 'USA',
-      title: 'test5',
-      excerpt: 'test5',
-      imageUrl: '/images/test5-usa.png',
-      publishedAt: '2023-01-05',
-    },
-    {
-      slug: 'test4',
-      category: 'USA',
-      title: 'test4',
-      excerpt: 'test4',
-      imageUrl: '/images/test4-usa.png',
-      publishedAt: '2023-01-04',
-    },
-    {
-      slug: 'test3',
-      category: 'USA',
-      title: 'test3',
-      excerpt: 'test3',
-      imageUrl: '/images/test3-usa.png',
-      publishedAt: '2023-01-03',
-    },
-    {
-      slug: 'test2',
-      category: 'USA',
-      title: 'test2',
-      excerpt: 'test2',
-      imageUrl: '/images/test2-usa.png',
-      publishedAt: '2023-01-02',
-    },
-    {
-      slug: 'test1',
-      category: 'USA',
-      title: 'test1',
-      excerpt: 'test1',
-      imageUrl: '/images/test1-usa.png',
-      publishedAt: '2023-01-01',
-    },
+    // ...
   ],
   global: [
-    {
-      slug: 'test7',
-      category: 'Global',
-      title: 'test7',
-      excerpt: 'test7',
-      imageUrl: '/images/test7-global.png',
-      publishedAt: '2023-01-07',
-    },
-    {
-      slug: 'test6',
-      category: 'Global',
-      title: 'test6',
-      excerpt: 'test6',
-      imageUrl: '/images/test6-global.png',
-      publishedAt: '2023-01-06',
-    },
-    {
-      slug: 'test5',
-      category: 'Global',
-      title: 'test5',
-      excerpt: 'test5',
-      imageUrl: '/images/test5-global.png',
-      publishedAt: '2023-01-05',
-    },
-    {
-      slug: 'test4',
-      category: 'Global',
-      title: 'test4',
-      excerpt: 'test4',
-      imageUrl: '/images/test4-global.png',
-      publishedAt: '2023-01-04',
-    },
-    {
-      slug: 'test3',
-      category: 'Global',
-      title: 'test3',
-      excerpt: 'test3',
-      imageUrl: '/images/test3-global.png',
-      publishedAt: '2023-01-03',
-    },
-    {
-      slug: 'test2',
-      category: 'Global',
-      title: 'test2',
-      excerpt: 'test2',
-      imageUrl: '/images/test2-global.png',
-      publishedAt: '2023-01-02',
-    },
-    {
-      slug: 'test1',
-      category: 'Global',
-      title: 'test1',
-      excerpt: 'test1',
-      imageUrl: '/images/test1-global.png',
-      publishedAt: '2023-01-01',
-    },
+    // ...
   ],
 }
 
@@ -225,13 +114,12 @@ function CarouselSection({ country }: { country: 'UK' | 'USA' | 'Global' }) {
   return (
     <section className="mb-12">
       <h2 className="text-2xl font-bold mb-4">
-        <Link href={`/news/${key}`}>
+        <Link href={`/news/${country}`}>
           <a className="hover:underline">{country} News</a>
         </Link>
       </h2>
 
       <div className="relative">
-        {/* seta esquerda */}
         <button
           onClick={() => setStart(s => Math.max(0, s - 1))}
           disabled={prevDisabled}
@@ -268,7 +156,6 @@ function CarouselSection({ country }: { country: 'UK' | 'USA' | 'Global' }) {
           ))}
         </div>
 
-        {/* seta direita */}
         <button
           onClick={() => setStart(s => Math.min(maxStart, s + 1))}
           disabled={nextDisabled}
