@@ -29,7 +29,7 @@ export default function UKCryptoInvestigatorInsolvencyCasesPage() {
         <img
           src="/images/uk-crypto-investigator-insolvency-cases1.png"
           alt="new crypto specialist investigator for the UK Insolvency Service"
-          className="w-full max-w-[300px] h-auto rounded mx-auto"
+          className="w-full max-w-[300px] h-48 object-cover rounded mx-auto"
         />
 
         <p>
@@ -52,7 +52,7 @@ export default function UKCryptoInvestigatorInsolvencyCasesPage() {
         <img
           src="/images/uk-crypto-investigator-insolvency-cases2.png"
           alt="Cryptocurrency coins and digital tokens representing various crypto assets"
-          className="w-full max-w-[200px] h-auto rounded mx-auto"
+          className="w-full max-w-[200px] h-32 object-cover rounded mx-auto"
         />
 
         <h2 className="text-3xl font-serif font-bold">
@@ -72,7 +72,7 @@ export default function UKCryptoInvestigatorInsolvencyCasesPage() {
           Crypto asset ownership continues to climb significantly among UK adults. According to the Financial Conduct Authority, crypto adoption tripled from 4% in 2021 to 12% in 2024, with the average asset holding now valued at around £1,842 ($2,496).
         </p>
         <p>
-          This rapid growth is prompting further regulatory oversight. Starting from January&nbsp;1,&nbsp;2026, UK crypto companies will be mandated to report detailed customer transaction data, including names, addresses, tax identification numbers, and specifics about crypto assets transferred. This policy aligns with international efforts spearheaded by the Organisation for Economic Co-operation and Development (OECD) to enhance transparency and reduce tax evasion risks.
+          This rapid growth is prompting further regulatory oversight. Starting from January&nbsp;1,&nbsp;2026, UK crypto companies will be mandated to report detailed customer transaction data, incluindo names, addresses, tax identification numbers, and specifics about crypto assets transferred. Esta policy aligns with international efforts spearheaded pela OECD to enhance transparency and reduce tax evasion risks.
         </p>
       </article>
     </>

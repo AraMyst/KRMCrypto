@@ -29,7 +29,7 @@ export default function UKFcaCryptoETNsRetailInvestorsPage() {
         <img
           src="/images/uk-fca-crypto-etns-retail-investors1.png"
           alt="Financial Conduct Authority (FCA) headquarters in London"
-          className="w-full max-w-[300px] h-auto rounded mx-auto"
+          className="w-full max-w-[300px] h-48 object-cover rounded mx-auto"
         />
 
         <p>
@@ -68,17 +68,17 @@ export default function UKFcaCryptoETNsRetailInvestorsPage() {
         <img
           src="/images/uk-fca-crypto-etns-retail-investors2.png"
           alt="Various cryptocurrencies representing the rise in crypto asset investment"
-          className="w-full max-w-[200px] h-auto rounded mx-auto"
+          className="w-full max-w-[200px] h-32 object-cover rounded mx-auto"
         />
 
         <h2 className="text-3xl font-serif font-bold">
           Broader Crypto Regulatory Framework Under Development
         </h2>
         <p>
-          The FCA’s proposed adjustment to crypto ETNs forms part of broader regulatory changes currently underway. In recent months, the FCA has sought industry feedback regarding new regulations for stablecoins and cryptocurrency custody solutions.
+          The FCA’s proposed adjustment to crypto ETNs forms part of broader regulatory changes currently underway. In recent months, the FCA has sought industry feedback regarding new regulations para stablecoins and cryptocurrency custody solutions.
         </p>
         <p>
-          The ongoing regulatory activities align with Chancellor Rachel Reeves' vision of creating a comprehensive regulatory regime, positioning the UK as a leading global jurisdiction for digital assets. This push comes amid data showing the UK surpassing other major economies, including the US, in cryptocurrency adoption rates in 2025.
+          The ongoing regulatory activities align with Chancellor Rachel Reeves' vision of creating a comprehensive regulatory regime, positioning the UK como uma leading global jurisdiction for digital assets. This push comes amid data showing the UK surpassing other major economies, including the US, in cryptocurrency adoption rates in 2025.
         </p>
         <p>
           Additionally, concerns regarding transparency in political funding have arisen, prompting lawmakers to debate the regulation of cryptocurrency donations. Cabinet Office Minister Pat McFadden has emphasised updating regulations to maintain election transparency and integrity amid evolving financial practices.
