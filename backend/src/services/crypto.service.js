@@ -23,7 +23,8 @@ class CryptoService {
         order: 'market_cap_desc',
         per_page: limit,
         page: 1
-      }
+      },
+      headers: {accept: 'application/json', 'x-cg-demo-api-key': 'CG-ZT6288PKHr8HSV1SbjwDJB3u'}
     });
     const data = response.data.map(c => ({
       symbol: c.symbol.toUpperCase(),
