@@ -5,7 +5,11 @@ import { useRef, useState, useEffect } from 'react'
 import { Article } from '../../types'
 import { fetchUserGeo } from '../../utils/geo'
 
-// Dados de teste — substitua por sua fonte real (API, getStaticProps etc.)
+const CARD_WIDTH = 256
+const GAP = 16
+const FULL_WIDTH = CARD_WIDTH + GAP
+
+// Dados de teste — substitua pela sua fonte real (API, getStaticProps etc.)
 const testArticles: Record<string, Article[]> = {
   uk: [
     { slug: 'test7', category: 'UK', title: 'test7', excerpt: 'excerpt7', imageUrl: '/images/test7-uk.png', publishedAt: '2023-01-07' },
@@ -38,7 +42,6 @@ const testArticles: Record<string, Article[]> = {
 
 function CarouselSection({ country }: { country: 'UK' | 'USA' | 'Global' }) {
   const key = country.toLowerCase()
-  // ordena do mais novo ao mais antigo
   const items = [...testArticles[key]].sort(
     (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
   )
@@ -47,15 +50,12 @@ function CarouselSection({ country }: { country: 'UK' | 'USA' | 'Global' }) {
   const [start, setStart] = useState(0)
   const [visibleCount, setVisibleCount] = useState(4)
 
-  // calcula quantos cards cabem na largura disponível
   useEffect(() => {
-    const CARD_WIDTH = 256 + 16 // w-64 + gap space-x-4
     function updateCount() {
       if (!containerRef.current) return
       const width = containerRef.current.clientWidth
-      const count = Math.max(1, Math.floor(width / CARD_WIDTH))
+      const count = Math.max(1, Math.floor(width / FULL_WIDTH))
       setVisibleCount(count)
-      // garante que start não ultrapasse o máximo
       setStart(s => Math.min(s, items.length - count))
     }
     updateCount()
@@ -66,19 +66,32 @@ function CarouselSection({ country }: { country: 'UK' | 'USA' | 'Global' }) {
   const maxStart = items.length - visibleCount
   const prevDisabled = start <= 0
   const nextDisabled = start >= maxStart
-
   const visibleItems = items.slice(start, start + visibleCount)
+
+  // centraliza o botão sobre o primeiro e o último card
+  const leftArrowPos = CARD_WIDTH / 2
+  const rightArrowPos = (visibleCount - 1) * FULL_WIDTH + CARD_WIDTH / 2
+  const arrowStyle = { color: '#5293C6' }
 
   return (
     <section className="mb-12">
-      <h2 className="text-2xl font-bold mb-4">{country} News</h2>
+      <h2 className="text-2xl font-bold mb-4">
+        <Link href={`/news/${key}`}>
+          <a className="hover:underline">{country} News</a>
+        </Link>
+      </h2>
+
       <div className="relative">
+        {/* seta esquerda */}
         <button
           onClick={() => setStart(s => Math.max(0, s - 1))}
           disabled={prevDisabled}
-          className={`absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-75 p-2 rounded-full ${
-            prevDisabled ? 'opacity-50 cursor-not-allowed' : ''
-          }`}
+          style={{ left: leftArrowPos, ...arrowStyle }}
+          className={`
+            absolute top-1/2 transform -translate-x-1/2 -translate-y-1/2
+            bg-white bg-opacity-75 p-2 rounded-full
+            ${prevDisabled ? 'opacity-50 cursor-not-allowed' : ''}
+          `}
         >
           ‹
         </button>
@@ -106,12 +119,16 @@ function CarouselSection({ country }: { country: 'UK' | 'USA' | 'Global' }) {
           ))}
         </div>
 
+        {/* seta direita */}
         <button
           onClick={() => setStart(s => Math.min(maxStart, s + 1))}
           disabled={nextDisabled}
-          className={`absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-75 p-2 rounded-full ${
-            nextDisabled ? 'opacity-50 cursor-not-allowed' : ''
-          }`}
+          style={{ left: rightArrowPos, ...arrowStyle }}
+          className={`
+            absolute top-1/2 transform -translate-x-1/2 -translate-y-1/2
+            bg-white bg-opacity-75 p-2 rounded-full
+            ${nextDisabled ? 'opacity-50 cursor-not-allowed' : ''}
+          `}
         >
           ›
         </button>
@@ -126,20 +143,18 @@ export default function NewsIndexPage() {
   >(['Global', 'UK', 'USA'])
 
   useEffect(() => {
-    const determineCountryOrder = async () => {
+    ;(async () => {
       try {
-        const geoData = await fetchUserGeo()
-        const code = geoData.countryCode2
+        const { countryCode2 } = await fetchUserGeo()
         let primary: 'UK' | 'USA' | 'Global' = 'Global'
-        if (code === 'GB') primary = 'UK'
-        else if (code === 'US') primary = 'USA'
+        if (countryCode2 === 'GB') primary = 'UK'
+        else if (countryCode2 === 'US') primary = 'USA'
         const all: ('UK' | 'USA' | 'Global')[] = ['UK', 'USA', 'Global']
         setRankedCountries([primary, ...all.filter(c => c !== primary)])
       } catch {
-        console.error('Geo falhou, usando ordem padrão.')
+        console.error('Falha na geo — usando ordem padrão.')
       }
-    }
-    determineCountryOrder()
+    })()
   }, [])
 
   return (
