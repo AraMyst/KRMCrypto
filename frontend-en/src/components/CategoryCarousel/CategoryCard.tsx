@@ -1,14 +1,22 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { Article } from './CategoryCarousel';
+// components/CategoryCarousel/CategoryCard.tsx
+import Link from 'next/link'
+import Image from 'next/image'
+import { Article } from './CategoryCarousel'
 
 interface CategoryCardProps {
-  article: Article;
+  article: Article
+  sizeClasses?: string
 }
 
-export default function CategoryCard({ article }: CategoryCardProps) {
+export default function CategoryCard({
+  article,
+  sizeClasses = 'w-48 h-32',
+}: CategoryCardProps) {
   return (
-    <Link className="relative block w-48 h-32 rounded overflow-hidden shadow-lg hover:shadow-xl transition" href={`/news/${article.category}/${article.slug}`}>
+    <Link href={`/news/${article.category}/${article.slug}`}>
+      <a
+        className={`relative block ${sizeClasses} rounded overflow-hidden shadow-lg hover:shadow-xl transition`}
+      >
         <Image
           src={article.imageUrl}
           alt={article.title}
@@ -21,6 +29,7 @@ export default function CategoryCard({ article }: CategoryCardProps) {
             {article.title}
           </p>
         </div>
+      </a>
     </Link>
-  );
+  )
 }
