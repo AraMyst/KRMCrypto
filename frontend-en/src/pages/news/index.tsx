@@ -114,13 +114,13 @@ function CarouselSection({ country }: { country: 'UK' | 'USA' | 'Global' }) {
           ))}
         </div>
 
-        {/* seta direita fixa na borda */}
+        {/* seta direita ajustada mais próxima ao último card */}
         <button
           onClick={() => setStart(s => Math.min(maxStart, s + 1))}
           disabled={nextDisabled}
           style={{ color: '#5293C6' }}
           className={`
-            absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2
+            absolute right-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2
             z-10 bg-white bg-opacity-75 p-2 rounded-full
             ${nextDisabled ? 'opacity-50 cursor-not-allowed' : ''}
           `}
