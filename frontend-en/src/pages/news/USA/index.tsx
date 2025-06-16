@@ -3,7 +3,6 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
-import ArticleCard from '../../../components/ArticleCard'
 import { Article } from '../../../types'
 
 interface UKNewsIndexProps {
@@ -15,8 +14,8 @@ export default function UKNewsIndexPage({ articles }: UKNewsIndexProps) {
   const sorted = [...articles].sort(
     (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
   )
-  const featured = sorted.slice(0, 3)
-  const others = sorted.slice(3)
+  const featured = sorted.slice(0, 3)          // 3 artigos em destaque
+  const others = sorted.slice(3)               // demais artigos
 
   return (
     <>
@@ -42,6 +41,7 @@ export default function UKNewsIndexPage({ articles }: UKNewsIndexProps) {
                       alt={article.title}
                       layout="fill"
                       objectFit="cover"
+                      className="rounded"
                     />
                     <h2 className="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 text-white text-2xl p-4 font-semibold">
                       {article.title}
@@ -49,25 +49,36 @@ export default function UKNewsIndexPage({ articles }: UKNewsIndexProps) {
                   </div>
                 </a>
               </Link>
+              {/* primeiro parágrafo (excerpt) */}
               <p className="mt-4 text-lg leading-relaxed">{article.excerpt}</p>
             </article>
           ))}
         </div>
 
-        {/* Outros artigos: grid de cards menores */}
+        {/* Outros artigos: grid de cards menores, apenas imagem e título */}
         {others.length > 0 && (
           <section>
             <h2 className="text-2xl font-semibold mb-6">More UK News</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {others.map((article) => (
-                <ArticleCard
+                <Link
                   key={article.slug}
-                  slug={article.slug}
-                  category={article.category}
-                  title={article.title}
-                  excerpt={article.excerpt}
-                  imageUrl={article.imageUrl}
-                />
+                  href={`/news/UK/${article.slug}`}
+                  className="block relative w-full h-40 rounded overflow-hidden shadow hover:shadow-lg transition"
+                >
+                  <Image
+                    src={article.imageUrl}
+                    alt={article.title}
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded"
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                    <h3 className="text-white text-lg font-semibold text-center px-2">
+                      {article.title}
+                    </h3>
+                  </div>
+                </Link>
               ))}
             </div>
           </section>
