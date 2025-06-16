@@ -3,23 +3,28 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useRef, useState, useEffect } from 'react'
 import { Article } from '../../types'
+import { fetchUserGeo } from '../../utils/geo'
 
 const CARD_WIDTH = 256
 const GAP = 16
 const FULL_WIDTH = CARD_WIDTH + GAP
 
+// All regions with their folder names and display labels
 const regions = [
-  { name: 'UK', slug: 'uk' },
-  { name: 'USA', slug: 'usa' },
-  { name: 'Global', slug: 'global' },
-  { name: 'Canada', slug: 'canada' },
-  { name: 'New Zealand', slug: 'new-zealand' },
-  { name: 'Africa', slug: 'africa' },
-  { name: 'Ireland', slug: 'ireland' },
-  { name: 'Australia', slug: 'australia' },
-  { name: 'Europe', slug: 'europe' },
-]
+  { label: 'UK', folder: 'UK' },
+  { label: 'USA', folder: 'USA' },
+  { label: 'Global', folder: 'Global' },
+  { label: 'Canada', folder: 'Canada' },
+  { label: 'New Zealand', folder: 'New-Zealand' },
+  { label: 'Africa', folder: 'Africa' },
+  { label: 'Ireland', folder: 'Ireland' },
+  { label: 'Australia', folder: 'Australia' },
+  { label: 'Europe', folder: 'Europe' },
+] as const
 
+type Region = typeof regions[number]
+
+// Base articles shared across regions
 const baseArticles: Omit<Article, 'category'>[] = [
   {
     slug: 'uk-crypto-investigator-insolvency-cases',
@@ -82,21 +87,38 @@ const baseArticles: Omit<Article, 'category'>[] = [
   },
 ]
 
-// Build per-region articles
+// Build testArticles keyed by folder
 const testArticles: Record<string, Article[]> = {}
-regions.forEach(({ name, slug }) => {
-  testArticles[slug] = baseArticles.map(a => ({ ...a, category: name }))
+regions.forEach(({ label, folder }) => {
+  testArticles[folder] = baseArticles.map(a => ({
+    ...a,
+    category: label,
+  }))
 })
 
-function CarouselSection({ region }: { region: typeof regions[0] }) {
-  const { name, slug } = region
-  // sort by date descending
-  const sorted = [...testArticles[slug]].sort(
+// Continent mapping for regions
+const continentMapping: Record<string, string> = {
+  UK: 'Europe',
+  Ireland: 'Europe',
+  Europe: 'Europe',
+  USA: 'North America',
+  Canada: 'North America',
+  Australia: 'Oceania',
+  'New-Zealand': 'Oceania',
+  Africa: 'Africa',
+  Global: 'Global',
+}
+
+function CarouselSection({ region }: { region: Region }) {
+  const { label, folder } = region
+  const items = [...testArticles[folder]].sort(
     (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
   )
-  // rotate differently per region
-  const idx = regions.findIndex(r => r.slug === slug)
-  const items = sorted.slice(idx).concat(sorted.slice(0, idx))
+
+  // Rotate items so order differs per region
+  const idx = regions.findIndex(r => r.folder === folder)
+  const offset = (idx + 1) % items.length
+  const rotated = items.slice(offset).concat(items.slice(0, offset))
 
   const containerRef = useRef<HTMLDivElement>(null)
   const [start, setStart] = useState(0)
@@ -108,24 +130,23 @@ function CarouselSection({ region }: { region: typeof regions[0] }) {
       const width = containerRef.current.clientWidth
       const count = Math.max(1, Math.min(4, Math.floor(width / FULL_WIDTH)))
       setVisibleCount(count)
-      setStart(s => Math.min(s, items.length - count))
+      setStart(s => Math.min(s, rotated.length - count))
     }
     updateCount()
     window.addEventListener('resize', updateCount)
     return () => window.removeEventListener('resize', updateCount)
-  }, [items.length])
+  }, [rotated.length])
 
-  const maxStart = items.length - visibleCount
-  const visibleItems = items.slice(start, start + visibleCount)
+  const maxStart = rotated.length - visibleCount
+  const visibleItems = rotated.slice(start, start + visibleCount)
 
   return (
     <section className="mb-12">
       <h2 className="text-2xl font-bold mb-4">
-        <Link href={`/news/${name}`}>
-          <a className="hover:underline">{name} News</a>
+        <Link href={`/news/${folder}`}>
+          <a className="hover:underline">{label} News</a>
         </Link>
       </h2>
-
       <div className="relative">
         <button
           onClick={() => setStart(s => Math.max(0, s - 1))}
@@ -135,12 +156,11 @@ function CarouselSection({ region }: { region: typeof regions[0] }) {
         >
           ‹
         </button>
-
         <div ref={containerRef} className="flex overflow-hidden space-x-4 py-2">
           {visibleItems.map(article => (
             <Link
               key={article.slug}
-              href={`/news/${name}/${article.slug}`}
+              href={`/news/${folder}/${article.slug}`}
               passHref
               className="relative flex-shrink-0 w-64 h-40 rounded overflow-hidden"
             >
@@ -155,7 +175,6 @@ function CarouselSection({ region }: { region: typeof regions[0] }) {
             </Link>
           ))}
         </div>
-
         <button
           onClick={() => setStart(s => Math.min(maxStart, s + 1))}
           disabled={start >= maxStart}
@@ -170,19 +189,64 @@ function CarouselSection({ region }: { region: typeof regions[0] }) {
 }
 
 export default function NewsIndexPage() {
+  const [orderedFolders, setOrderedFolders] = useState<string[]>(
+    regions.map(r => r.folder)
+  )
+
+  useEffect(() => {
+    ;(async () => {
+      try {
+        const { countryCode2 } = await fetchUserGeo()
+        const directMap: Record<string, string> = {
+          GB: 'UK',
+          US: 'USA',
+          CA: 'Canada',
+          IE: 'Ireland',
+          AU: 'Australia',
+          NZ: 'New-Zealand',
+        }
+        let primary = directMap[countryCode2] || 'Global'
+        const europeCodes = [
+          'AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR',
+          'DE','GR','HU','IT','LV','LT','LU','MT','NL',
+          'PL','PT','RO','SK','SI','ES','SE',
+        ]
+        const africaCodes = [
+          /* list of African ISO2 codes, e.g. 'NG','ZA','EG', etc. */
+        ]
+        if (!directMap[countryCode2]) {
+          if (europeCodes.includes(countryCode2)) primary = 'Europe'
+          else if (africaCodes.includes(countryCode2)) primary = 'Africa'
+          else primary = 'Global'
+        }
+        const continent = continentMapping[primary]
+        const sameContinent = regions
+          .filter(r => r.folder !== primary && continentMapping[r.folder] === continent)
+          .map(r => r.folder)
+        const others = regions
+          .map(r => r.folder)
+          .filter(f => f !== primary && f !== 'Global' && !sameContinent.includes(f))
+        setOrderedFolders([primary, ...sameContinent, 'Global', ...others])
+      } catch {
+        // fallback to default
+      }
+    })()
+  }, [])
+
   return (
     <>
       <Head>
         <title>News – iDontKnowCrypto</title>
         <meta
           name="description"
-          content="Latest news across regions: UK, USA, Global, Canada, New Zealand, Africa, Ireland, Australia, Europe."
+          content="Latest news across regions with dynamic ordering based on your location."
         />
       </Head>
       <main className="max-w-7xl mx-auto px-4 py-8">
-        {regions.map(region => (
-          <CarouselSection key={region.slug} region={region} />
-        ))}
+        {orderedFolders.map(folder => {
+          const region = regions.find(r => r.folder === folder)!
+          return <CarouselSection key={folder} region={region} />
+        })}
       </main>
     </>
   )
