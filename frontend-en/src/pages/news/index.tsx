@@ -82,6 +82,7 @@ const baseArticles: Omit<Article, 'category'>[] = [
   },
 ]
 
+// Build per-region articles
 const testArticles: Record<string, Article[]> = {}
 regions.forEach(({ name, slug }) => {
   testArticles[slug] = baseArticles.map(a => ({ ...a, category: name }))
@@ -89,9 +90,13 @@ regions.forEach(({ name, slug }) => {
 
 function CarouselSection({ region }: { region: typeof regions[0] }) {
   const { name, slug } = region
-  const items = [...testArticles[slug]].sort(
+  // sort by date descending
+  const sorted = [...testArticles[slug]].sort(
     (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
   )
+  // rotate differently per region
+  const idx = regions.findIndex(r => r.slug === slug)
+  const items = sorted.slice(idx).concat(sorted.slice(0, idx))
 
   const containerRef = useRef<HTMLDivElement>(null)
   const [start, setStart] = useState(0)
@@ -116,7 +121,7 @@ function CarouselSection({ region }: { region: typeof regions[0] }) {
   return (
     <section className="mb-12">
       <h2 className="text-2xl font-bold mb-4">
-        <Link href={`/news/${slug}`}>
+        <Link href={`/news/${name}`}>
           <a className="hover:underline">{name} News</a>
         </Link>
       </h2>
@@ -135,7 +140,7 @@ function CarouselSection({ region }: { region: typeof regions[0] }) {
           {visibleItems.map(article => (
             <Link
               key={article.slug}
-              href={`/news/${slug}/${article.slug}`}
+              href={`/news/${name}/${article.slug}`}
               passHref
               className="relative flex-shrink-0 w-64 h-40 rounded overflow-hidden"
             >
