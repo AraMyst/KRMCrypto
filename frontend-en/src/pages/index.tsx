@@ -16,7 +16,6 @@ export default function HomePage() {
     async function determineRegion() {
       try {
         const { countryCode2 } = await fetchUserGeo()
-        // Garante que seja sempre string para o includes
         const code = countryCode2 ?? ''
         const europeCodes = [
           'AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR',
@@ -24,15 +23,11 @@ export default function HomePage() {
           'PL','PT','RO','SK','SI','ES','SE'
         ]
 
-        if (code === 'GB') {
-          setRegion('uk')
-        } else if (europeCodes.includes(code)) {
-          setRegion('europe')
-        } else {
-          setRegion('global')
-        }
-      } catch (err) {
-        console.error('Erro ao determinar região, usando global', err)
+        if (code === 'GB') setRegion('uk')
+        else if (europeCodes.includes(code)) setRegion('europe')
+        else setRegion('global')
+      } catch {
+        console.error('Erro ao determinar região, usando global')
         setRegion('global')
       }
     }
