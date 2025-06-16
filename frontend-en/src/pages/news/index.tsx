@@ -8,7 +8,6 @@ const CARD_WIDTH = 256
 const GAP = 16
 const FULL_WIDTH = CARD_WIDTH + GAP
 
-// List of all regions to display
 const regions = [
   { name: 'UK', slug: 'uk' },
   { name: 'USA', slug: 'usa' },
@@ -21,14 +20,13 @@ const regions = [
   { name: 'Europe', slug: 'europe' },
 ]
 
-// Base articles (same for every region)
 const baseArticles: Omit<Article, 'category'>[] = [
   {
     slug: 'uk-crypto-investigator-insolvency-cases',
     title:
       'UK Strengthens Efforts to Recover Crypto from Insolvency and Criminal Cases',
     excerpt:
-      'In response to a dramatic surge in insolvency cases involving cryptocurrencies, the UK Insolvency Service has recently appointed its first dedicated crypto specialist.',
+      'In response to a dramatic surge in insolvency cases involving cryptocurrencies, the UK Insolvency Service has appointed its first dedicated crypto specialist.',
     imageUrl: '/images/uk-crypto-investigator-insolvency-cases1.png',
     publishedAt: '2025-06-15',
   },
@@ -36,7 +34,7 @@ const baseArticles: Omit<Article, 'category'>[] = [
     slug: 'uk-fca-crypto-etns-retail-investors',
     title: "UK's FCA Proposes Removing Ban on Crypto ETNs for Retail Investors",
     excerpt:
-      "The UK's Financial Conduct Authority has proposed ending its prohibition on retail investors accessing crypto ETNs, marking a significant policy shift.",
+      "The UK's Financial Conduct Authority has proposed ending its prohibition on retail investors accessing crypto ETNs.",
     imageUrl: '/images/uk-fca-crypto-etns-retail-investors1.png',
     publishedAt: '2025-06-15',
   },
@@ -84,13 +82,9 @@ const baseArticles: Omit<Article, 'category'>[] = [
   },
 ]
 
-// Build per-region articles, preserving same imageUrl and slug
 const testArticles: Record<string, Article[]> = {}
 regions.forEach(({ name, slug }) => {
-  testArticles[slug] = baseArticles.map(a => ({
-    ...a,
-    category: name,
-  }))
+  testArticles[slug] = baseArticles.map(a => ({ ...a, category: name }))
 })
 
 function CarouselSection({ region }: { region: typeof regions[0] }) {
@@ -129,7 +123,7 @@ function CarouselSection({ region }: { region: typeof regions[0] }) {
 
       <div className="relative">
         <button
-          onClick={() => setStart(s => Math.max(0, s - 1)))}
+          onClick={() => setStart(s => Math.max(0, s - 1))}
           disabled={start === 0}
           style={{ color: '#5293C6' }}
           className="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-white bg-opacity-75 p-2 rounded-full"
@@ -137,10 +131,7 @@ function CarouselSection({ region }: { region: typeof regions[0] }) {
           ‹
         </button>
 
-        <div
-          ref={containerRef}
-          className="flex overflow-hidden space-x-4 py-2"
-        >
+        <div ref={containerRef} className="flex overflow-hidden space-x-4 py-2">
           {visibleItems.map(article => (
             <Link
               key={article.slug}
@@ -161,7 +152,7 @@ function CarouselSection({ region }: { region: typeof regions[0] }) {
         </div>
 
         <button
-          onClick={() => setStart(s => Math.min(maxStart, s + 1)))}
+          onClick={() => setStart(s => Math.min(maxStart, s + 1))}
           disabled={start >= maxStart}
           style={{ color: '#5293C6' }}
           className="absolute right-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-white bg-opacity-75 p-2 rounded-full"
