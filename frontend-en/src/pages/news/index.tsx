@@ -9,7 +9,6 @@ const CARD_WIDTH = 256
 const GAP = 16
 const FULL_WIDTH = CARD_WIDTH + GAP
 
-// All regions with their folder names and display labels
 const regions = [
   { label: 'UK', folder: 'UK' },
   { label: 'USA', folder: 'USA' },
@@ -24,7 +23,6 @@ const regions = [
 
 type Region = typeof regions[number]
 
-// Base articles shared across regions
 const baseArticles: Omit<Article, 'category'>[] = [
   {
     slug: 'uk-crypto-investigator-insolvency-cases',
@@ -87,17 +85,12 @@ const baseArticles: Omit<Article, 'category'>[] = [
   },
 ]
 
-// Build testArticles keyed by folder
 const testArticles: Record<string, Article[]> = {}
 regions.forEach(({ label, folder }) => {
-  testArticles[folder] = baseArticles.map(a => ({
-    ...a,
-    category: label,
-  }))
+  testArticles[folder] = baseArticles.map(a => ({ ...a, category: label }))
 })
 
-// Continent mapping for regions
-const continentMapping: Record<string, string> = {
+const continentMap: Record<string, string> = {
   UK: 'Europe',
   Ireland: 'Europe',
   Europe: 'Europe',
@@ -114,27 +107,25 @@ function CarouselSection({ region }: { region: Region }) {
   const items = [...testArticles[folder]].sort(
     (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
   )
-
-  // Rotate items so order differs per region
+  // rotate per region index
   const idx = regions.findIndex(r => r.folder === folder)
-  const offset = (idx + 1) % items.length
-  const rotated = items.slice(offset).concat(items.slice(0, offset))
+  const rotated = items.slice(idx).concat(items.slice(0, idx))
 
   const containerRef = useRef<HTMLDivElement>(null)
   const [start, setStart] = useState(0)
   const [visibleCount, setVisibleCount] = useState(4)
 
   useEffect(() => {
-    function updateCount() {
+    function update() {
       if (!containerRef.current) return
       const width = containerRef.current.clientWidth
       const count = Math.max(1, Math.min(4, Math.floor(width / FULL_WIDTH)))
       setVisibleCount(count)
       setStart(s => Math.min(s, rotated.length - count))
     }
-    updateCount()
-    window.addEventListener('resize', updateCount)
-    return () => window.removeEventListener('resize', updateCount)
+    update()
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
   }, [rotated.length])
 
   const maxStart = rotated.length - visibleCount
@@ -161,7 +152,6 @@ function CarouselSection({ region }: { region: Region }) {
             <Link
               key={article.slug}
               href={`/news/${folder}/${article.slug}`}
-              passHref
               className="relative flex-shrink-0 w-64 h-40 rounded overflow-hidden"
             >
               <img
@@ -189,15 +179,14 @@ function CarouselSection({ region }: { region: Region }) {
 }
 
 export default function NewsIndexPage() {
-  const [orderedFolders, setOrderedFolders] = useState<string[]>(
-    regions.map(r => r.folder)
-  )
+  const [order, setOrder] = useState<string[]>(regions.map(r => r.folder))
 
   useEffect(() => {
     ;(async () => {
       try {
         const { countryCode2 } = await fetchUserGeo()
-        const directMap: Record<string, string> = {
+        const code = countryCode2 ?? ''
+        const direct: Record<string, string> = {
           GB: 'UK',
           US: 'USA',
           CA: 'Canada',
@@ -205,30 +194,27 @@ export default function NewsIndexPage() {
           AU: 'Australia',
           NZ: 'New-Zealand',
         }
-        let primary = directMap[countryCode2] || 'Global'
+        let primary = direct[code] ?? 'Global'
+
         const europeCodes = [
           'AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR',
           'DE','GR','HU','IT','LV','LT','LU','MT','NL',
           'PL','PT','RO','SK','SI','ES','SE',
         ]
-        const africaCodes = [
-          /* list of African ISO2 codes, e.g. 'NG','ZA','EG', etc. */
-        ]
-        if (!directMap[countryCode2]) {
-          if (europeCodes.includes(countryCode2)) primary = 'Europe'
-          else if (africaCodes.includes(countryCode2)) primary = 'Africa'
-          else primary = 'Global'
+        if (!direct[code] && europeCodes.includes(code)) {
+          primary = 'Europe'
         }
-        const continent = continentMapping[primary]
-        const sameContinent = regions
-          .filter(r => r.folder !== primary && continentMapping[r.folder] === continent)
+        const continent = continentMap[primary]
+        const sameCont = regions
+          .filter(r => r.folder !== primary && continentMap[r.folder] === continent)
           .map(r => r.folder)
         const others = regions
           .map(r => r.folder)
-          .filter(f => f !== primary && f !== 'Global' && !sameContinent.includes(f))
-        setOrderedFolders([primary, ...sameContinent, 'Global', ...others])
+          .filter(f => f !== primary && f !== 'Global' && !sameCont.includes(f))
+
+        setOrder([primary, ...sameCont, 'Global', ...others])
       } catch {
-        // fallback to default
+        // fallback
       }
     })()
   }, [])
@@ -239,11 +225,11 @@ export default function NewsIndexPage() {
         <title>News – iDontKnowCrypto</title>
         <meta
           name="description"
-          content="Latest news across regions with dynamic ordering based on your location."
+          content="Latest news across regions, dynamically ordered by user location."
         />
       </Head>
       <main className="max-w-7xl mx-auto px-4 py-8">
-        {orderedFolders.map(folder => {
+        {order.map(folder => {
           const region = regions.find(r => r.folder === folder)!
           return <CarouselSection key={folder} region={region} />
         })}
