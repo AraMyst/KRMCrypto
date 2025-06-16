@@ -23,6 +23,7 @@ const regions = [
 
 type Region = typeof regions[number]
 
+// Base articles shared across all regions
 const baseArticles: Omit<Article, 'category'>[] = [
   {
     slug: 'uk-crypto-investigator-insolvency-cases',
@@ -85,10 +86,29 @@ const baseArticles: Omit<Article, 'category'>[] = [
   },
 ]
 
+// Build per-region article lists (same content, category label differs)
 const testArticles: Record<string, Article[]> = {}
 regions.forEach(({ label, folder }) => {
-  testArticles[folder] = baseArticles.map(a => ({ ...a, category: label }))
+  testArticles[folder] = baseArticles.map(a => ({
+    ...a,
+    category: label,
+  }))
 })
+
+// Simple seeded shuffle for deterministic per-region ordering
+function shuffle<T>(array: T[], seed: string): T[] {
+  const result = [...array]
+  let hash = 0
+  for (let i = 0; i < seed.length; i++) {
+    hash = (hash * 31 + seed.charCodeAt(i)) >>> 0
+  }
+  for (let i = result.length - 1; i > 0; i--) {
+    hash = (hash * 1664525 + 1013904223) >>> 0
+    const j = hash % (i + 1)
+    ;[result[i], result[j]] = [result[j], result[i]]
+  }
+  return result
+}
 
 const continentMap: Record<string, string> = {
   UK: 'Europe',
@@ -104,32 +124,31 @@ const continentMap: Record<string, string> = {
 
 function CarouselSection({ region }: { region: Region }) {
   const { label, folder } = region
-  const items = [...testArticles[folder]].sort(
+  // sort descending and then shuffle based on folder name
+  const sorted = [...testArticles[folder]].sort(
     (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
   )
-  // rotate per region index
-  const idx = regions.findIndex(r => r.folder === folder)
-  const rotated = items.slice(idx).concat(items.slice(0, idx))
+  const items = shuffle(sorted, folder)
 
   const containerRef = useRef<HTMLDivElement>(null)
   const [start, setStart] = useState(0)
   const [visibleCount, setVisibleCount] = useState(4)
 
   useEffect(() => {
-    function update() {
+    function updateCount() {
       if (!containerRef.current) return
       const width = containerRef.current.clientWidth
       const count = Math.max(1, Math.min(4, Math.floor(width / FULL_WIDTH)))
       setVisibleCount(count)
-      setStart(s => Math.min(s, rotated.length - count))
+      setStart(s => Math.min(s, items.length - count))
     }
-    update()
-    window.addEventListener('resize', update)
-    return () => window.removeEventListener('resize', update)
-  }, [rotated.length])
+    updateCount()
+    window.addEventListener('resize', updateCount)
+    return () => window.removeEventListener('resize', updateCount)
+  }, [items.length])
 
-  const maxStart = rotated.length - visibleCount
-  const visibleItems = rotated.slice(start, start + visibleCount)
+  const maxStart = items.length - visibleCount
+  const visibleItems = items.slice(start, start + visibleCount)
 
   return (
     <section className="mb-12">
@@ -152,6 +171,7 @@ function CarouselSection({ region }: { region: Region }) {
             <Link
               key={article.slug}
               href={`/news/${folder}/${article.slug}`}
+              passHref
               className="relative flex-shrink-0 w-64 h-40 rounded overflow-hidden"
             >
               <img
@@ -195,7 +215,6 @@ export default function NewsIndexPage() {
           NZ: 'New-Zealand',
         }
         let primary = direct[code] ?? 'Global'
-
         const europeCodes = [
           'AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR',
           'DE','GR','HU','IT','LV','LT','LU','MT','NL',
@@ -214,7 +233,7 @@ export default function NewsIndexPage() {
 
         setOrder([primary, ...sameCont, 'Global', ...others])
       } catch {
-        // fallback
+        // fallback to default
       }
     })()
   }, [])
@@ -225,7 +244,7 @@ export default function NewsIndexPage() {
         <title>News – iDontKnowCrypto</title>
         <meta
           name="description"
-          content="Latest news across regions, dynamically ordered by user location."
+          content="Latest news across regions, dynamically ordered by your location."
         />
       </Head>
       <main className="max-w-7xl mx-auto px-4 py-8">
