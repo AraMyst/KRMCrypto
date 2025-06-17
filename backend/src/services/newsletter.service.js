@@ -51,7 +51,7 @@ async function subscribe({ firstName, lastName, email }) {
     to: email,
     subject: '🎉 Welcome to our newsletter!',
     html: `
-      <p>Hello ${firstName},</p>
+      <p>Hello ${email},</p>
       <p>Thank you for subscribing to the KRMCrypto newsletter!</p>
       <p>You will start receiving updates soon.</p>
     `
