@@ -3,12 +3,28 @@
 const subscriptionService = require('../services/subscription.service');
 
 exports.createSubscription = async (req, res, next) => {
+  const { plan } = req.body; // e.g. 'daily', 'weekly', ...
+
+  // --- VERIFICAÇÃO ADICIONADA ---
+  const allowedPlans = ['daily', 'weekly', 'monthly'];
+
+  // Verifica se o 'plan' recebido NÃO está na lista de planos permitidos
+  // A verificação '!plan' garante que o campo não foi enviado vazio ou nulo.
+  if (!plan || !allowedPlans.includes(plan)) {
+    // Se não estiver, retorna um erro 400 (Bad Request) com uma mensagem clara.
+    return res.status(400).json({
+      error: `Plano inválido. Por favor, escolha uma das seguintes opções: ${allowedPlans.join(', ')}.`
+    });
+  }
+  // --- FIM DA VERIFICAÇÃO ---
+
   try {
     const userId = req.user.id;
-    const { plan } = req.body; // e.g. 'daily', 'weekly', ...
+    // Se a execução chegou até aqui, o 'plan' é válido.
     const { subscription, paymentLink } = await subscriptionService.createSubscription(userId, plan);
     res.status(201).json({ subscription, paymentLink });
   } catch (err) {
+    // Se ocorrer um erro no serviço ou no banco de dados, ele será capturado aqui
     next(err);
   }
 };

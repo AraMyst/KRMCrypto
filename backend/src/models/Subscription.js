@@ -14,10 +14,7 @@ const SubscriptionSchema = new mongoose.Schema({
     enum: [
       'daily',
       'weekly',
-      'biweekly',
       'monthly',
-      'bimonthly',
-      'quarterly'
     ]
   },
   status: {

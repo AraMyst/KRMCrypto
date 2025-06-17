@@ -5,10 +5,7 @@ const paymentService = require('./payment.service');
 const planPrices = {
   daily: 5,
   weekly: 10,
-  biweekly: 15,
   monthly: 20,
-  bimonthly: 35,
-  quarterly: 50
 };
 const DEFAULT_CURRENCY = 'USD';
 

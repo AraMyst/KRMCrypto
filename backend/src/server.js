@@ -24,7 +24,9 @@ const app = express();
 
 const allowedOrigins = [
   'https://krm-crypto-en.vercel.app', // Domínio de produção do seu frontend
-  'http://localhost:3000'             // Domínio de desenvolvimento local
+  'http://localhost:3000',         // Domínio de desenvolvimento local
+  'http://localhost:3001',
+  'http://localhost:3002'           
 ];
 
 const corsOptions = {
