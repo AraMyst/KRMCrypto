@@ -1,4 +1,4 @@
-// src/pages/news/UK/uk-fca-stablecoin-crypto-custody-regulation.tsx
+s// src/pages/news/UK/uk-fca-stablecoin-crypto-custody-regulation.tsx
 import Head from 'next/head'
 import Link from 'next/link'
 import { formatDate } from '../../../utils/date'
@@ -21,7 +21,7 @@ export default function UKFcaStablecoinCryptoCustodyRegulationPage() {
 
         <p className="text-sm text-gray-500">
           Published on {formatDate('2025-06-15')} • Updated on {formatDate(now)} • By{' '}
-          <Link href="/Authors/cora-elmwick" legacyBehavior>
+          <Link href="/Authors/cora-elmwick" legacyBehavior >
             <a className="text-blue-600 hover:underline">Cora Elmwick</a>
           </Link>
         </p>

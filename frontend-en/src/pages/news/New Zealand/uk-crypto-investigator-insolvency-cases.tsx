@@ -21,7 +21,7 @@ export default function UKCryptoInvestigatorInsolvencyCasesPage() {
 
         <p className="text-sm text-gray-500">
           Published on {formatDate('2025-06-15')} • Updated on {formatDate(now)} • By{' '}
-          <Link href="/Authors/cora-elmwick" legacyBehavior>
+          <Link href="/Authors/cora-elmwick" legacyBehavior >
             <a className="text-blue-600 hover:underline">Cora Elmwick</a>
           </Link>
         </p>

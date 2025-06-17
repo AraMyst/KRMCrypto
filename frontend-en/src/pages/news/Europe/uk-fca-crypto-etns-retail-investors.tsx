@@ -21,7 +21,7 @@ export default function UKFcaCryptoETNsRetailInvestorsPage() {
 
         <p className="text-sm text-gray-500">
           Published on {formatDate('2025-06-15')} • Updated on {formatDate(now)} • By{' '}
-          <Link href="/Authors/cora-elmwick" legacyBehavior>
+          <Link href="/Authors/cora-elmwick" legacyBehavior >
             <a className="text-blue-600 hover:underline">Cora Elmwick</a>
           </Link>
         </p>
@@ -44,7 +44,7 @@ export default function UKFcaCryptoETNsRetailInvestorsPage() {
         </p>
         <p>
           David Geale, Executive Director of Payments and Digital Assets at the FCA, highlighted the rationale behind the change, stating: “We want investors to have the freedom to decide if such high-risk investments align with their financial strategies, fully aware{' '}
-          <Link href="/news/UK/uk-crypto-investigator-insolvency-cases" legacyBehavior>
+          <Link href="/news/UK/uk-crypto-investigator-insolvency-cases" legacyBehavior >
             <a className="text-blue-600 hover:underline">that they risk losing</a>
           </Link>{' '}
           their entire investment.”
