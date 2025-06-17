@@ -135,7 +135,7 @@ export default function AccountPage() {
               {subscription.nextBillingDate}
             </p>
             <div className="flex space-x-4">
-              <Link className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700" href="/account/payment">
+              <Link className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700" href="/account/payment" legacyBehavior>
                   Edit Payment Method
               </Link>
               <button
@@ -150,7 +150,7 @@ export default function AccountPage() {
         ) : (
           <div>
             <p>You do not have an active subscription.</p>
-            <Link className="inline-block mt-2 px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark" href="/checkout">
+            <Link className="inline-block mt-2 px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark" href="/checkout" legacyBehavior>
                 Subscribe Now
             </Link>
           </div>

@@ -72,7 +72,7 @@ export default function HomePage() {
     <main className="max-w-7xl mx-auto px-4 pt-8 pb-16 space-y-16">
       {/* News */}
       <section>
-        <Link href="/news" className="text-3xl font-bold mb-4 inline-block hover:underline">
+        <Link href="/news" className="text-3xl font-bold mb-4 inline-block hover:underline" legacyBehavior>
           News
         </Link>
         <CategoryCarousel country="News" articles={newsPosts} bigCards />
@@ -81,7 +81,7 @@ export default function HomePage() {
       {/* Guides, Airdrops, Bitcoin, Presale */}
       {otherCats.map(cat => (
         <section key={cat.slug}>
-          <Link href={`/${cat.slug}`} className="text-3xl font-bold mb-4 inline-block hover:underline">
+          <Link href={`/${cat.slug}`} className="text-3xl font-bold mb-4 inline-block hover:underline" legacyBehavior>
             {cat.name}
           </Link>
           <CategoryCarousel

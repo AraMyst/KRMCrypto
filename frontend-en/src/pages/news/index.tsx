@@ -153,7 +153,7 @@ function CarouselSection({ region }: { region: Region }) {
   return (
     <section className="mb-12">
       <h2 className="text-2xl font-bold mb-4">
-        <Link href={`/news/${folder}`}>
+        <Link href={`/news/${folder}`} legacyBehavior>
           <a className="hover:underline">{label} News</a>
         </Link>
       </h2>

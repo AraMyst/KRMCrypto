@@ -35,7 +35,7 @@ export default function Navbar() {
       <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 bg-white shadow">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           {/* Logo */}
-          <Link className="flex-shrink-0" href="/">
+          <Link className="flex-shrink-0" href="/" legacyBehavior>
               <Image
                 src="/images/idontknowcrypto-logo.png"
                 alt="iDontKnowCrypto"
@@ -48,7 +48,7 @@ export default function Navbar() {
           {/* Nav links desktop */}
           <div className="hidden md:flex space-x-8">
             {NAV_LINKS.map((link) => (
-              <Link className="text-gray-700 hover:text-primary font-medium" key={link.href} href={link.href}>
+              <Link className="text-gray-700 hover:text-primary font-medium" key={link.href} href={link.href} legacyBehavior>
                   {link.label}
               </Link>
             ))}

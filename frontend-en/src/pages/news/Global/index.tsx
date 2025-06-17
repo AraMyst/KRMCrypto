@@ -34,7 +34,7 @@ export default function GlobalNewsIndexPage({ articles }: GlobalNewsIndexProps) 
         <div className="space-y-12">
           {featured.map((article) => (
             <article key={article.slug}>
-              <Link href={`/news/Global/${article.slug}`}>
+              <Link href={`/news/Global/${article.slug}`} legacyBehavior>
                 <a className="block relative">
                   <div className="w-full h-64 relative rounded overflow-hidden">
                     <Image

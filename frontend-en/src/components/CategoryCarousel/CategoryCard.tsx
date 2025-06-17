@@ -13,7 +13,7 @@ export default function CategoryCard({
   sizeClasses = 'w-48 h-32',
 }: CategoryCardProps) {
   return (
-    <Link href={`/news/${article.category}/${article.slug}`}>
+    <Link href={`/news/${article.category}/${article.slug}`} legacyBehavior>
       <a
         className={`relative block ${sizeClasses} rounded overflow-hidden shadow-lg hover:shadow-xl transition`}
       >

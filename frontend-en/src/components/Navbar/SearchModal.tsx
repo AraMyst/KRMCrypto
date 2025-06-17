@@ -66,7 +66,7 @@ export default function SearchModal({ onClose }: SearchModalProps) {
         {/* <ul className="mt-4 space-y-2">
           {results.map(r => (
             <li key={r.slug}>
-              <Link href={`/news/${r.category}/${r.slug}`}>
+              <Link href={`/news/${r.category}/${r.slug}`} legacyBehavior>
                 <a className="block hover:bg-gray-100 p-2 rounded">{r.title}</a>
               </Link>
             </li>

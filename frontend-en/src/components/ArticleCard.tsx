@@ -18,7 +18,7 @@ export default function ArticleCard({
   imageUrl,
 }: ArticleCardProps) {
   return (
-    <Link className="flex flex-col md:flex-row bg-white rounded-lg overflow-hidden shadow hover:shadow-lg transition" href={`/news/${category}/${slug}`}>
+    <Link className="flex flex-col md:flex-row bg-white rounded-lg overflow-hidden shadow hover:shadow-lg transition" href={`/news/${category}/${slug}`} legacyBehavior>
         {/* Imagem de capa */}
         <div className="relative w-full md:w-48 h-40 md:h-auto flex-shrink-0">
           <Image
