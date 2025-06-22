@@ -13,7 +13,7 @@ export default function PortugalPage() {
     async function fetchArticles() {
       try {
         const resp = await apiClient.get<Article[]>(
-          '/posts?category=portugal'
+          '/articles?category=portugal'
         )
         setArticles(resp.data)
       } catch (err) {

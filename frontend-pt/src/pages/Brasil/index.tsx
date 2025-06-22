@@ -13,7 +13,7 @@ export default function BrasilPage() {
     async function fetchArticles() {
       try {
         const resp = await apiClient.get<Article[]>(
-          '/posts?category=brasil'
+          '/articles?category=brasil'
         )
         setArticles(resp.data)
       } catch (err) {
