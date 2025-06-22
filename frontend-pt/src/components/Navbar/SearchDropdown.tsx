@@ -32,7 +32,7 @@ export default function SearchDropdown({ onClose }: SearchDropdownProps) {
   return (
     <div
       ref={ref}
-      className="absolute right-4 top-full mt-2 bg-white p-4 shadow rounded w-64 z-40"
+      className="absolute right-4 top-full mt-2 bg-white p-4 shadow rounded w-56 z-40"
     >
       <form onSubmit={handleSubmit} className="flex space-x-2">
         <input
