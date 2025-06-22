@@ -3,8 +3,8 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
-import ArticleCard from '../../../components/ArticleCard'
-import { Article } from '../../../types'
+import ArticleCard from '../../components/ArticleCard'
+import { Article } from '../../types'
 
 interface GlobalNewsIndexProps {
   articles: Article[]

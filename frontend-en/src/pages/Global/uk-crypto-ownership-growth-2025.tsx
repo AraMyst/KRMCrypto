@@ -1,7 +1,7 @@
 // src/pages/news/Global/uk-crypto-ownership-growth-2025.tsx
 import Head from 'next/head'
 import Link from 'next/link'
-import { formatDate } from '../../../utils/date'
+import { formatDate } from '../../utils/date'
 
 export default function UKCryptoOwnershipGrowth2025Page() {
   const now = new Date().toISOString()

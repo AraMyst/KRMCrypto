@@ -1,7 +1,7 @@
 // src/pages/news/UK/uk-crypto-investigator-insolvency-cases.tsx
 import Head from 'next/head'
 import Link from 'next/link'
-import { formatDate } from '../../../utils/date'
+import { formatDate } from '../../utils/date'
 
 export default function UKCryptoInvestigatorInsolvencyCasesPage() {
   const now = new Date().toISOString()
