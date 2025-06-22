@@ -88,7 +88,7 @@ export default function Navbar() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search..."
-                className="px-2 py-1 focus:outline-none"
+                className="px-2 py-1 focus:outline-none w-28 sm:w-36"
               />
               <button
                 type="submit"
@@ -136,6 +136,7 @@ export default function Navbar() {
 
         {/* Dropdowns */}
         {isLoginOpen && <LoginDropdown onClose={() => setIsLoginOpen(false)} />}
+        </div>
       </nav>
 
       {/* Spacer para evitar overlap */}
