@@ -4,12 +4,11 @@ import Link from 'next/link'
 import { Article } from '../../types'
 
 const articles: Article[] = [
-  // two original “big” features
   {
     slug: 'ig-group-crypto-trading-uk-retail-investors',
     title: 'IG Group Introduces Direct Crypto Trading for UK Retail Investors',
     excerpt:
-      'IG Group, the prominent UK-based trading and financial services provider, has officially launched direct cryptocurrency trading for retail investors. This development significantly broadens IG’s presence in the rapidly evolving crypto market.',
+      'IG Group, the prominent UK-based trading and financial services provider, has officially launched direct cryptocurrency trading for retail investors.',
     imageUrl: '/images/ig-group-crypto-trading-uk-retail-investors1.png',
     publishedAt: '2025-06-15',
     category: 'Guides',
@@ -25,7 +24,6 @@ const articles: Article[] = [
     publishedAt: '2025-06-15',
     category: 'Guides',
   },
-  // promoted above the two big ones
   {
     slug: 'uk-crypto-investigator-insolvency-cases',
     title:
@@ -35,9 +33,7 @@ const articles: Article[] = [
     imageUrl: '/images/uk-crypto-investigator-insolvency-cases1.png',
     publishedAt: '2025-06-15',
     category: 'Guides',
-    content: `Andrew Small, previously a police investigator with extensive expertise in economic crime, has been recruited specifically to address the complex challenge of tracing and reclaiming cryptocurrencies. Small will leverage his background in forensic financial investigations to support the Insolvency Service’s efforts to locate crypto assets concealed or unreported in insolvency and criminal proceedings. His appointment follows a year-over-year surge in crypto-related bankruptcies that saw digital asset holdings locked away in failed businesses.`,
   },
-  // the remaining four for the grid
   {
     slug: 'uk-fca-crypto-etns-retail-investors',
     title: "UK's FCA Proposes Removing Ban on Crypto ETNs for Retail Investors",
@@ -83,6 +79,8 @@ const articles: Article[] = [
 
 const [feature1, feature2, special, ...rest] = articles
 
+const specialText = `Andrew Small, previously a police investigator with extensive expertise in economic crime, has been recruited specifically to address the complex challenge of tracing and reclaiming cryptocurrencies. Small will leverage his background in forensic financial investigations to support the Insolvency Service’s efforts to locate crypto assets concealed or unreported in insolvency and criminal proceedings. His appointment follows a year-over-year surge in crypto-related bankruptcies that saw digital asset holdings locked away in failed businesses.`
+
 export default function GuidesIndexPage() {
   return (
     <>
@@ -103,11 +101,8 @@ export default function GuidesIndexPage() {
           />
           <div className="lg:w-1/2">
             <h2 className="text-2xl font-bold">{special.title}</h2>
-            <p className="mt-4 text-base">{special.content}</p>
-            <Link
-              href={`/guides/${special.slug}`}
-              legacyBehavior
-            >
+            <p className="mt-4 text-base">{specialText}</p>
+            <Link href={`/guides/${special.slug}`} legacyBehavior>
               <a className="mt-4 inline-block text-blue-600 hover:underline">
                 Read more
               </a>

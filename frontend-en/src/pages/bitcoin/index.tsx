@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { Article } from '../../types'
 
 const articles: Article[] = [
-  // two original “big” features
   {
     slug: 'uk-crypto-ownership-growth-2025',
     title:
@@ -26,7 +25,6 @@ const articles: Article[] = [
     publishedAt: '2025-06-15',
     category: 'Bitcoin',
   },
-  // promoted above the two big ones
   {
     slug: 'uk-fca-crypto-etns-retail-investors',
     title: "UK's FCA Proposes Removing Ban on Crypto ETNs for Retail Investors",
@@ -35,9 +33,7 @@ const articles: Article[] = [
     imageUrl: '/images/uk-fca-crypto-etns-retail-investors1.png',
     publishedAt: '2025-06-15',
     category: 'Bitcoin',
-    content: `According to a recent statement, the FCA intends to enable individual investors to buy and sell crypto ETNs, provided these financial instruments are listed on exchanges recognised by the FCA. This move would provide retail investors more options to engage with cryptocurrency markets through regulated and transparent investment vehicles. Market participants believe this policy shift could open new on-ramps for UK retail and foster greater institutional interest in digital asset ETNs.`,
   },
-  // the remaining four for the grid
   {
     slug: 'ig-group-crypto-trading-uk-retail-investors',
     title: 'IG Group Introduces Direct Crypto Trading for UK Retail Investors',
@@ -83,6 +79,8 @@ const articles: Article[] = [
 
 const [feature1, feature2, special, ...rest] = articles
 
+const specialText = `According to a recent statement, the FCA intends to enable individual investors to buy and sell crypto ETNs, provided these financial instruments are listed on exchanges recognised by the FCA. This move would provide retail investors more options to engage with cryptocurrency markets through regulated and transparent investment vehicles. Market participants believe this policy shift could open new on-ramps for UK retail and foster greater institutional interest in digital asset ETNs.`
+
 export default function BitcoinIndexPage() {
   return (
     <>
@@ -103,7 +101,7 @@ export default function BitcoinIndexPage() {
           />
           <div className="lg:w-1/2">
             <h2 className="text-2xl font-bold">{special.title}</h2>
-            <p className="mt-4 text-base">{special.content}</p>
+            <p className="mt-4 text-base">{specialText}</p>
             <Link href={`/bitcoin/${special.slug}`} legacyBehavior>
               <a className="mt-4 inline-block text-blue-600 hover:underline">
                 Read more

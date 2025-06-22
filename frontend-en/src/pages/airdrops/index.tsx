@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { Article } from '../../types'
 
 const articles: Article[] = [
-  // two original “big” features
   {
     slug: 'bcp-technologies-pound-stablecoin-launch',
     title:
@@ -26,7 +25,6 @@ const articles: Article[] = [
     publishedAt: '2025-06-15',
     category: 'Airdrops',
   },
-  // promoted above the two big ones
   {
     slug: 'reform-uk-accepts-crypto-donations-nigel-farage',
     title:
@@ -37,9 +35,7 @@ const articles: Article[] = [
       '/images/reform-uk-accepts-crypto-donations-nigel-farage1.png',
     publishedAt: '2025-06-15',
     category: 'Airdrops',
-    content: `Speaking at the Bitcoin 2025 conference in Las Vegas on May 29, Nigel Farage emphasised the significance of accepting crypto donations as a progressive digital finance stance. “We are proud to be the first mainstream UK party to accept Bitcoin and other cryptocurrencies,” he declared, highlighting plans for new legislation and a proposed Bitcoin reserve to strengthen national digital asset infrastructure. This move signals a broader shift towards blockchain-based fundraising in politics.`,
   },
-  // the remaining four for the grid
   {
     slug: 'ig-group-crypto-trading-uk-retail-investors',
     title: 'IG Group Introduces Direct Crypto Trading for UK Retail Investors',
@@ -54,7 +50,8 @@ const articles: Article[] = [
     title: "UK's FCA Proposes Removing Ban on Crypto ETNs for Retail Investors",
     excerpt:
       "The UK's Financial Conduct Authority has proposed ending its prohibition on retail investors accessing crypto ETNs.",
-    imageUrl: '/images/uk-fca-crypto-etns-retail-investors1.png',
+    imageUrl:
+      '/images/uk-fca-crypto-etns-retail-investors1.png',
     publishedAt: '2025-06-15',
     category: 'Airdrops',
   },
@@ -75,13 +72,16 @@ const articles: Article[] = [
       'UK Tops Global Crypto Ownership Growth in 2025 Amid Regulatory Ambiguity',
     excerpt:
       'In 2025, the UK recorded the fastest year-over-year increase in crypto ownership among major markets.',
-    imageUrl: '/images/uk-crypto-ownership-growth-20251.png',
+    imageUrl:
+      '/images/uk-crypto-ownership-growth-20251.png',
     publishedAt: '2025-06-15',
     category: 'Airdrops',
   },
 ]
 
 const [feature1, feature2, special, ...rest] = articles
+
+const specialText = `Speaking at the Bitcoin 2025 conference in Las Vegas on May 29, Nigel Farage emphasised the significance of accepting crypto donations as a progressive digital finance stance. “We are proud to be the first mainstream UK party to accept Bitcoin and other cryptocurrencies,” he declared, highlighting plans for new legislation and a proposed Bitcoin reserve to strengthen national digital asset infrastructure. This move signals a broader shift towards blockchain-based fundraising in politics.`
 
 export default function AirdropsIndexPage() {
   return (
@@ -103,7 +103,7 @@ export default function AirdropsIndexPage() {
           />
           <div className="lg:w-1/2">
             <h2 className="text-2xl font-bold">{special.title}</h2>
-            <p className="mt-4 text-base">{special.content}</p>
+            <p className="mt-4 text-base">{specialText}</p>
             <Link href={`/airdrops/${special.slug}`} legacyBehavior>
               <a className="mt-4 inline-block text-blue-600 hover:underline">
                 Read more

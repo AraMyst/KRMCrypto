@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { Article } from '../../types'
 
 const articles: Article[] = [
-  // two original “big” features
   {
     slug: 'uk-crypto-investigator-insolvency-cases',
     title:
@@ -24,18 +23,15 @@ const articles: Article[] = [
     publishedAt: '2025-06-15',
     category: 'Presale',
   },
-  // promoted above the two big ones
   {
     slug: 'ig-group-crypto-trading-uk-retail-investors',
     title: 'IG Group Introduces Direct Crypto Trading for UK Retail Investors',
     excerpt:
-      'IG Group, the prominent UK-based trading and financial services provider, has officially launched direct cryptocurrency trading for retail investors. This development significantly broadens IG’s presence in the rapidly evolving crypto market, moving beyond its earlier CFD offerings.',
+      'IG Group, the prominent UK-based trading and financial services provider, has officially launched direct cryptocurrency trading for retail investors.',
     imageUrl: '/images/ig-group-crypto-trading-uk-retail-investors1.png',
     publishedAt: '2025-06-15',
     category: 'Presale',
-    content: `The London-listed IG Group has confirmed that its clients can now directly buy, sell, and hold a diverse selection of digital assets, including Bitcoin (BTC), Ethereum (ETH), Ripple (XRP) alongside trending memecoins and altcoins. This offering comprises 31 cryptocurrencies, marking a substantial expansion from its earlier CFD-focused crypto exposure. Retail traders benefit from a seamless in-platform experience with real-time pricing, advanced charting tools and transparent fee structures, positioning IG as a leading gateway into spot crypto markets.`,
   },
-  // the remaining four for the grid
   {
     slug: 'reform-uk-accepts-crypto-donations-nigel-farage',
     title:
@@ -83,6 +79,8 @@ const articles: Article[] = [
 
 const [feature1, feature2, special, ...rest] = articles
 
+const specialText = `The London-listed IG Group has confirmed that its clients can now directly buy, sell, and hold a diverse selection of digital assets, including Bitcoin (BTC), Ethereum (ETH), Ripple (XRP) alongside trending memecoins and altcoins. This offering comprises 31 cryptocurrencies, marking a substantial expansion from its earlier CFD-focused crypto exposure. Retail traders benefit from a seamless in-platform experience with real-time pricing, advanced charting tools and transparent fee structures, positioning IG as a leading gateway into spot crypto markets.`
+
 export default function PresaleIndexPage() {
   return (
     <>
@@ -103,7 +101,7 @@ export default function PresaleIndexPage() {
           />
           <div className="lg:w-1/2">
             <h2 className="text-2xl font-bold">{special.title}</h2>
-            <p className="mt-4 text-base">{special.content}</p>
+            <p className="mt-4 text-base">{specialText}</p>
             <Link href={`/presale/${special.slug}`} legacyBehavior>
               <a className="mt-4 inline-block text-blue-600 hover:underline">
                 Read more
