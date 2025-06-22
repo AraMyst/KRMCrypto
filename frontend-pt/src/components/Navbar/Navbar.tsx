@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import SearchDropdown from './SearchDropdown'
 
 const NAV_LINKS = [
@@ -17,6 +18,7 @@ export default function Navbar() {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [isMenuOpen, setIsMenuOpen]     = useState(false)
   const navRef = useRef<HTMLDivElement>(null)
+  const router = useRouter()
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -37,8 +39,8 @@ export default function Navbar() {
           <Link href="/">
             <a className="flex-shrink-0">
               <Image
-                src="/images/idontknowcrypto-logo.png"
-                alt="iDontKnowCrypto"
+                src="/images/naoseicripto-logo.png"
+                alt="NaoseiCripto"
                 width={140}
                 height={40}
                 priority
@@ -48,13 +50,18 @@ export default function Navbar() {
 
           {/* Links desktop */}
           <div className="hidden md:flex space-x-8">
-            {NAV_LINKS.map(link => (
-              <Link key={link.href} href={link.href}>
-                <a className="text-gray-700 hover:text-primary font-medium">
-                  {link.label}
-                </a>
-              </Link>
-            ))}
+            {NAV_LINKS.map(link => {
+              const isActive = router.pathname === link.href
+              return (
+                <Link key={link.href} href={link.href}>
+                  <a
+                    className={`font-medium text-nav-primary hover:text-nav-primary-dark ${isActive ? 'border-b-2 border-nav-primary pb-1' : ''}`}
+                  >
+                    {link.label}
+                  </a>
+                </Link>
+              )
+            })}
           </div>
 
           {/* Mobile: Hambúrguer + Search */}
@@ -92,16 +99,19 @@ export default function Navbar() {
         {/* Mobile menu */}
         {isMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow border-t z-40">
-            {NAV_LINKS.map(link => (
-              <Link key={link.href} href={link.href}>
-                <a
-                  onClick={() => setIsMenuOpen(false)}
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                >
-                  {link.label}
-                </a>
-              </Link>
-            ))}
+            {NAV_LINKS.map(link => {
+              const isActive = router.pathname === link.href
+              return (
+                <Link key={link.href} href={link.href}>
+                  <a
+                    onClick={() => setIsMenuOpen(false)}
+                    className={`block px-4 py-2 font-medium text-nav-primary hover:text-nav-primary-dark ${isActive ? 'border-b-2 border-nav-primary' : ''}`}
+                  >
+                    {link.label}
+                  </a>
+                </Link>
+              )
+            })}
           </div>
         )}
 

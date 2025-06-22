@@ -13,6 +13,10 @@ module.exports = {
       colors: {
         primary: '#7C3AED',       // roxo da marca
         'primary-dark': '#5B21B6',
+        'nav-primary': '#672FAA',
+        'nav-primary-dark': '#522588',
+        'footer-bg': '#431464',
+        'footer-link': '#9b6bd4',
         // secundária se precisar…
       },
       keyframes: { /* …mesmo do marquee… */ },
