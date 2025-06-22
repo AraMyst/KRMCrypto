@@ -1,67 +1,60 @@
-// src/contexts/CryptoContext.tsx
 import {
   createContext,
   ReactNode,
   useContext,
   useEffect,
   useState,
-} from 'react';
-import apiClient from '../utils/apiClient';
-import { CryptoPrice } from '../types';
+} from 'react'
+import apiClient from '../utils/apiClient'
+import { CryptoPrice } from '../types'
 
 interface CryptoContextType {
-  prices: CryptoPrice[];
-  loading: boolean;
-  error: string | null;
+  prices: CryptoPrice[]
+  loading: boolean
+  error: string | null
 }
 
 const CryptoContext = createContext<CryptoContextType | undefined>(
   undefined
-);
+)
 
 export function CryptoProvider({ children }: { children: ReactNode }) {
-  const [prices, setPrices] = useState<CryptoPrice[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [prices, setPrices] = useState<CryptoPrice[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    // Função que busca os preços
-    const fetchPrices = async () => {
-      setLoading(true);
-      setError(null);
+    // busca os preços de cripto do backend
+    async function fetchPrices() {
+      setLoading(true)
+      setError(null)
       try {
-        // rota corrigida para o ticker de preços
-        const resp = await apiClient.get<CryptoPrice[]>('/api/crypto/ticker');
-        setPrices(resp.data);
+        const resp = await apiClient.get<CryptoPrice[]>('/api/crypto/ticker')
+        setPrices(resp.data)
       } catch (err: any) {
-        console.error('Crypto fetch error', err);
-        setError('Failed to load crypto prices');
+        console.error('Falha ao carregar preços de criptomoedas', err)
+        setError('Falha ao carregar preços de criptomoedas')
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
+    }
 
-    // Executa o fetch assim que montar
-    fetchPrices();
-
-    // Re-executa a cada 60 segundos
-    const intervalId = setInterval(fetchPrices, 60_000);
-
-    // Cleanup: limpa o interval corretamente
-    return () => clearInterval(intervalId);
-  }, []);
+    fetchPrices()
+    const intervalo = setInterval(fetchPrices, 60_000) // atualiza a cada 60s
+    return () => clearInterval(intervalo)
+  }, [])
 
   return (
     <CryptoContext.Provider value={{ prices, loading, error }}>
       {children}
     </CryptoContext.Provider>
-  );
+  )
 }
 
 export function useCrypto() {
-  const ctx = useContext(CryptoContext);
+  const ctx = useContext(CryptoContext)
   if (!ctx) {
-    throw new Error('useCrypto must be used within a CryptoProvider');
+    throw new Error('useCrypto deve ser usado dentro de um CryptoProvider')
   }
-  return ctx;
+  return ctx
 }

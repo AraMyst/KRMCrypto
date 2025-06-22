@@ -1,30 +1,31 @@
-import { FormEvent, useState, useRef, useEffect } from 'react';
-import Link from 'next/link';
+import { FormEvent, useState, useEffect, useRef } from 'react'
+import { useRouter } from 'next/router'
 
 interface SearchModalProps {
-  onClose: () => void;
+  onClose: () => void
 }
 
 export default function SearchModal({ onClose }: SearchModalProps) {
-  const [query, setQuery] = useState('');
-  const modalRef = useRef<HTMLDivElement>(null);
+  const [query, setQuery] = useState('')
+  const modalRef = useRef<HTMLDivElement>(null)
+  const router = useRouter()
 
-  // Fecha o modal ao clicar fora
   useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-        onClose();
+    function handleClickOutside(e: MouseEvent) {
+      if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
+        onClose()
       }
     }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [onClose]);
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [onClose])
 
   function handleSubmit(e: FormEvent) {
-    e.preventDefault();
-    // redireciona para página de busca com query param
-    if (query.trim()) {
-      window.location.href = `/search?query=${encodeURIComponent(query.trim())}`;
+    e.preventDefault()
+    const termo = query.trim()
+    if (termo) {
+      router.push(`/search?query=${encodeURIComponent(termo)}`)
+      onClose()
     }
   }
 
@@ -35,10 +36,10 @@ export default function SearchModal({ onClose }: SearchModalProps) {
         className="bg-white rounded-lg w-full max-w-md mx-4 p-6 shadow-lg"
       >
         <header className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-semibold">Search Articles</h2>
+          <h2 className="text-lg font-semibold">Pesquisar artigos</h2>
           <button
             onClick={onClose}
-            aria-label="Close search"
+            aria-label="Fechar busca"
             className="text-gray-600 hover:text-gray-800"
           >
             ×
@@ -49,8 +50,8 @@ export default function SearchModal({ onClose }: SearchModalProps) {
           <input
             type="text"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Type keywords..."
+            onChange={e => setQuery(e.target.value)}
+            placeholder="Digite palavras-chave..."
             className="flex-grow border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
             autoFocus
           />
@@ -58,21 +59,10 @@ export default function SearchModal({ onClose }: SearchModalProps) {
             type="submit"
             className="px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark"
           >
-            Search
+            Pesquisar
           </button>
         </form>
-
-        {/* Espaço para resultados futuros */}
-        {/* <ul className="mt-4 space-y-2">
-          {results.map(r => (
-            <li key={r.slug}>
-              <Link href={`/news/${r.category}/${r.slug}`}>
-                <a className="block hover:bg-gray-100 p-2 rounded">{r.title}</a>
-              </Link>
-            </li>
-          ))}
-        </ul> */}
       </div>
     </div>
-  );
+  )
 }

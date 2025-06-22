@@ -7,7 +7,6 @@ import LoginDropdown from './LoginDropdown'
 
 // atualizei apenas aqui:
 const NAV_LINKS = [
-  { label: 'News',    href: '/news'       },
   { label: 'Airdrops', href: '/airdrops'  },
   { label: 'Guides',   href: '/guides'    },
   { label: 'Bitcoin',  href: '/bitcoin'   },

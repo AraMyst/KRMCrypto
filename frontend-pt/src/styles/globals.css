@@ -1,18 +1,17 @@
-/* 1. Tailwind’s base reset + components + utilities */
-@import './_navbar.css';
-@import './_ticker.css';
-@import './_carousel.css';
-@import './_banners.css';
-@import './_footer.css';
+/* src/styles/globals.css */
 
+/* 1. Component-level CSS */
+@import './components/_navbar.css';
+@import './components/_ticker.css';
+@import './components/_carousel.css';
+@import './components/_footer.css';
+
+/* 2. Tailwind base + components + utilities */
 @tailwind base;
 @tailwind components;
-
-/* 2. Component-level CSS (each uses @layer components) */
-
 @tailwind utilities;
 
-/* 3. Global customizations */
+/* 3. Ajustes globais */
 html {
   scroll-behavior: smooth;
 }
@@ -21,17 +20,14 @@ body {
   @apply bg-white text-gray-900 antialiased;
 }
 
-/* 4. Link defaults */
 a {
   @apply text-primary hover:text-primary-dark;
 }
 
-/* 5. Hide focus outlines except when keyboard-navigating */
 :focus:not(:focus-visible) {
   outline: none;
 }
 
-/* 6. Utility to hide scrollbars if needed */
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;

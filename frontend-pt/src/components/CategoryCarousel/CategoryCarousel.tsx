@@ -1,4 +1,3 @@
-// components/CategoryCarousel/CategoryCarousel.tsx
 import { useRef } from 'react'
 import CategoryCard from './CategoryCard'
 
@@ -10,40 +9,40 @@ export interface Article {
 }
 
 interface CategoryCarouselProps {
-  country: string
+  localidade: string
   articles: Article[]
-  /** Quando true exibe cards maiores (por ex. no News) */
+  /** Quando true exibe cards maiores (por ex. na página inicial) */
   bigCards?: boolean
 }
 
 export default function CategoryCarousel({
-  country,
+  localidade,
   articles,
   bigCards = false,
 }: CategoryCarouselProps) {
   const carouselRef = useRef<HTMLDivElement>(null)
 
-  // define tamanho do card conforme o modo
+  // define o tamanho do card conforme o modo
   const sizeClasses = bigCards ? 'w-64 h-40' : 'w-48 h-32'
 
-  const scroll = (direction: 'left' | 'right') => {
+  const scroll = (direction: 'esquerda' | 'direita') => {
     if (!carouselRef.current) return
     const { clientWidth } = carouselRef.current
-    const scrollAmount = direction === 'left' ? -clientWidth : clientWidth
+    const scrollAmount = direction === 'esquerda' ? -clientWidth : clientWidth
     carouselRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' })
   }
 
   return (
     <section className="carousel-section">
-      <h2 className="carousel-title">{country}</h2>
+      <h2 className="carousel-title">{localidade}</h2>
       <div className="carousel-wrapper">
         <button
-          aria-label="Scroll left"
-          onClick={() => scroll('left')}
+          aria-label="Rolar para a esquerda"
+          onClick={() => scroll('esquerda')}
           className="scroll-button left-0"
         >
           <svg
-            className="h-6 w-6 text-[#5293C6]"
+            className="h-6 w-6 text-current"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -68,12 +67,12 @@ export default function CategoryCarousel({
         </div>
 
         <button
-          aria-label="Scroll right"
-          onClick={() => scroll('right')}
+          aria-label="Rolar para a direita"
+          onClick={() => scroll('direita')}
           className="scroll-button right-0"
         >
           <svg
-            className="h-6 w-6 text-[#5293C6]"
+            className="h-6 w-6 text-current"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

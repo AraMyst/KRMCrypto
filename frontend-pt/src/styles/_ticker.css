@@ -1,14 +1,14 @@
-/* styles/components/_ticker.css */
 @layer components {
   .ticker-container {
-    @apply w-full bg-gray-100 py-2 overflow-hidden;
+    /* fundo roxo clarinho para combinar com a marca */
+    @apply w-full bg-purple-50 py-2 overflow-hidden;
   }
   .ticker-marquee {
-    @apply inline-flex whitespace-nowrap;
+    @apply inline-flex whitespace-nowrap no-scrollbar;
     animation: marquee 20s linear infinite;
   }
   .ticker-item {
-    @apply mx-6 flex-shrink-0 font-semibold;
+    @apply mx-6 flex-shrink-0 flex items-center font-semibold text-gray-900;
   }
 }
 

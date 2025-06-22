@@ -1,33 +1,32 @@
 /**
- * Transforms arbitrary text into a URL-friendly slug.
- * Ex.: "Hello World!" → "hello-world"
+ * Transforma texto em slug URL-friendly.
+ * Ex.: "Olá, Mundo!" → "ola-mundo"
  */
 export function slugify(text: string): string {
   return text
-    .toString()
-    .normalize('NFKD')            // separa acentos
-    .replace(/[\u0300-\u036f]/g, '') // remove diacríticos
+    .normalize('NFKD')                 // separa diacríticos
+    .replace(/[\u0300-\u036f]/g, '')   // remove acentos
     .toLowerCase()
     .trim()
-    .replace(/[^a-z0-9]+/g, '-')  // espaços e pontuações viram hífen
-    .replace(/^-+|-+$/g, '');     // remove hífens nas pontas
+    .replace(/[^a-z0-9]+/g, '-')       // não alfanuméricos viram hífen
+    .replace(/^-+|-+$/g, '')           // retira hífens na ponta
 }
 
 /**
- * Trunca um texto para um tamanho máximo de caracteres, adicionando "…" se necessário.
+ * Trunca texto ao tamanho máximo, adicionando "…" se exceder.
  *
  * @param text      – texto original
  * @param maxLength – número máximo de caracteres
  */
 export function truncate(text: string, maxLength: number): string {
-  if (text.length <= maxLength) return text;
-  return text.slice(0, maxLength).trimEnd() + '…';
+  if (text.length <= maxLength) return text
+  return text.slice(0, maxLength).trimEnd() + '…'
 }
 
 /**
- * Capitaliza a primeira letra de cada palavra do texto.
+ * Capitaliza a primeira letra de cada palavra.
  * Ex.: "bitcoin news" → "Bitcoin News"
  */
 export function capitalize(text: string): string {
-  return text.replace(/\b\w/g, (char) => char.toUpperCase());
+  return text.replace(/\b\w/g, char => char.toUpperCase())
 }

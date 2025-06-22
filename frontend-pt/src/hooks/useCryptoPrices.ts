@@ -1,7 +1,9 @@
-// Hook que devolve preços, loading e error do CryptoContext
-import { useCrypto } from '../contexts/CryptoContext';
+import { useCrypto } from '../contexts/CryptoContext'
 
+/**
+ * Hook que expõe preços de cripto, estado de carregamento e erros.
+ */
 export default function useCryptoPrices() {
-  const { prices, loading, error } = useCrypto();
-  return { prices, loading, error };
+  const { prices, loading, error } = useCrypto()
+  return { prices, loading, error }
 }

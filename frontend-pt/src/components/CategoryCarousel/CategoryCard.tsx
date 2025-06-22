@@ -1,4 +1,3 @@
-// components/CategoryCarousel/CategoryCard.tsx
 import Link from 'next/link'
 import Image from 'next/image'
 import { Article } from './CategoryCarousel'
@@ -13,7 +12,7 @@ export default function CategoryCard({
   sizeClasses = 'w-48 h-32',
 }: CategoryCardProps) {
   return (
-    <Link href={`/news/${article.category}/${article.slug}`}>
+    <Link href={`/${article.category.toLowerCase()}/${article.slug}`}>
       <a
         className={`relative block ${sizeClasses} rounded overflow-hidden shadow-lg hover:shadow-xl transition`}
       >

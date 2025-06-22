@@ -1,10 +1,9 @@
-/* styles/components/_carousel.css */
 @layer components {
   .carousel-section {
     @apply my-8;
   }
   .carousel-title {
-    @apply text-2xl font-semibold mb-4 capitalize;
+    @apply text-2xl font-semibold mb-4 capitalize text-gray-900;
   }
   .carousel-wrapper {
     @apply relative;
@@ -14,13 +13,5 @@
   }
   .scroll-container {
     @apply flex overflow-x-auto scroll-smooth space-x-4 no-scrollbar px-8;
-  }
-  /* Esconder scrollbar em todos os navegadores */
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
   }
 }

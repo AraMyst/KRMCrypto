@@ -1,4 +1,3 @@
-/* styles/components/_navbar.css */
 @layer components {
   .navbar {
     @apply fixed top-0 left-0 right-0 z-50 bg-white shadow;
@@ -17,9 +16,6 @@
   }
   .search-button {
     @apply p-2 rounded hover:bg-gray-100;
-  }
-  .login-button {
-    @apply px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark;
   }
   .spacer {
     @apply h-16;
