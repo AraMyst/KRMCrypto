@@ -13,7 +13,7 @@ export default function CryptoTicker() {
   useEffect(() => {
     async function fetchPrices() {
       try {
-        const resp = await apiClient.get<CryptoPrice[]>('/ticker')
+        const resp = await apiClient.get<CryptoPrice[]>('/api/crypto/ticker')
         setPrices(resp.data)
       } catch (err) {
         console.error('Falha ao carregar preços de cripto', err)
