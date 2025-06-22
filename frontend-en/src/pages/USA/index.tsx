@@ -3,7 +3,7 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Article } from '../../../types'
+import { Article } from '../../types'
 
 interface UKNewsIndexProps {
   articles: Article[]
