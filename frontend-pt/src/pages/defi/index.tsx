@@ -13,7 +13,7 @@ export default function DeFiPage() {
     async function fetchArticles() {
       try {
         const resp = await apiClient.get<Article[]>(
-          '/api/articles?subcategory=defi'
+          '/posts?subcategory=defi'
         )
         setArticles(resp.data)
       } catch {

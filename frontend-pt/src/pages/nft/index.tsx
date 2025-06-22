@@ -13,7 +13,7 @@ export default function NFTPage() {
     async function fetchArticles() {
       try {
         const resp = await apiClient.get<Article[]>(
-          '/api/articles?subcategory=nft'
+          '/posts?subcategory=nft'
         )
         setArticles(resp.data)
       } catch {

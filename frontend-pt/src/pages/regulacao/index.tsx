@@ -13,7 +13,7 @@ export default function RegulacaoPage() {
     async function fetchArticles() {
       try {
         const resp = await apiClient.get<Article[]>(
-          '/api/articles?subcategory=regulacao'
+          '/posts?subcategory=regulacao'
         )
         setArticles(resp.data)
       } catch {

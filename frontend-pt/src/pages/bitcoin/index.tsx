@@ -13,7 +13,7 @@ export default function BitcoinPage() {
     async function fetchArticles() {
       try {
         const resp = await apiClient.get<Article[]>(
-          '/api/articles?subcategory=bitcoin'
+          '/posts?subcategory=bitcoin'
         )
         setArticles(resp.data)
       } catch (err) {

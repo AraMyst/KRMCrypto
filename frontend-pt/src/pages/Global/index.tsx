@@ -13,7 +13,7 @@ export default function GlobalPage() {
     async function fetchArticles() {
       try {
         const resp = await apiClient.get<Article[]>(
-          '/api/articles?category=global'
+          '/posts?category=global'
         )
         setArticles(resp.data)
       } catch (err) {

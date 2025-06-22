@@ -13,7 +13,7 @@ export default function EthereumPage() {
     async function fetchArticles() {
       try {
         const resp = await apiClient.get<Article[]>(
-          '/api/articles?subcategory=ethereum'
+          '/posts?subcategory=ethereum'
         )
         setArticles(resp.data)
       } catch {

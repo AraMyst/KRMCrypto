@@ -13,7 +13,7 @@ export default function BlockchainPage() {
     async function fetchArticles() {
       try {
         const resp = await apiClient.get<Article[]>(
-          '/api/articles?subcategory=blockchain'
+          '/posts?subcategory=blockchain'
         )
         setArticles(resp.data)
       } catch {
