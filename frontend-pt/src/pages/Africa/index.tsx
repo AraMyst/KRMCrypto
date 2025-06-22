@@ -13,7 +13,7 @@ export default function AfricaPage() {
     async function fetchArticles() {
       try {
         const resp = await apiClient.get<Article[]>(
-          '/api/articles?category=africa'
+          '/posts?category=africa'
         )
         setArticles(resp.data)
       } catch (err) {

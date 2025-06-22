@@ -13,7 +13,7 @@ export default function AltcoinsPage() {
     async function fetchArticles() {
       try {
         const resp = await apiClient.get<Article[]>(
-          '/api/articles?subcategory=altcoins'
+          '/posts?subcategory=altcoins'
         )
         setArticles(resp.data)
       } catch (err) {
