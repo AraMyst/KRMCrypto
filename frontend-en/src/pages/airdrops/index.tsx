@@ -3,8 +3,8 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { Article } from '../../types'
 
-// Airdrops: two new featured ones, then the rest
 const articles: Article[] = [
+  // two original “big” features
   {
     slug: 'bcp-technologies-pound-stablecoin-launch',
     title:
@@ -26,22 +26,25 @@ const articles: Article[] = [
     publishedAt: '2025-06-15',
     category: 'Airdrops',
   },
+  // promoted above the two big ones
   {
     slug: 'reform-uk-accepts-crypto-donations-nigel-farage',
     title:
       'Reform UK Embraces Crypto Donations, Announces Ambitious Digital Finance Agenda',
     excerpt:
-      'Nigel Farage announced Reform UK will accept cryptocurrency donations, a first among major British parties.',
+      'Nigel Farage, leader of Reform UK, announced a landmark decision allowing the party to accept cryptocurrency donations, making it the first major British party to adopt digital currencies.',
     imageUrl:
       '/images/reform-uk-accepts-crypto-donations-nigel-farage1.png',
     publishedAt: '2025-06-15',
     category: 'Airdrops',
+    content: `Speaking at the Bitcoin 2025 conference in Las Vegas on May 29, Nigel Farage emphasised the significance of accepting crypto donations as a progressive digital finance stance. “We are proud to be the first mainstream UK party to accept Bitcoin and other cryptocurrencies,” he declared, highlighting plans for new legislation and a proposed Bitcoin reserve to strengthen national digital asset infrastructure. This move signals a broader shift towards blockchain-based fundraising in politics.`,
   },
+  // the remaining four for the grid
   {
     slug: 'ig-group-crypto-trading-uk-retail-investors',
     title: 'IG Group Introduces Direct Crypto Trading for UK Retail Investors',
     excerpt:
-      'IG Group has launched direct spot trading for 31 cryptocurrencies to its retail clients.',
+      'IG Group, the prominent UK-based trading and financial services provider, has officially launched direct cryptocurrency trading for retail investors.',
     imageUrl: '/images/ig-group-crypto-trading-uk-retail-investors1.png',
     publishedAt: '2025-06-15',
     category: 'Airdrops',
@@ -78,7 +81,7 @@ const articles: Article[] = [
   },
 ]
 
-const [first, second, ...rest] = articles
+const [feature1, feature2, special, ...rest] = articles
 
 export default function AirdropsIndexPage() {
   return (
@@ -91,17 +94,38 @@ export default function AirdropsIndexPage() {
         />
       </Head>
       <main className="max-w-7xl mx-auto px-4 py-8">
+        {/* Special Top Story */}
+        <section className="mb-12 flex flex-col lg:flex-row items-start gap-6">
+          <img
+            src={special.imageUrl}
+            alt={special.title}
+            className="w-full lg:w-1/2 h-auto object-cover rounded"
+          />
+          <div className="lg:w-1/2">
+            <h2 className="text-2xl font-bold">{special.title}</h2>
+            <p className="mt-4 text-base">{special.content}</p>
+            <Link href={`/airdrops/${special.slug}`} legacyBehavior>
+              <a className="mt-4 inline-block text-blue-600 hover:underline">
+                Read more
+              </a>
+            </Link>
+          </div>
+        </section>
+
+        {/* Two Big Features */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          {[first, second].map((article) => (
+          {[feature1, feature2].map((article) => (
             <article key={article.slug}>
-              <Link href={`/airdrops/${article.slug}`} passHref legacyBehavior>
+              <Link href={`/airdrops/${article.slug}`} legacyBehavior>
                 <a className="block">
                   <img
                     src={article.imageUrl}
                     alt={article.title}
                     className="w-full h-64 object-cover rounded"
                   />
-                  <h2 className="mt-4 text-2xl font-bold">{article.title}</h2>
+                  <h2 className="mt-4 text-2xl font-bold">
+                    {article.title}
+                  </h2>
                   <p className="mt-2 text-lg">{article.excerpt}</p>
                 </a>
               </Link>
@@ -109,10 +133,11 @@ export default function AirdropsIndexPage() {
           ))}
         </div>
 
+        {/* Grid of Others */}
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {rest.map((article) => (
             <article key={article.slug}>
-              <Link href={`/airdrops/${article.slug}`} passHref legacyBehavior>
+              <Link href={`/airdrops/${article.slug}`} legacyBehavior>
                 <a className="block relative h-48 overflow-hidden rounded">
                   <img
                     src={article.imageUrl}

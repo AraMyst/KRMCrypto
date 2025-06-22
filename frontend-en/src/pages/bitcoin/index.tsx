@@ -3,8 +3,8 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { Article } from '../../types'
 
-// Bitcoin: yet another reorder, two fresh featured picks
 const articles: Article[] = [
+  // two original “big” features
   {
     slug: 'uk-crypto-ownership-growth-2025',
     title:
@@ -26,6 +26,7 @@ const articles: Article[] = [
     publishedAt: '2025-06-15',
     category: 'Bitcoin',
   },
+  // promoted above the two big ones
   {
     slug: 'uk-fca-crypto-etns-retail-investors',
     title: "UK's FCA Proposes Removing Ban on Crypto ETNs for Retail Investors",
@@ -34,24 +35,15 @@ const articles: Article[] = [
     imageUrl: '/images/uk-fca-crypto-etns-retail-investors1.png',
     publishedAt: '2025-06-15',
     category: 'Bitcoin',
+    content: `According to a recent statement, the FCA intends to enable individual investors to buy and sell crypto ETNs, provided these financial instruments are listed on exchanges recognised by the FCA. This move would provide retail investors more options to engage with cryptocurrency markets through regulated and transparent investment vehicles. Market participants believe this policy shift could open new on-ramps for UK retail and foster greater institutional interest in digital asset ETNs.`,
   },
+  // the remaining four for the grid
   {
     slug: 'ig-group-crypto-trading-uk-retail-investors',
     title: 'IG Group Introduces Direct Crypto Trading for UK Retail Investors',
     excerpt:
-      'IG Group has launched direct spot trading for 31 cryptocurrencies to its retail clients.',
+      'IG Group, the prominent UK-based trading and financial services provider, has officially launched direct cryptocurrency trading for retail investors.',
     imageUrl: '/images/ig-group-crypto-trading-uk-retail-investors1.png',
-    publishedAt: '2025-06-15',
-    category: 'Bitcoin',
-  },
-  {
-    slug: 'uk-fca-stablecoin-crypto-custody-regulation',
-    title:
-      'UK’s FCA Opens Consultation on Stablecoin and Crypto Custody Regulations',
-    excerpt:
-      'The FCA has opened a consultation for feedback on stablecoin issuers and crypto custody providers.',
-    imageUrl:
-      '/images/uk-fca-stablecoin-crypto-custody-regulation1.png',
     publishedAt: '2025-06-15',
     category: 'Bitcoin',
   },
@@ -76,9 +68,20 @@ const articles: Article[] = [
     publishedAt: '2025-06-15',
     category: 'Bitcoin',
   },
+  {
+    slug: 'uk-fca-stablecoin-crypto-custody-regulation',
+    title:
+      'UK’s FCA Opens Consultation on Stablecoin and Crypto Custody Regulations',
+    excerpt:
+      'The FCA has opened a consultation for feedback on stablecoin issuers and crypto custody providers.',
+    imageUrl:
+      '/images/uk-fca-stablecoin-crypto-custody-regulation1.png',
+    publishedAt: '2025-06-15',
+    category: 'Bitcoin',
+  },
 ]
 
-const [first, second, ...rest] = articles
+const [feature1, feature2, special, ...rest] = articles
 
 export default function BitcoinIndexPage() {
   return (
@@ -91,17 +94,38 @@ export default function BitcoinIndexPage() {
         />
       </Head>
       <main className="max-w-7xl mx-auto px-4 py-8">
+        {/* Special Top Story */}
+        <section className="mb-12 flex flex-col lg:flex-row items-start gap-6">
+          <img
+            src={special.imageUrl}
+            alt={special.title}
+            className="w-full lg:w-1/2 h-auto object-cover rounded"
+          />
+          <div className="lg:w-1/2">
+            <h2 className="text-2xl font-bold">{special.title}</h2>
+            <p className="mt-4 text-base">{special.content}</p>
+            <Link href={`/bitcoin/${special.slug}`} legacyBehavior>
+              <a className="mt-4 inline-block text-blue-600 hover:underline">
+                Read more
+              </a>
+            </Link>
+          </div>
+        </section>
+
+        {/* Two Big Features */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          {[first, second].map((article) => (
+          {[feature1, feature2].map((article) => (
             <article key={article.slug}>
-              <Link href={`/bitcoin/${article.slug}`} passHref legacyBehavior>
+              <Link href={`/bitcoin/${article.slug}`} legacyBehavior>
                 <a className="block">
                   <img
                     src={article.imageUrl}
                     alt={article.title}
                     className="w-full h-64 object-cover rounded"
                   />
-                  <h2 className="mt-4 text-2xl font-bold">{article.title}</h2>
+                  <h2 className="mt-4 text-2xl font-bold">
+                    {article.title}
+                  </h2>
                   <p className="mt-2 text-lg">{article.excerpt}</p>
                 </a>
               </Link>
@@ -109,10 +133,11 @@ export default function BitcoinIndexPage() {
           ))}
         </div>
 
+        {/* Grid of Others */}
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {rest.map((article) => (
             <article key={article.slug}>
-              <Link href={`/bitcoin/${article.slug}`} passHref legacyBehavior>
+              <Link href={`/bitcoin/${article.slug}`} legacyBehavior>
                 <a className="block relative h-48 overflow-hidden rounded">
                   <img
                     src={article.imageUrl}

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Article } from '../../types'
 
 const articles: Article[] = [
+  // two original “big” features
   {
     slug: 'uk-crypto-investigator-insolvency-cases',
     title:
@@ -23,15 +24,18 @@ const articles: Article[] = [
     publishedAt: '2025-06-15',
     category: 'Presale',
   },
+  // promoted above the two big ones
   {
     slug: 'ig-group-crypto-trading-uk-retail-investors',
     title: 'IG Group Introduces Direct Crypto Trading for UK Retail Investors',
     excerpt:
-      'IG Group has launched direct spot trading for 31 cryptocurrencies to its retail clients.',
+      'IG Group, the prominent UK-based trading and financial services provider, has officially launched direct cryptocurrency trading for retail investors. This development significantly broadens IG’s presence in the rapidly evolving crypto market, moving beyond its earlier CFD offerings.',
     imageUrl: '/images/ig-group-crypto-trading-uk-retail-investors1.png',
     publishedAt: '2025-06-15',
     category: 'Presale',
+    content: `The London-listed IG Group has confirmed that its clients can now directly buy, sell, and hold a diverse selection of digital assets, including Bitcoin (BTC), Ethereum (ETH), Ripple (XRP) alongside trending memecoins and altcoins. This offering comprises 31 cryptocurrencies, marking a substantial expansion from its earlier CFD-focused crypto exposure. Retail traders benefit from a seamless in-platform experience with real-time pricing, advanced charting tools and transparent fee structures, positioning IG as a leading gateway into spot crypto markets.`,
   },
+  // the remaining four for the grid
   {
     slug: 'reform-uk-accepts-crypto-donations-nigel-farage',
     title:
@@ -77,8 +81,7 @@ const articles: Article[] = [
   },
 ]
 
-// Presale: first two are featured, rest render in grid
-const [first, second, ...rest] = articles
+const [feature1, feature2, special, ...rest] = articles
 
 export default function PresaleIndexPage() {
   return (
@@ -91,11 +94,29 @@ export default function PresaleIndexPage() {
         />
       </Head>
       <main className="max-w-7xl mx-auto px-4 py-8">
-        {/* Featured */}
+        {/* Special Top Story */}
+        <section className="mb-12 flex flex-col lg:flex-row items-start gap-6">
+          <img
+            src={special.imageUrl}
+            alt={special.title}
+            className="w-full lg:w-1/2 h-auto object-cover rounded"
+          />
+          <div className="lg:w-1/2">
+            <h2 className="text-2xl font-bold">{special.title}</h2>
+            <p className="mt-4 text-base">{special.content}</p>
+            <Link href={`/presale/${special.slug}`} legacyBehavior>
+              <a className="mt-4 inline-block text-blue-600 hover:underline">
+                Read more
+              </a>
+            </Link>
+          </div>
+        </section>
+
+        {/* Two Big Features */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          {[first, second].map((article) => (
+          {[feature1, feature2].map((article) => (
             <article key={article.slug}>
-              <Link href={`/presale/${article.slug}`} passHref legacyBehavior>
+              <Link href={`/presale/${article.slug}`} legacyBehavior>
                 <a className="block">
                   <img
                     src={article.imageUrl}
@@ -110,11 +131,11 @@ export default function PresaleIndexPage() {
           ))}
         </div>
 
-        {/* Grid */}
+        {/* Grid of Others */}
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {rest.map((article) => (
             <article key={article.slug}>
-              <Link href={`/presale/${article.slug}`} passHref legacyBehavior>
+              <Link href={`/presale/${article.slug}`} legacyBehavior>
                 <a className="block relative h-48 overflow-hidden rounded">
                   <img
                     src={article.imageUrl}
