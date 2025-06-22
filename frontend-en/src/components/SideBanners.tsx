@@ -52,7 +52,7 @@ export default function SideBanners() {
       <div className="block w-40 p-4 bg-green-600 text-white rounded-l-lg shadow">
         <h3 className="font-bold mb-1 text-center">Premium</h3>
         <p className="text-sm text-center">Get early price analysis from our experts</p>
-        <Link className="mt-2 block w-fit px-3 py-1 bg-white text-green-700 rounded text-sm font-semibold mx-auto text-center" href="/auth/register" legacyBehavior>
+        <Link className="underline text-sm hover:text-gray-300 block mx-auto" href="/auth/register" legacyBehavior>
             Go Premium
         </Link>
       </div>
