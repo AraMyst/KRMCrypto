@@ -1,0 +1,35 @@
+/* styles/components/_footer.css */
+@layer components {
+  /* Rodapé principal */
+  .footer {
+    @apply bg-gray-800 text-gray-300 py-8 mt-16;
+  }
+  /* Container interno para alinhamento */
+  .footer-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  /* Flex responsivo das seções */
+  .footer-content {
+    @apply flex flex-col md:flex-row justify-between;
+  }
+  /* Bloco de links institucionais */
+  .footer-links {
+    @apply space-y-2;
+  }
+  /* Título de cada seção */
+  .footer-title {
+    @apply text-white font-semibold;
+  }
+  /* Link do rodapé */
+  .footer-link {
+    @apply block hover:underline;
+  }
+  /* Bloco de copyright e disclaimer */
+  .footer-copy {
+    @apply mt-6 md:mt-0 text-sm;
+  }
+  /* Parágrafo de disclaimer */
+  .footer-disclaimer {
+    @apply mt-2;
+  }
+}

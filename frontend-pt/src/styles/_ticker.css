@@ -1,0 +1,18 @@
+/* styles/components/_ticker.css */
+@layer components {
+  .ticker-container {
+    @apply w-full bg-gray-100 py-2 overflow-hidden;
+  }
+  .ticker-marquee {
+    @apply inline-flex whitespace-nowrap;
+    animation: marquee 20s linear infinite;
+  }
+  .ticker-item {
+    @apply mx-6 flex-shrink-0 font-semibold;
+  }
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
