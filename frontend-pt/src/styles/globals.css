@@ -1,10 +1,11 @@
 /* src/styles/globals.css */
 
 /* 1. Component-level CSS */
-@import './components/_navbar.css';
-@import './components/_ticker.css';
-@import './components/_carousel.css';
-@import './components/_footer.css';
+@import './_navbar.css';
+@import './_ticker.css';
+@import './_carousel.css';
+@import './_banners.css';
+@import './_footer.css';
 
 /* 2. Tailwind base + components + utilities */
 @tailwind base;
@@ -28,6 +29,7 @@ a {
   outline: none;
 }
 
+/* Utilitário para esconder scrollbars quando necessário */
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
