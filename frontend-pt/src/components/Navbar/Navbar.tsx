@@ -34,7 +34,7 @@ export default function Navbar() {
   return (
     <>
       <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           {/* Logo */}
           <Link href="/">
             <a className="flex-shrink-0">
@@ -94,9 +94,12 @@ export default function Navbar() {
               </svg>
             </button>
           </div>
-        </div>
+            {isSearchOpen && (
+              <SearchDropdown onClose={() => setIsSearchOpen(false)} />
+            )}
+          </div>
 
-        {/* Mobile menu */}
+          {/* Mobile menu */}
         {isMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow border-t z-40">
             {NAV_LINKS.map(link => {
@@ -114,9 +117,6 @@ export default function Navbar() {
             })}
           </div>
         )}
-
-        {/* Dropdown de busca */}
-        {isSearchOpen && <SearchDropdown onClose={() => setIsSearchOpen(false)} />}
       </nav>
 
       {/* Spacer para evitar overlap */}
