@@ -8,10 +8,10 @@ export default function Footer() {
           This site provides information for educational purposes only. Not financial advice.
         </p>
         <div className="flex justify-center space-x-6">
-          <Link className="hover:underline" href="/about" legacyBehavior>
+          <Link className="hover:underline" href="/about-us" legacyBehavior>
           About Us
           </Link>
-          <Link className="hover:underline" href="/terms" legacyBehavior>
+          <Link className="hover:underline" href="/terms-conditions" legacyBehavior>
           Terms &amp; Conditions
           </Link>
           <Link className="hover:underline" href="/contact" legacyBehavior>
