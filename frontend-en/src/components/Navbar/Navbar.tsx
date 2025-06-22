@@ -108,9 +108,12 @@ export default function Navbar() {
               Log in
             </button>
           </div>
-        </div>
+            {isSearchOpen && (
+              <SearchDropdown onClose={() => setIsSearchOpen(false)} />
+            )}
+          </div>
 
-        {/* Mobile menu */}
+          {/* Mobile menu */}
         {isMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow border-t z-40">
             {NAV_LINKS.map((link) => (
@@ -123,8 +126,7 @@ export default function Navbar() {
         )}
 
         {/* Dropdowns */}
-        {isSearchOpen && <SearchDropdown onClose={() => setIsSearchOpen(false)} />}
-        {isLoginOpen  && <LoginDropdown onClose={() => setIsLoginOpen(false)} />}
+        {isLoginOpen && <LoginDropdown onClose={() => setIsLoginOpen(false)} />}
       </nav>
 
       {/* Spacer para evitar overlap */}
