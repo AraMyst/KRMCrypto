@@ -1,11 +1,11 @@
-// src/pages/altcoins/index.tsx
+// src/pages/africa/index.tsx
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import apiClient from '../../utils/apiClient'
 import { Article } from '../../types'
 import ArticleCard from '../../components/ArticleCard'
 
-export default function AltcoinsPage() {
+export default function AfricaPage() {
   const [articles, setArticles] = useState<Article[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -13,11 +13,11 @@ export default function AltcoinsPage() {
     async function fetchArticles() {
       try {
         const resp = await apiClient.get<Article[]>(
-          '/api/articles?subcategory=altcoins'
+          '/api/articles?category=africa'
         )
         setArticles(resp.data)
       } catch (err) {
-        console.error('Erro ao carregar artigos de Altcoins', err)
+        console.error('Erro ao carregar artigos da África', err)
       } finally {
         setLoading(false)
       }
@@ -28,19 +28,19 @@ export default function AltcoinsPage() {
   return (
     <>
       <Head>
-        <title>Altcoins – NaoseiCripto</title>
+        <title>África – NaoseiCripto</title>
         <meta
           name="description"
-          content="Notícias sobre Altcoins explicadas de maneira simples para quem está começando."
+          content="Notícias sobre criptomoedas no continente africano, explicadas de forma acessível."
         />
       </Head>
       <main className="max-w-4xl mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-6">Altcoins</h1>
+        <h1 className="text-3xl font-bold mb-6">África</h1>
 
         {loading ? (
-          <p>Carregando artigos...</p>
+          <p>Carregando notícias da África…</p>
         ) : articles.length === 0 ? (
-          <p className="text-gray-600">Nenhum artigo de Altcoins publicado ainda.</p>
+          <p className="text-gray-600">Nenhuma notícia publicada para a África ainda.</p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {articles.map(article => (

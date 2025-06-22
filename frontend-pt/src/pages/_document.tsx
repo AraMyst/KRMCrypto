@@ -18,20 +18,21 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="en">
+      <Html lang="pt-BR">
         <Head>
           {/* Meta tags essenciais */}
           <meta charSet="utf-8" />
-          <meta name="theme-color" content="#1A73E8" />
+          {/* Cor principal do tema (roxo do logo) */}
+          <meta name="theme-color" content="#6F2DBD" />
           {/* Fontes via Google Fonts */}
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
             rel="preconnect"
             href="https://fonts.gstatic.com"
-            crossOrigin=""
+            crossOrigin="anonymous"
           />
           <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap&subset=latin"
             rel="stylesheet"
           />
         </Head>
