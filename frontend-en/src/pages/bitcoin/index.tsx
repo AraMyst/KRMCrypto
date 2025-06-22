@@ -1,163 +1,135 @@
-// src/pages/news/index.tsx
-import Head from 'next/head';
-import Link from 'next/link';
-import { useRef } from 'react';
-import { Article } from '../../types';
+// src/pages/bitcoin/index.tsx
+import Head from 'next/head'
+import Link from 'next/link'
+import { Article } from '../../types'
 
-const testArticles: Record<string, Article[]> = {
-  uk: [
-    {
-      slug: 'test1',
-      category: 'UK',
-      title: 'test1',
-      excerpt: 'test1',
-      imageUrl: '/images/test1-uk.png',
-      publishedAt: '2023-01-01',
-    },
-    {
-      slug: 'test2',
-      category: 'UK',
-      title: 'test2',
-      excerpt: 'test2',
-      imageUrl: '/images/test2-uk.png',
-      publishedAt: '2023-01-02',
-    },
-    {
-      slug: 'test3',
-      category: 'UK',
-      title: 'test3',
-      excerpt: 'test3',
-      imageUrl: '/images/test3-uk.png',
-      publishedAt: '2023-01-03',
-    },
-  ],
-  usa: [
-    {
-      slug: 'test1',
-      category: 'USA',
-      title: 'test1',
-      excerpt: 'test1',
-      imageUrl: '/images/test1-usa.png',
-      publishedAt: '2023-01-01',
-    },
-    {
-      slug: 'test2',
-      category: 'USA',
-      title: 'test2',
-      excerpt: 'test2',
-      imageUrl: '/images/test2-usa.png',
-      publishedAt: '2023-01-02',
-    },
-    {
-      slug: 'test3',
-      category: 'USA',
-      title: 'test3',
-      excerpt: 'test3',
-      imageUrl: '/images/test3-usa.png',
-      publishedAt: '2023-01-03',
-    },
-  ],
-  global: [
-    {
-      slug: 'test1',
-      category: 'Global',
-      title: 'test1',
-      excerpt: 'test1',
-      imageUrl: '/images/test1-global.png',
-      publishedAt: '2023-01-01',
-    },
-    {
-      slug: 'test2',
-      category: 'Global',
-      title: 'test2',
-      excerpt: 'test2',
-      imageUrl: '/images/test2-global.png',
-      publishedAt: '2023-01-02',
-    },
-    {
-      slug: 'test3',
-      category: 'Global',
-      title: 'test3',
-      excerpt: 'test3',
-      imageUrl: '/images/test3-global.png',
-      publishedAt: '2023-01-03',
-    },
-  ],
-};
+// Bitcoin: yet another reorder, two fresh featured picks
+const articles: Article[] = [
+  {
+    slug: 'uk-crypto-ownership-growth-2025',
+    title:
+      'UK Tops Global Crypto Ownership Growth in 2025 Amid Regulatory Ambiguity',
+    excerpt:
+      'In 2025, the UK recorded the fastest year-over-year increase in crypto ownership among major markets.',
+    imageUrl: '/images/uk-crypto-ownership-growth-20251.png',
+    publishedAt: '2025-06-15',
+    category: 'Bitcoin',
+  },
+  {
+    slug: 'reform-uk-accepts-crypto-donations-nigel-farage',
+    title:
+      'Reform UK Embraces Crypto Donations, Announces Ambitious Digital Finance Agenda',
+    excerpt:
+      'Nigel Farage announced Reform UK will accept cryptocurrency donations, a first among major British parties.',
+    imageUrl:
+      '/images/reform-uk-accepts-crypto-donations-nigel-farage1.png',
+    publishedAt: '2025-06-15',
+    category: 'Bitcoin',
+  },
+  {
+    slug: 'uk-fca-crypto-etns-retail-investors',
+    title: "UK's FCA Proposes Removing Ban on Crypto ETNs for Retail Investors",
+    excerpt:
+      "The UK's Financial Conduct Authority has proposed ending its prohibition on retail investors accessing crypto ETNs.",
+    imageUrl: '/images/uk-fca-crypto-etns-retail-investors1.png',
+    publishedAt: '2025-06-15',
+    category: 'Bitcoin',
+  },
+  {
+    slug: 'ig-group-crypto-trading-uk-retail-investors',
+    title: 'IG Group Introduces Direct Crypto Trading for UK Retail Investors',
+    excerpt:
+      'IG Group has launched direct spot trading for 31 cryptocurrencies to its retail clients.',
+    imageUrl: '/images/ig-group-crypto-trading-uk-retail-investors1.png',
+    publishedAt: '2025-06-15',
+    category: 'Bitcoin',
+  },
+  {
+    slug: 'uk-fca-stablecoin-crypto-custody-regulation',
+    title:
+      'UK’s FCA Opens Consultation on Stablecoin and Crypto Custody Regulations',
+    excerpt:
+      'The FCA has opened a consultation for feedback on stablecoin issuers and crypto custody providers.',
+    imageUrl:
+      '/images/uk-fca-stablecoin-crypto-custody-regulation1.png',
+    publishedAt: '2025-06-15',
+    category: 'Bitcoin',
+  },
+  {
+    slug: 'bcp-technologies-pound-stablecoin-launch',
+    title:
+      'BCP Technologies Introduces New British Pound-Backed Stablecoin',
+    excerpt:
+      'BCP Technologies has launched tGBP, a pound-backed stablecoin designed as a blueprint for future FCA regulations.',
+    imageUrl:
+      '/images/bcp-technologies-pound-stablecoin-launch1.png',
+    publishedAt: '2025-06-15',
+    category: 'Bitcoin',
+  },
+  {
+    slug: 'uk-crypto-investigator-insolvency-cases',
+    title:
+      'UK Strengthens Efforts to Recover Crypto from Insolvency and Criminal Cases',
+    excerpt:
+      'In response to a dramatic surge in insolvency cases involving cryptocurrencies, the UK Insolvency Service has appointed its first dedicated crypto specialist.',
+    imageUrl: '/images/uk-crypto-investigator-insolvency-cases1.png',
+    publishedAt: '2025-06-15',
+    category: 'Bitcoin',
+  },
+]
 
-function CarouselSection({ country }: { country: 'UK' | 'USA' | 'Global' }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const key = country.toLowerCase();
-  const items = testArticles[key];
+const [first, second, ...rest] = articles
 
-  const scroll = (delta: number) => {
-    if (!ref.current) return;
-    ref.current.scrollBy({ left: delta * 300, behavior: 'smooth' });
-  };
-
-  return (
-    <section className="mb-12">
-      <h2 className="text-2xl font-bold mb-4">{country} News (Test)</h2>
-      <div className="relative">
-        {/* seta esquerda */}
-        <button
-          onClick={() => scroll(-1)}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-75 p-2 rounded-full"
-        >
-          ‹
-        </button>
-
-        {/* container rolável */}
-        <div
-          ref={ref}
-          className="flex overflow-x-auto space-x-4 scroll-smooth py-2"
-        >
-          {items.map((art) => (
-            <Link
-              key={art.slug}
-              href={`/news/${country}/${art.slug}`}
-              passHref
-              className="relative flex-shrink-0 w-64 h-40 rounded overflow-hidden"
-            >
-                <img
-                  src={art.imageUrl}
-                  alt={art.title}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-white text-lg font-semibold">
-                  {art.title}
-                </div>
-            </Link>
-          ))}
-        </div>
-
-        {/* seta direita */}
-        <button
-          onClick={() => scroll(1)}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-75 p-2 rounded-full"
-        >
-          ›
-        </button>
-      </div>
-    </section>
-  );
-}
-
-export default function NewsIndexPage() {
+export default function BitcoinIndexPage() {
   return (
     <>
       <Head>
-        <title>News – iDontKnowCrypto (Test)</title>
+        <title>Bitcoin News – iDontKnowCrypto</title>
         <meta
           name="description"
-          content="Página de testes para News: UK, USA e Global."
+          content="Up-to-date Bitcoin news, analysis and market developments."
         />
       </Head>
       <main className="max-w-7xl mx-auto px-4 py-8">
-        <CarouselSection country="UK" />
-        <CarouselSection country="USA" />
-        <CarouselSection country="Global" />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+          {[first, second].map((article) => (
+            <article key={article.slug}>
+              <Link href={`/bitcoin/${article.slug}`} passHref legacyBehavior>
+                <a className="block">
+                  <img
+                    src={article.imageUrl}
+                    alt={article.title}
+                    className="w-full h-64 object-cover rounded"
+                  />
+                  <h2 className="mt-4 text-2xl font-bold">{article.title}</h2>
+                  <p className="mt-2 text-lg">{article.excerpt}</p>
+                </a>
+              </Link>
+            </article>
+          ))}
+        </div>
+
+        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {rest.map((article) => (
+            <article key={article.slug}>
+              <Link href={`/bitcoin/${article.slug}`} passHref legacyBehavior>
+                <a className="block relative h-48 overflow-hidden rounded">
+                  <img
+                    src={article.imageUrl}
+                    alt={article.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-40 flex items-end p-2">
+                    <h3 className="text-white text-lg font-semibold">
+                      {article.title}
+                    </h3>
+                  </div>
+                </a>
+              </Link>
+            </article>
+          ))}
+        </section>
       </main>
     </>
-  );
+  )
 }
