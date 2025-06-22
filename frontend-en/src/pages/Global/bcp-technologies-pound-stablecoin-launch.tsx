@@ -1,7 +1,7 @@
 // src/pages/news/Global/bcp-technologies-pound-stablecoin-launch.tsx
 import Head from 'next/head'
 import Link from 'next/link'
-import { formatDate } from '../../../utils/date'
+import { formatDate } from '../../utils/date'
 
 export default function BCPTechnologiesPoundStablecoinLaunchPage() {
   const now = new Date().toISOString()

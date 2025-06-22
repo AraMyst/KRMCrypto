@@ -1,7 +1,7 @@
 // src/pages/news/UK/uk-fca-stablecoin-crypto-custody-regulation.tsx
 import Head from 'next/head'
 import Link from 'next/link'
-import { formatDate } from '../../../utils/date'
+import { formatDate } from '../../utils/date'
 
 export default function UKFcaStablecoinCryptoCustodyRegulationPage() {
   const now = new Date().toISOString()

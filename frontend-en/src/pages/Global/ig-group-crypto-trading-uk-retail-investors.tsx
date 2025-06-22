@@ -1,7 +1,7 @@
 // src/pages/news/Global/ig-group-crypto-trading-uk-retail-investors.tsx
 import Head from 'next/head'
 import Link from 'next/link'
-import { formatDate } from '../../../utils/date'
+import { formatDate } from '../../utils/date'
 
 export default function IGGroupCryptoTradingUKRetailInvestorsPage() {
   const now = new Date().toISOString()

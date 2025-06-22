@@ -1,7 +1,7 @@
 // src/pages/news/Global/reform-uk-accepts-crypto-donations-nigel-farage.tsx
 import Head from 'next/head'
 import Link from 'next/link'
-import { formatDate } from '../../../utils/date'
+import { formatDate } from '../../utils/date'
 
 export default function ReformUKAcceptsCryptoDonationsNigelFaragePage() {
   const now = new Date().toISOString()
