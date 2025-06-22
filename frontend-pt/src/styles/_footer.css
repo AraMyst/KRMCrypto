@@ -15,4 +15,26 @@
   .footer-copy {
     @apply text-sm mt-4;
   }
+
+  /* Scrollbar que combina com o rodapé e aparece apenas no hover */
+  .footer-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: transparent #431464;
+  }
+  .footer-scrollbar::-webkit-scrollbar {
+    height: 6px;
+  }
+  .footer-scrollbar::-webkit-scrollbar-track {
+    background-color: #431464;
+  }
+  .footer-scrollbar::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 6px;
+  }
+  .footer-scrollbar:hover {
+    scrollbar-color: #9b6bd4 #431464;
+  }
+  .footer-scrollbar:hover::-webkit-scrollbar-thumb {
+    background-color: #9b6bd4;
+  }
 }
