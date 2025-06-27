@@ -1,102 +1,87 @@
+# KRMCrypto Backend
 
-# Crypto Newsletter Backend
+A Node.js REST API for managing users, subscriptions, cryptocurrency prices and newsletter sign‑ups. The service integrates with MongoDB, Sendinblue (Brevo) and Coinbase Commerce.
 
-API REST para gerenciar usuários, assinaturas, newsletter e preços de criptomoedas.
+## Features
 
-## Tecnologias
-- Node.js
-- Express
-- MongoDB + Mongoose
-- JWT para autenticação
-- Nodemailer + Brevo (Sendinblue) para envio de emails
-- Coinbase Commerce para pagamentos em cripto
+- User registration and JWT based authentication
+- Subscription management with basic plans (daily/weekly/monthly)
+- Cryptocurrency ticker powered by the CoinGecko API
+- Newsletter subscriptions with Brevo mailing list integration
+- Payments through Coinbase Commerce
+- Optional IP geolocation for personalisation
 
-## Pré-requisitos
-- Node.js >= 14
-- MongoDB (cluster ou local)
-- Conta Brevo (Sendinblue)
-- Conta Coinbase Commerce
+## Requirements
 
-## Instalação
-1. Clone o repositório:
-   ```bash
-   git clone <repo-url>
-   cd <project-folder>
-````
+- Node.js 14+
+- MongoDB database
+- Brevo (Sendinblue) account
+- Coinbase Commerce account
 
-2. Instale as dependências:
-
-   ```bash
-   npm install
-   ```
-3. Crie um arquivo `.env` na raiz com as variáveis (exemplo abaixo).
-
-## Variáveis de Ambiente
-
-```dotenv
-# MongoDB\ n MONGODB_URI=mongodb+srv://<db_username>:<db_password>@cluster.mongodb.net/yourDB
-
-# App\ n NODE_ENV=development
-PORT=3000
-
-# JWT\ n JWT_SECRET=seu_secret\ n JWT_EXPIRES_IN=7d
-
-# Email (Brevo)\ n SMTP_HOST=smtp-relay.sendinblue.com
-SMTP_PORT=587
-SMTP_USER=seu_usuario
-SMTP_PASSWORD=sua_senha
-BREVO_LIST_ID=KRMCrypto
-EMAIL_API_KEY=xkeysib-...
-
-# Coinbase Commerce
-COINBASE_API_KEY=579038d7-0e41-47f9-b643-04a51447220f
-# CoinGecko Demo API
-COINGECKO_API_KEY=your_coingecko_key
-# IP Geolocation
-IPGEO_API_KEY=your_ipgeolocation_key
-```
-
-Ensure `MONGODB_URI` points to a running MongoDB instance. Without it the newsletter subscription route will return a server error.
-
-## Executando
+## Installation
 
 ```bash
-# Modo desenvolvimento
-npm run dev
-
-# Modo produção
-npm start
+# clone the repo
+npm install
 ```
 
-## Estrutura do Projeto
+Create a `.env` file inside `/backend` with the following variables:
+
+```dotenv
+MONGODB_URI=mongodb://localhost:27017/krmcrypto
+NODE_ENV=development
+PORT=3000
+
+JWT_SECRET=changeme
+JWT_EXPIRES_IN=7d
+
+SMTP_HOST=smtp-relay.sendinblue.com
+SMTP_PORT=587
+SMTP_USER=your_user
+SMTP_PASSWORD=your_pass
+EMAIL_FROM=news@krmcrypto.com
+BREVO_API_KEY=your_brevo_key
+BREVO_LIST_ID=2
+
+COINBASE_API_KEY=your_coinbase_key
+COINGECKO_API_KEY=your_coingecko_key
+IPGEO_API_KEY=your_ipgeolocation_key
+IPGEO_ASYNC=false
+```
+
+Start the API:
+
+```bash
+npm run dev    # development
+npm start      # production
+```
+
+## Project structure
 
 ```
-├── config/
-│   └── database.js
-├── controllers/
-├── middlewares/
-├── models/
-├── routes/
-├── services/
-├── utils/
-├── server.js
-└── package.json
+backend/
+├─ src/
+│  ├─ config/
+│  ├─ controllers/
+│  ├─ middlewares/
+│  ├─ models/
+│  ├─ routes/
+│  ├─ services/
+│  └─ utils/
+└─ package.json
 ```
 
-## Endpoints Principais
+## Main endpoints
 
-* `POST /api/auth/register` – cadastro de usuário
-* `POST /api/auth/login` – login JWT
-* `GET /api/subscriptions/me` – dados da assinatura do usuário
-* `POST /api/newsletter/subscribe` – subscribe an email to the newsletter. Send `{ email, name? }` in the body (name optional)
-* `GET /api/crypto/prices` – lista de preços de criptos
+- `POST /api/auth/register` – create account
+- `POST /api/auth/login` – obtain JWT token
+- `GET /api/subscriptions/me` – retrieve the logged user's subscription
+- `POST /api/newsletter/subscribe` – add an email to the newsletter list
+- `GET /api/crypto/ticker` – list crypto prices
+- `GET /api/geo` – resolve requesting IP geolocation
 
-Para detalhes de todas as rotas, veja a documentação Swagger (se implementado).
-
-```
+More routes exist for categories, posts, payments and admin functions. Swagger documentation can be enabled if required.
 
 ---
 
-Com esses arquivos sua base de backend estará pronta para iniciar o desenvolvimento e testes locais.
-
-```
+This backend powers the KRMCrypto front‑end applications.

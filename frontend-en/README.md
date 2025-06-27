@@ -1,85 +1,71 @@
-# iDontKnowCrypto Frontend (en)
+# KRMCrypto Frontend (English)
 
-Aplicação web em **Next.js** que exibe notícias e análises de criptomoedas para o público internacional. Inclui autenticação, sistema de assinaturas, newsletter e integração com preços de criptos em tempo real.
+This Next.js 14 application provides cryptocurrency news and analysis for an English speaking audience. It consumes the KRMCrypto backend API for authentication, subscriptions, newsletter and price data.
 
-## Tecnologias
+## Tech stack
 
-- [Next.js 14](https://nextjs.org/) + React 18
-- TypeScript estrito
-- Tailwind CSS para estilos
-- Axios para requisições HTTP
+- Next.js 14 with React 18 and TypeScript
+- Tailwind CSS for styling
+- Axios for HTTP requests
 
-## Pré‑requisitos
+## Setup
 
-- Node.js 16 ou superior
-- URL do backend exposta em `NEXT_PUBLIC_API_URL`
+Requirements:
 
-## Instalação
+- Node.js 16+
+- `NEXT_PUBLIC_API_URL` pointing to the backend
+
+Install dependencies and create an environment file:
 
 ```bash
-# Clone o repositório e acesse a pasta
 cd frontend-en
-
-# Instale as dependências
 npm install
-
-# Copie o arquivo de exemplo e ajuste a URL do backend
-cp .env.local .env.local
-# edite .env.local se necessário
+cp .env.local .env.local  # edit if needed
 ```
 
-## Scripts
-
-- `npm run dev` – inicia o servidor de desenvolvimento
-- `npm run build` – gera a versão de produção
-- `npm start` – executa a build
-- `npm run lint` – executa o ESLint
-
-## Principais funcionalidades
-
-- **Página inicial dinâmica** ordena as seções de notícias pelo país do usuário via geolocalização.
-- **Menu de categorias** e páginas para cada região/tema (UK, USA, Bitcoin etc.).
-- **Ticker de preços** de criptomoedas atualizado periodicamente.
-- **Autenticação** com login e registro usando JWT (contexto `AuthProvider`).
-- **Área do usuário** para atualizar perfil, gerenciar assinatura e método de pagamento.
-- **Newsletter** com formulário independente e banners laterais de captura.
-- **Busca de artigos** através de dropdown ou modal.
-- Componentização com **Context API** e hooks personalizados.
-
-## Estrutura resumida
-
-```
-frontend-en/
-├── public/            # imagens e assets estáticos
-├── src/
-│   ├── components/    # Header, Footer, banners, etc.
-│   ├── contexts/      # Auth, Crypto e Newsletter providers
-│   ├── hooks/         # hooks como useAuth, useCryptoPrices
-│   ├── pages/         # rotas Next.js (notícias, conta, auth…)
-│   ├── services/      # integração com APIs de pagamento e usuário
-│   ├── styles/        # arquivos Tailwind
-│   └── utils/         # helpers (apiClient, geo, date…)
-└── package.json
-```
-
-## Variáveis de Ambiente
-
-Crie `.env.local` na raiz com:
+`.env.local` should contain:
 
 ```
 NEXT_PUBLIC_API_URL=http://localhost:3000
 ```
 
-Essa URL é utilizada pelo `apiClient.ts` para comunicar com o backend.
+## Useful scripts
 
-## Executando em desenvolvimento
+- `npm run dev` – start the development server
+- `npm run build` – generate a production build
+- `npm start` – run the built app
+- `npm run lint` – check code with ESLint
+
+## Key features
+
+- Home page sections reordered based on the user's geolocation
+- Category pages for regions and topics (UK, USA, Bitcoin …)
+- Live cryptocurrency ticker using the backend
+- JWT authentication via the `AuthProvider`
+- User area to manage profile and subscription
+- Newsletter subscription banners and form
+- Article search by keyword
+
+## Folder overview
+
+```
+frontend-en/
+├─ public/
+├─ src/
+│  ├─ components/
+│  ├─ contexts/
+│  ├─ hooks/
+│  ├─ pages/
+│  ├─ services/
+│  ├─ styles/
+│  └─ utils/
+└─ package.json
+```
+
+Run locally with:
 
 ```bash
 npm run dev
 ```
 
-A aplicação ficará disponível em `http://localhost:3000` (porta padrão do Next.js).
-
----
-
-Com esse guia você consegue rodar o frontend em inglês localmente e adaptar conforme as necessidades do projeto.
+The app defaults to http://localhost:3000.
