@@ -96,13 +96,23 @@ export default function AirdropsIndexPage() {
       <main className="max-w-7xl mx-auto px-4 py-8">
         {/* Special Top Story */}
         <section className="mb-12 flex flex-col lg:flex-row items-start gap-6">
-          <img
-            src={special.imageUrl}
-            alt={special.title}
-            className="w-full lg:w-1/2 h-auto object-cover rounded"
-          />
+          <Link href={`/airdrops/${special.slug}`} legacyBehavior>
+            <a className="block lg:w-1/2">
+              <img
+                src={special.imageUrl}
+                alt={special.title}
+                className="w-full h-64 lg:h-auto lg:max-h-80 object-cover rounded"
+              />
+            </a>
+          </Link>
           <div className="lg:w-1/2">
-            <h2 className="text-2xl font-bold">{special.title}</h2>
+            <Link href={`/airdrops/${special.slug}`} legacyBehavior>
+              <a>
+                <h2 className="text-2xl font-bold hover:underline">
+                  {special.title}
+                </h2>
+              </a>
+            </Link>
             <p className="mt-4 text-base">{specialText}</p>
             <Link href={`/airdrops/${special.slug}`} legacyBehavior>
               <a className="mt-4 inline-block text-blue-600 hover:underline">
