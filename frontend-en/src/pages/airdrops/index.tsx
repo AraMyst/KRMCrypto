@@ -133,12 +133,16 @@ export default function AirdropsIndexPage() {
                     alt={article.title}
                     className="w-full h-64 object-cover rounded"
                   />
+                </a>
+              </Link>
+              <Link href={`/airdrops/${article.slug}`} legacyBehavior>
+                <a>
                   <h2 className="mt-4 text-2xl font-bold">
                     {article.title}
                   </h2>
-                  <p className="mt-2 text-lg">{article.excerpt}</p>
                 </a>
               </Link>
+              <p className="mt-2 text-lg">{article.excerpt}</p>
             </article>
           ))}
         </div>
