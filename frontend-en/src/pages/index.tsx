@@ -5,7 +5,7 @@ import { useRef, useState, useEffect } from 'react'
 import { Article } from '../types'
 import { fetchUserGeo } from '../utils/geo'
 
-const CARD_WIDTH = 256
+const CARD_WIDTH = 230
 const GAP = 16
 const FULL_WIDTH = CARD_WIDTH + GAP
 const MAX_VISIBLE = 5
@@ -178,7 +178,7 @@ function CarouselSection({ region }: { region: Region }) {
               passHref
               legacyBehavior
             >
-              <a className="relative flex-shrink-0 w-64 h-40 rounded overflow-hidden">
+              <a className="relative flex-shrink-0 w-[230px] h-40 rounded overflow-hidden">
                 <img
                   src={article.imageUrl}
                   alt={article.title}
@@ -252,7 +252,7 @@ export default function HomePage() {
           content="Latest news across regions, dynamically ordered by your location."
         />
       </Head>
-      <main className="max-w-7xl mx-auto px-4 py-8">
+      <main className="w-full px-4 py-8">
         {order.map(folder => {
           const region = regions.find(r => r.folder === folder)!
           return <CarouselSection key={folder} region={region} />
