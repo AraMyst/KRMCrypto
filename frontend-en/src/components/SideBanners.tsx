@@ -16,7 +16,7 @@ export default function SideBanners() {
   };
 
   return (
-    <aside className="fixed top-1/3 -right-36 hover:right-0 md:-right-36 md:hover:right-0 lg:right-4 lg:hover:right-4 flex flex-col space-y-6 z-40 transition-all">
+    <aside className="absolute top-1/3 -right-36 hover:right-0 md:-right-36 md:hover:right-0 lg:right-4 lg:hover:right-4 flex flex-col space-y-6 z-40 transition-all">
       {/* Banner Newsletter */}
       <div className="block w-40 p-4 bg-primary text-white rounded-l-lg shadow text-center">
         <h3 className="font-bold mb-1 text-center">Newsletter</h3>
@@ -53,7 +53,7 @@ export default function SideBanners() {
         <h3 className="font-bold mb-1 text-center">Premium</h3>
         <p className="text-sm text-center">Get early price analysis from our experts</p>
         <Link href="/auth/register" legacyBehavior>
-            <a className="underline text-sm !text-white hover:!text-gray-300 block mx-auto">
+            <a className="mt-2 inline-block w-full bg-white text-green-700 font-semibold py-1 rounded hover:bg-gray-100 text-sm">
               Go Premium
             </a>
         </Link>

@@ -2,7 +2,8 @@
 @layer components {
   /* Container dos banners laterais */
   .side-banners {
-    @apply fixed top-1/3 right-4 flex flex-col space-y-6 z-40;
+    /* Banners move with the page instead of being fixed */
+    @apply absolute top-1/3 right-4 flex flex-col space-y-6 z-40;
   }
   /* Banner de newsletter */
   .banner-newsletter {
