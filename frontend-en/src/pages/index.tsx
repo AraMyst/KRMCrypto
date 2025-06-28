@@ -15,7 +15,7 @@ const regions = [
   { label: 'USA', folder: 'USA' },
   { label: 'Global', folder: 'Global' },
   { label: 'Canada', folder: 'Canada' },
-  { label: 'New Zealand', folder: 'New Zealand' },
+  { label: 'New Zealand', folder: 'New-Zealand' },
   { label: 'Africa', folder: 'Africa' },
   { label: 'Ireland', folder: 'Ireland' },
   { label: 'Australia', folder: 'Australia' },
@@ -94,13 +94,8 @@ const baseArticles: Omit<Article, 'category'>[] = [
 
 // Build per-region article lists (same content, category label differs)
 const testArticles: Record<string, Article[]> = {}
-regions.forEach(({ label, folder }, idx) => {
-  const offset = idx % baseArticles.length
-  const rotated = [
-    ...baseArticles.slice(offset),
-    ...baseArticles.slice(0, offset),
-  ]
-  testArticles[folder] = rotated.slice(0, 5).map(a => ({
+regions.forEach(({ label, folder }) => {
+  testArticles[folder] = baseArticles.map(a => ({
     ...a,
     category: label,
   }))
@@ -128,7 +123,7 @@ const continentMap: Record<string, string> = {
   USA: 'North America',
   Canada: 'North America',
   Australia: 'Oceania',
-  'New Zealand': 'Oceania',
+  'New-Zealand': 'Oceania',
   Africa: 'Africa',
   Global: 'Global',
 }
@@ -140,23 +135,22 @@ function CarouselSection({ region }: { region: Region }) {
   )
   const items = shuffle(sorted, folder)
 
- const containerRef = useRef<HTMLDivElement>(null)
-const [start, setStart] = useState(0)
-const [visibleCount, setVisibleCount] = useState(MAX_VISIBLE)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [start, setStart] = useState(0)
+  const [visibleCount, setVisibleCount] = useState(MAX_VISIBLE)
 
-useEffect(() => {
-  function updateCount() {
-    if (!containerRef.current) return
-    const width = containerRef.current.clientWidth
-    const count = Math.max(1, Math.min(MAX_VISIBLE, Math.floor(width / FULL_WIDTH)))
-    setVisibleCount(count)
-    setStart(s => Math.min(s, items.length - count))
-  }
-  updateCount()
-  window.addEventListener('resize', updateCount)
-  return () => window.removeEventListener('resize', updateCount)
-}, [items.length])
-
+  useEffect(() => {
+    function updateCount() {
+      if (!containerRef.current) return
+      const width = containerRef.current.clientWidth
+      const count = Math.max(1, Math.min(MAX_VISIBLE, Math.floor(width / FULL_WIDTH)))
+      setVisibleCount(count)
+      setStart(s => Math.min(s, items.length - count))
+    }
+    updateCount()
+    window.addEventListener('resize', updateCount)
+    return () => window.removeEventListener('resize', updateCount)
+  }, [items.length])
 
   const maxStart = items.length - visibleCount
   const visibleItems = items.slice(start, start + visibleCount)
@@ -223,7 +217,7 @@ export default function HomePage() {
           CA: 'Canada',
           IE: 'Ireland',
           AU: 'Australia',
-          NZ: 'New Zealand',
+          NZ: 'New-Zealand',
         }
         let primary = direct[code] ?? 'Global'
         const europeCodes = [
