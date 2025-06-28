@@ -101,7 +101,7 @@ export default function AirdropsIndexPage() {
               <img
                 src={special.imageUrl}
                 alt={special.title}
-                className="w-full h-auto object-cover rounded"
+                className="w-full h-56 md:h-64 lg:h-72 object-cover rounded"
               />
             </a>
           </Link>
