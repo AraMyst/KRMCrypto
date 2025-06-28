@@ -93,8 +93,13 @@ const baseArticles: Omit<Article, 'category'>[] = [
 
 // Build per-region article lists (same content, category label differs)
 const testArticles: Record<string, Article[]> = {}
-regions.forEach(({ label, folder }) => {
-  testArticles[folder] = baseArticles.map(a => ({
+regions.forEach(({ label, folder }, idx) => {
+  const offset = idx % baseArticles.length
+  const rotated = [
+    ...baseArticles.slice(offset),
+    ...baseArticles.slice(0, offset),
+  ]
+  testArticles[folder] = rotated.slice(0, 5).map(a => ({
     ...a,
     category: label,
   }))
@@ -136,13 +141,13 @@ function CarouselSection({ region }: { region: Region }) {
 
   const containerRef = useRef<HTMLDivElement>(null)
   const [start, setStart] = useState(0)
-  const [visibleCount, setVisibleCount] = useState(4)
+  const [visibleCount, setVisibleCount] = useState(5)
 
   useEffect(() => {
     function updateCount() {
       if (!containerRef.current) return
       const width = containerRef.current.clientWidth
-      const count = Math.max(1, Math.min(4, Math.floor(width / FULL_WIDTH)))
+      const count = Math.max(1, Math.min(5, Math.floor(width / FULL_WIDTH)))
       setVisibleCount(count)
       setStart(s => Math.min(s, items.length - count))
     }
