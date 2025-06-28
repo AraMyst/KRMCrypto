@@ -39,3 +39,15 @@ a {
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* Subtle thin scrollbar */
+.thin-scrollbar {
+  scrollbar-width: thin;
+}
+.thin-scrollbar::-webkit-scrollbar {
+  height: 6px;
+}
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(155, 107, 212, 0.6);
+  border-radius: 6px;
+}

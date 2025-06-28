@@ -28,7 +28,7 @@ export default function useGeoCategories(): GeoCategoriesHook {
       setError(null)
       try {
         // busca lista completa de categorias
-        const resp = await apiClient.get<Category[]>('/api/categories')
+        const resp = await apiClient.get<Category[]>('/categories')
         let lista = resp.data
 
         // tenta obter país do usuário

@@ -10,10 +10,10 @@ export interface GeoData {
 }
 
 /**
- * Busca a geolocalização do usuário na rota /api/geo.
+ * Busca a geolocalização do usuário na rota /geo.
  * Retorna pelo menos o nome ou código do país.
  */
 export async function fetchUserGeo(): Promise<GeoData> {
-  const resp = await apiClient.get<GeoData>('/api/geo')
+  const resp = await apiClient.get<GeoData>('/geo')
   return resp.data
 }

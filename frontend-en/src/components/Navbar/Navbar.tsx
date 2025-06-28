@@ -1,8 +1,7 @@
 // src/components/Navbar/Navbar.tsx
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, FormEvent } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import SearchDropdown from './SearchDropdown'
 import LoginDropdown from './LoginDropdown'
 
 // atualizei apenas aqui:
@@ -14,7 +13,7 @@ const NAV_LINKS = [
 ]
 
 export default function Navbar() {
-  const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
   const [isLoginOpen, setIsLoginOpen]   = useState(false)
   const [isMenuOpen, setIsMenuOpen]     = useState(false)
   const navRef = useRef<HTMLDivElement>(null)
@@ -28,6 +27,13 @@ export default function Navbar() {
     document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
+
+  function handleSearchSubmit(e: FormEvent) {
+    e.preventDefault()
+    if (searchQuery.trim()) {
+      window.location.href = `/search?query=${encodeURIComponent(searchQuery.trim())}`
+    }
+  }
 
   return (
     <>
@@ -60,7 +66,6 @@ export default function Navbar() {
             <button
               onClick={() => {
                 setIsMenuOpen((v) => !v)
-                setIsSearchOpen(false)
                 setIsLoginOpen(false)
               }}
               aria-label="Toggle menu"
@@ -77,30 +82,38 @@ export default function Navbar() {
               </svg>
             </button>
 
-            <button
-              onClick={() => {
-                setIsSearchOpen((v) => !v)
-                setIsMenuOpen(false)
-                setIsLoginOpen(false)
-              }}
-              aria-label="Search articles"
-              className="p-2 rounded hover:bg-gray-100"
-            >
-              <svg
-                className="h-6 w-6 text-gray-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+            <form onSubmit={handleSearchSubmit} className="flex items-center border rounded">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search..."
+                className="px-2 py-1 focus:outline-none w-28 sm:w-36"
+              />
+              <button
+                type="submit"
+                aria-label="Search articles"
+                className="p-2 hover:bg-gray-100 rounded"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                  d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1 0 6.15 6.15a7.5 7.5 0 0 0 10.5 10.5z" />
-              </svg>
-            </button>
+                <svg
+                  className="h-5 w-5 text-gray-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1 0 6.15 6.15a7.5 7.5 0 0 0 10.5 10.5z"
+                  />
+                </svg>
+              </button>
+            </form>
 
             <button
               onClick={() => {
                 setIsLoginOpen((v) => !v)
-                setIsSearchOpen(false)
                 setIsMenuOpen(false)
               }}
               className="px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark"
@@ -108,9 +121,8 @@ export default function Navbar() {
               Log in
             </button>
           </div>
-        </div>
 
-        {/* Mobile menu */}
+          {/* Mobile menu */}
         {isMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow border-t z-40">
             {NAV_LINKS.map((link) => (
@@ -123,8 +135,8 @@ export default function Navbar() {
         )}
 
         {/* Dropdowns */}
-        {isSearchOpen && <SearchDropdown onClose={() => setIsSearchOpen(false)} />}
-        {isLoginOpen  && <LoginDropdown onClose={() => setIsLoginOpen(false)} />}
+        {isLoginOpen && <LoginDropdown onClose={() => setIsLoginOpen(false)} />}
+        </div>
       </nav>
 
       {/* Spacer para evitar overlap */}

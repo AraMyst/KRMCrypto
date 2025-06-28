@@ -16,7 +16,7 @@ export default function SideBanners() {
   };
 
   return (
-    <aside className="fixed top-1/3 right-4 flex flex-col space-y-6 z-40">
+    <aside className="absolute top-1/3 -right-36 hover:right-0 md:-right-36 md:hover:right-0 lg:-right-36 lg:hover:right-0 flex flex-col space-y-6 z-40 transition-all">
       {/* Banner Newsletter */}
       <div className="block w-40 p-4 bg-primary text-white rounded-l-lg shadow text-center">
         <h3 className="font-bold mb-1 text-center">Newsletter</h3>
@@ -49,11 +49,13 @@ export default function SideBanners() {
       </div>
 
       {/* Banner Premium */}
-      <div className="block w-40 p-4 bg-green-600 text-white rounded-l-lg shadow">
+      <div className="block w-40 p-4 bg-green-600 text-white rounded-l-lg shadow text-center">
         <h3 className="font-bold mb-1 text-center">Premium</h3>
         <p className="text-sm text-center">Get early price analysis from our experts</p>
-        <Link className="mt-2 block w-fit px-3 py-1 bg-white text-green-700 rounded text-sm font-semibold mx-auto text-center" href="/auth/register" legacyBehavior>
-            Go Premium
+        <Link href="/auth/register" legacyBehavior>
+            <a className="mt-2 inline-block w-full bg-white text-green-700 font-semibold py-1 rounded hover:bg-gray-100 text-sm">
+              Go Premium
+            </a>
         </Link>
       </div>
     </aside>
