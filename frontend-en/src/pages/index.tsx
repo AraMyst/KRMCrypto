@@ -8,6 +8,7 @@ import { fetchUserGeo } from '../utils/geo'
 const CARD_WIDTH = 256
 const GAP = 16
 const FULL_WIDTH = CARD_WIDTH + GAP
+const MAX_VISIBLE = 5
 
 const regions = [
   { label: 'UK', folder: 'UK' },
@@ -136,13 +137,13 @@ function CarouselSection({ region }: { region: Region }) {
 
   const containerRef = useRef<HTMLDivElement>(null)
   const [start, setStart] = useState(0)
-  const [visibleCount, setVisibleCount] = useState(4)
+  const [visibleCount, setVisibleCount] = useState(MAX_VISIBLE)
 
   useEffect(() => {
     function updateCount() {
       if (!containerRef.current) return
       const width = containerRef.current.clientWidth
-      const count = Math.max(1, Math.min(4, Math.floor(width / FULL_WIDTH)))
+      const count = Math.max(1, Math.min(MAX_VISIBLE, Math.floor(width / FULL_WIDTH)))
       setVisibleCount(count)
       setStart(s => Math.min(s, items.length - count))
     }
