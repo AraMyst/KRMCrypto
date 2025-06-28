@@ -52,8 +52,10 @@ export default function SideBanners() {
       <div className="block w-40 p-4 bg-green-600 text-white rounded-l-lg shadow text-center">
         <h3 className="font-bold mb-1 text-center">Premium</h3>
         <p className="text-sm text-center">Get early price analysis from our experts</p>
-        <Link className="underline text-sm hover:text-gray-300 block mx-auto text-white" href="/auth/register" legacyBehavior>
-            Go Premium
+        <Link href="/auth/register" legacyBehavior>
+            <a className="underline text-sm !text-white hover:!text-gray-300 block mx-auto">
+              Go Premium
+            </a>
         </Link>
       </div>
     </aside>
