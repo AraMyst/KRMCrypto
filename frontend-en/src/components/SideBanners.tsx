@@ -16,7 +16,7 @@ export default function SideBanners() {
   };
 
   return (
-    <aside className="absolute top-1/3 -right-36 hover:right-0 md:-right-36 md:hover:right-0 lg:right-4 lg:hover:right-4 flex flex-col space-y-6 z-40 transition-all">
+    <aside className="absolute top-1/3 -right-36 hover:right-0 md:-right-36 md:hover:right-0 lg:-right-36 lg:hover:right-0 flex flex-col space-y-6 z-40 transition-all">
       {/* Banner Newsletter */}
       <div className="block w-40 p-4 bg-primary text-white rounded-l-lg shadow text-center">
         <h3 className="font-bold mb-1 text-center">Newsletter</h3>
