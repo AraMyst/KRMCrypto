@@ -26,7 +26,7 @@ cp .env.local .env.local  # edit to point to your backend
 Example `.env.local`:
 
 ```
-NEXT_PUBLIC_API_URL=https://naoseicripto.com/wp-json/krm/v1
+NEXT_PUBLIC_API_URL=https://krmcrypto.onrender.com/api
 ```
 
 ## Available scripts

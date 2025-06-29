@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import apiClient from '../utils/apiClient'
+
 
 interface CryptoPrice {
   symbol: string
@@ -13,8 +13,12 @@ export default function CryptoTicker() {
   useEffect(() => {
     async function fetchPrices() {
       try {
-        const resp = await apiClient.get<CryptoPrice[]>('/api/crypto/ticker')
-        setPrices(resp.data)
+        const resp = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/crypto/ticker`
+        )
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`)
+        const data = (await resp.json()) as CryptoPrice[]
+        setPrices(data)
       } catch (err) {
         console.error('Falha ao carregar preços de cripto', err)
       }
