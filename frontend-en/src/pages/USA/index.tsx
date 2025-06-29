@@ -1,7 +1,7 @@
 // src/pages/USA/index.tsx
 import Head from 'next/head'
 import Link from 'next/link'
-import { Article } from '../../types'
+import type { Article } from '../../types'
 
 const articles: Article[] = [
   {
@@ -82,7 +82,7 @@ const usaArticles: Article[] = [
   articles[3],
   articles[5],
   articles[6],
-]
+].filter(Boolean)
 
 const [feature1, feature2, special, ...rest] = usaArticles
 
