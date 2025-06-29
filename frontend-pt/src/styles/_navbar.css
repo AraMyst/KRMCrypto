@@ -1,6 +1,6 @@
 @layer components {
   .navbar {
-    @apply fixed top-0 left-0 right-0 z-50 bg-white shadow;
+    @apply bg-white shadow;
   }
   .navbar-container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between;
@@ -16,8 +16,5 @@
   }
   .search-button {
     @apply p-2 rounded hover:bg-gray-100;
-  }
-  .spacer {
-    @apply h-16;
   }
 }

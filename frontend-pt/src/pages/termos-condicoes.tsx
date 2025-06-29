@@ -11,7 +11,7 @@ export default function TermosCondicoesPage() {
           content="Leia nossos termos e condições de uso para entender suas responsabilidades e direitos."
         />
       </Head>
-      <main className="max-w-3xl mx-auto px-4 py-8 prose prose-sm">
+      <main className="max-w-3xl mx-auto px-4 py-8 prose prose-sm text-justify">
         <h1>Termos e Condições</h1>
 
         <h2>1. Uso do Site</h2>
@@ -47,7 +47,7 @@ export default function TermosCondicoesPage() {
           indicada no rodapé. Recomendamos revisar periodicamente.
         </p>
 
-        <p className="mt-6 text-xs text-gray-600">
+        <p className="mt-6 text-xs text-gray-600 text-justify">
           Última revisão: junho de 2025
         </p>
       </main>

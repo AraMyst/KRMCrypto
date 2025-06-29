@@ -32,7 +32,7 @@ export default function KarlaGoncalves() {
         </div>
 
         {/* Biografia */}
-        <article className="prose prose-lg">
+        <article className="prose prose-lg text-justify">
           <p>
             Karla Gonçalves é redatora e analista com mais de cinco anos de experiência cobrindo
             o ecossistema de criptomoedas no Brasil. Formada em Jornalismo pela Universidade Federal,

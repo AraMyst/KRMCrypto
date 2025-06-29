@@ -32,7 +32,7 @@ export default function YolandaSais() {
         </div>
 
         {/* Biografia */}
-        <article className="prose prose-lg">
+        <article className="prose prose-lg text-justify">
           <p>
             Yolanda Sais é jornalista e pesquisadora que se dedica à cobertura do universo
             cripto em Portugal. Licenciada em Comunicação Social, destacou-se pelos artigos

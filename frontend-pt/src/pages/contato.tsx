@@ -25,7 +25,7 @@ export default function ContatoPage() {
       </Head>
       <main className="max-w-2xl mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-4">Fale Conosco</h1>
-        <p className="mb-6">
+        <p className="mb-6 text-justify">
           Tem dúvidas sobre criptomoedas ou sugestões para o NaoseiCripto?
           Use o formulário abaixo e nossa equipe responderá o mais breve possível.
         </p>
@@ -78,7 +78,7 @@ export default function ContatoPage() {
           </button>
         </form>
 
-        <p className="mt-8 text-sm text-gray-600">
+        <p className="mt-8 text-sm text-gray-600 text-justify">
           Ou envie direto para: <a href="mailto:contato@naoseicripto.com" className="underline">contato@naoseicripto.com</a>
         </p>
       </main>

@@ -39,7 +39,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 bg-white shadow">
+      <nav ref={navRef} className="bg-white shadow">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           {/* Logo */}
           <Link href="/">
@@ -126,9 +126,6 @@ export default function Navbar() {
           </div>
         )}
       </nav>
-
-      {/* Spacer para evitar overlap */}
-      <div className="h-16" />
     </>
   )
 }
