@@ -14,6 +14,6 @@ export interface GeoData {
  * Retorna pelo menos o nome ou código do país.
  */
 export async function fetchUserGeo(): Promise<GeoData> {
-  const resp = await apiClient.get<GeoData>('/geo')
+  const resp = await apiClient.get<GeoData>('/api/geo')
   return resp.data
 }
