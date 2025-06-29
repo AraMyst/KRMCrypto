@@ -1,4 +1,4 @@
-// src/pages/europe/index.tsx
+// src/pages/Europe/index.tsx
 import Head from 'next/head'
 import Link from 'next/link'
 import { Article } from '../../types'
@@ -107,7 +107,7 @@ export default function EuropeIndexPage() {
       <main className="max-w-7xl mx-auto px-4 py-8">
         {/* Special Top Story */}
         <section className="mb-12 flex flex-col items-center text-center lg:flex-row lg:items-start gap-6">
-          <Link href={`/europe/${special.slug}`} legacyBehavior>
+          <Link href={`/Europe/${special.slug}`} legacyBehavior>
             <a className="block lg:w-1/2">
               <img
                 src={special.imageUrl}
@@ -117,7 +117,7 @@ export default function EuropeIndexPage() {
             </a>
           </Link>
           <div className="lg:w-1/2">
-            <Link href={`/europe/${special.slug}`} legacyBehavior>
+            <Link href={`/Europe/${special.slug}`} legacyBehavior>
               <a>
                 <h2 className="text-2xl font-bold hover:underline">
                   {special.title}
@@ -125,7 +125,7 @@ export default function EuropeIndexPage() {
               </a>
             </Link>
             <p className="mt-4 text-base text-justify">{specialText}</p>
-            <Link href={`/europe/${special.slug}`} legacyBehavior>
+            <Link href={`/Europe/${special.slug}`} legacyBehavior>
               <a className="mt-4 inline-block text-blue-600 hover:underline">
                 Read more
               </a>
@@ -137,7 +137,7 @@ export default function EuropeIndexPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
           {[feature1, feature2].map((article) => (
             <article key={article.slug}>
-              <Link href={`/europe/${article.slug}`} legacyBehavior>
+              <Link href={`/Europe/${article.slug}`} legacyBehavior>
                 <a className="block">
                   <img
                     src={article.imageUrl}
@@ -146,7 +146,7 @@ export default function EuropeIndexPage() {
                   />
                 </a>
               </Link>
-              <Link href={`/europe/${article.slug}`} legacyBehavior>
+              <Link href={`/Europe/${article.slug}`} legacyBehavior>
                 <a>
                   <h2 className="mt-4 text-2xl font-bold">
                     {article.title}
@@ -162,7 +162,7 @@ export default function EuropeIndexPage() {
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {rest.map((article) => (
             <article key={article.slug}>
-              <Link href={`/europe/${article.slug}`} legacyBehavior>
+              <Link href={`/Europe/${article.slug}`} legacyBehavior>
                 <a className="block relative h-48 overflow-hidden rounded">
                   <img
                     src={article.imageUrl}

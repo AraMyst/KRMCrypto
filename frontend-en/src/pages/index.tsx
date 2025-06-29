@@ -15,7 +15,7 @@ const regions = [
   { label: 'USA', folder: 'USA' },
   { label: 'Global', folder: 'Global' },
   { label: 'Canada', folder: 'Canada' },
-  { label: 'New Zealand', folder: 'New-Zealand' },
+  { label: 'New Zealand', folder: 'New%20Zealand' },
   { label: 'Africa', folder: 'Africa' },
   { label: 'Ireland', folder: 'Ireland' },
   { label: 'Australia', folder: 'Australia' },
@@ -123,7 +123,7 @@ const continentMap: Record<string, string> = {
   USA: 'North America',
   Canada: 'North America',
   Australia: 'Oceania',
-  'New-Zealand': 'Oceania',
+  'New%20Zealand': 'Oceania',
   Africa: 'Africa',
   Global: 'Global',
 }
@@ -220,7 +220,7 @@ export default function HomePage() {
           CA: 'Canada',
           IE: 'Ireland',
           AU: 'Australia',
-          NZ: 'New-Zealand',
+          NZ: 'New%20Zealand',
         }
         let primary = direct[code] ?? 'Global'
         const europeCodes = [
