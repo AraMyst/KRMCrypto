@@ -166,11 +166,14 @@ function CarouselSection({ region }: { region: Region }) {
         <button
           onClick={() => setStart(s => Math.max(0, s - 1))}
           disabled={start === 0}
-          className="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-white bg-opacity-75 p-2 rounded-full"
+          className="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-primary text-white p-2 rounded-full"
         >
           ‹
         </button>
-        <div ref={containerRef} className="flex overflow-hidden space-x-4 py-2">
+        <div
+          ref={containerRef}
+          className="flex overflow-hidden space-x-4 py-2 justify-center"
+        >
           {visibleItems.map(article => (
             <Link
               key={article.slug}
@@ -194,7 +197,7 @@ function CarouselSection({ region }: { region: Region }) {
         <button
           onClick={() => setStart(s => Math.min(maxStart, s + 1))}
           disabled={start >= maxStart}
-          className="absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2 z-10 bg-white bg-opacity-75 p-2 rounded-full"
+          className="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-primary text-white p-2 rounded-full"
         >
           ›
         </button>
@@ -252,7 +255,7 @@ export default function HomePage() {
           content="Latest news across regions, dynamically ordered by your location."
         />
       </Head>
-      <main className="w-full px-4 py-8">
+      <main className="max-w-7xl mx-auto px-4 py-8">
         {order.map(folder => {
           const region = regions.find(r => r.folder === folder)!
           return <CarouselSection key={folder} region={region} />
