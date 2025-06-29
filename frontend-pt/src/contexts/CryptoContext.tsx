@@ -5,7 +5,6 @@ import {
   useEffect,
   useState,
 } from 'react'
-import apiClient from '../utils/apiClient'
 import { CryptoPrice } from '../types'
 
 interface CryptoContextType {
@@ -29,8 +28,12 @@ export function CryptoProvider({ children }: { children: ReactNode }) {
       setLoading(true)
       setError(null)
       try {
-        const resp = await apiClient.get<CryptoPrice[]>('/api/crypto/ticker')
-        setPrices(resp.data)
+        const resp = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/crypto/ticker`
+        )
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`)
+        const data = (await resp.json()) as CryptoPrice[]
+        setPrices(data)
       } catch (err: any) {
         console.error('Falha ao carregar preços de criptomoedas', err)
         setError('Falha ao carregar preços de criptomoedas')
