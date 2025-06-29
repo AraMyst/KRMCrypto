@@ -93,19 +93,25 @@ export default function BitcoinIndexPage() {
       </Head>
       <main className="max-w-7xl mx-auto px-4 py-8">
         {/* Special Top Story */}
-        <section className="mb-12 flex flex-col lg:flex-row items-start gap-6">
-          <img
-            src={special.imageUrl}
-            alt={special.title}
-            className="w-full lg:w-1/2 h-auto object-cover rounded"
-          />
+        <section className="mb-12 flex flex-col items-center text-center lg:flex-row lg:items-start lg:text-left gap-6">
+          <Link href={`/bitcoin/${special.slug}`} legacyBehavior>
+            <a className="block lg:w-1/2">
+              <img
+                src={special.imageUrl}
+                alt={special.title}
+                className="w-full h-56 md:h-64 lg:h-72 object-cover rounded"
+              />
+            </a>
+          </Link>
           <div className="lg:w-1/2">
-            <h2 className="text-2xl font-bold">{special.title}</h2>
-            <p className="mt-4 text-base">{specialText}</p>
             <Link href={`/bitcoin/${special.slug}`} legacyBehavior>
-              <a className="mt-4 inline-block text-blue-600 hover:underline">
-                Read more
+              <a>
+                <h2 className="text-2xl font-bold hover:underline">{special.title}</h2>
               </a>
+            </Link>
+            <p className="mt-4 text-base text-justify">{specialText}</p>
+            <Link href={`/bitcoin/${special.slug}`} legacyBehavior>
+              <a className="mt-4 inline-block text-blue-600 hover:underline">Read more</a>
             </Link>
           </div>
         </section>
@@ -121,12 +127,14 @@ export default function BitcoinIndexPage() {
                     alt={article.title}
                     className="w-full h-64 object-cover rounded"
                   />
-                  <h2 className="mt-4 text-2xl font-bold">
-                    {article.title}
-                  </h2>
-                  <p className="mt-2 text-lg">{article.excerpt}</p>
                 </a>
               </Link>
+              <Link href={`/bitcoin/${article.slug}`} legacyBehavior>
+                <a>
+                  <h2 className="mt-4 text-2xl font-bold">{article.title}</h2>
+                </a>
+              </Link>
+              <p className="mt-2 text-lg text-justify">{article.excerpt}</p>
             </article>
           ))}
         </div>
