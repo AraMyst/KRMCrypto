@@ -22,7 +22,7 @@ export default function SideBanners() {
       onMouseLeave={() => setOpen(false)}
       onTouchStart={() => setOpen(true)}
       onTouchEnd={() => setOpen(false)}
-      className={`absolute top-1/3 ${open ? 'right-0' : '-right-36'} flex flex-col space-y-6 z-40 transition-all`}
+      className={`hidden md:flex absolute top-1/3 ${open ? 'right-0' : '-right-36'} flex-col space-y-6 z-40 transition-all`}
     >
       {/* Banner Newsletter */}
       <div className="block w-40 p-4 bg-primary text-white rounded-l-lg shadow text-center">
