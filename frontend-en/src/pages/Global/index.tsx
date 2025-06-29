@@ -1,91 +1,109 @@
-// src/pages/news/Global/index.tsx
-import { GetServerSideProps } from 'next'
+// src/pages/global/index.tsx
 import Head from 'next/head'
 import Link from 'next/link'
-import Image from 'next/image'
-import ArticleCard from '../../components/ArticleCard'
 import { Article } from '../../types'
 
-interface GlobalNewsIndexProps {
-  articles: Article[]
-}
+const articles: Article[] = [
+  /* mesmos 7 artigos, com category: 'Global' */
+]
 
-export default function GlobalNewsIndexPage({ articles }: GlobalNewsIndexProps) {
-  // ordena do mais recente para o mais antigo
-  const sorted = [...articles].sort(
-    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
-  )
-  const featured = sorted.slice(0, 3)
-  const others = sorted.slice(3)
+const globalArticles: Article[] = [
+  articles[5], // FCA Consulta
+  articles[6], // Ownership Growth
+  articles[1], // UK Crypto Investigator (destaque)
+  articles[0],
+  articles[2],
+  articles[3],
+  articles[4],
+]
 
+const [feature1, feature2, special, ...rest] = globalArticles
+
+const specialText = `Diante do aumento expressivo de casos de insolvência envolvendo cripto, o UK Insolvency Service nomeou seu primeiro especialista em cripto para otimizar processos de recuperação de ativos digitais.`
+
+export default function GlobalIndexPage() {
   return (
     <>
       <Head>
-        <title>Global News – iDontKnowCrypto</title>
+        <title>Global – iDontKnowCrypto</title>
         <meta
           name="description"
-          content="As últimas notícias Global, com destaques e lista completa."
+          content="Notícias globais sobre criptomoedas: reguladores, mercado e inovações."
         />
       </Head>
-      <main className="max-w-5xl mx-auto px-4 py-8 space-y-12">
-        <h1 className="text-3xl font-bold">Global News</h1>
+      <main className="max-w-7xl mx-auto px-4 py-8">
+        <section className="mb-12 flex flex-col items-center text-center lg:flex-row lg:items-start gap-6">
+          <Link href={`/global/${special.slug}`} legacyBehavior>
+            <a className="block lg:w-1/2">
+              <img
+                src={special.imageUrl}
+                alt={special.title}
+                className="w-full h-56 md:h-64 lg:h-72 object-cover rounded"
+              />
+            </a>
+          </Link>
+          <div className="lg:w-1/2">
+            <Link href={`/global/${special.slug}`} legacyBehavior>
+              <a>
+                <h2 className="text-2xl font-bold hover:underline">
+                  {special.title}
+                </h2>
+              </a>
+            </Link>
+            <p className="mt-4 text-base text-justify">{specialText}</p>
+            <Link href={`/global/${special.slug}`} legacyBehavior>
+              <a className="mt-4 inline-block text-blue-600 hover:underline">
+                Read more
+              </a>
+            </Link>
+          </div>
+        </section>
 
-        {/* Destaques: três mais recentes com imagem grande, título sobreposto e excerpt abaixo */}
-        <div className="space-y-12">
-          {featured.map((article) => (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+          {[feature1, feature2].map((article) => (
             <article key={article.slug}>
-              <Link href={`/news/Global/${article.slug}`} legacyBehavior >
-                <a className="block relative">
-                  <div className="w-full h-64 relative rounded overflow-hidden">
-                    <Image
-                      src={article.imageUrl}
-                      alt={article.title}
-                      layout="fill"
-                      objectFit="cover"
-                    />
-                    <h2 className="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 text-white text-2xl p-4 font-semibold">
-                      {article.title}
-                    </h2>
-                  </div>
+              <Link href={`/global/${article.slug}`} legacyBehavior>
+                <a className="block">
+                  <img
+                    src={article.imageUrl}
+                    alt={article.title}
+                    className="w-full h-64 object-cover rounded"
+                  />
                 </a>
               </Link>
-              <p className="mt-4 text-lg leading-relaxed">{article.excerpt}</p>
+              <Link href={`/global/${article.slug}`} legacyBehavior>
+                <a>
+                  <h2 className="mt-4 text-2xl font-bold">
+                    {article.title}
+                  </h2>
+                </a>
+              </Link>
+              <p className="mt-2 text-lg text-justify">{article.excerpt}</p>
             </article>
           ))}
         </div>
 
-        {/* Outros artigos: grid de cards menores */}
-        {others.length > 0 && (
-          <section>
-            <h2 className="text-2xl font-semibold mb-6">More Global News</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {others.map((article) => (
-                <ArticleCard
-                  key={article.slug}
-                  slug={article.slug}
-                  category={article.category}
-                  title={article.title}
-                  excerpt={article.excerpt}
-                  imageUrl={article.imageUrl}
-                />
-              ))}
-            </div>
-          </section>
-        )}
+        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {rest.map((article) => (
+            <article key={article.slug}>
+              <Link href={`/global/${article.slug}`} legacyBehavior>
+                <a className="block relative h-48 overflow-hidden rounded">
+                  <img
+                    src={article.imageUrl}
+                    alt={article.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-40 flex items-end p-2">
+                    <h3 className="text-white text-lg font-semibold">
+                      {article.title}
+                    </h3>
+                  </div>
+                </a>
+              </Link>
+            </article>
+          ))}
+        </section>
       </main>
     </>
   )
-}
-
-export const getServerSideProps: GetServerSideProps<GlobalNewsIndexProps> = async () => {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/news?category=global`
-    )
-    const articles: Article[] = await res.json()
-    return { props: { articles } }
-  } catch (err) {
-    console.error('Error fetching Global articles:', err)
-    return { props: { articles: [] } }
-  }
 }
