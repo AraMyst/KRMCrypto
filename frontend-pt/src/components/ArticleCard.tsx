@@ -34,7 +34,7 @@ export default function ArticleCard({
       {/* Conteúdo textual */}
       <div className="p-4 flex flex-col justify-between">
         <h3 className="text-lg font-semibold mb-2 line-clamp-2">{title}</h3>
-        <p className="text-sm text-gray-600 mb-4 line-clamp-3">{excerpt}</p>
+        <p className="text-sm text-gray-600 mb-4 line-clamp-3 text-justify">{excerpt}</p>
         <span className="text-xs text-primary font-medium hover:underline">
           Leia mais →
         </span>

@@ -11,7 +11,7 @@ export default function SobreNosPage() {
           content="Conheça a equipe de especialistas do NaoseiCripto e nossa missão de tornar a cripto simples para todos."
         />
       </Head>
-      <main className="max-w-3xl mx-auto px-4 py-8 prose prose-lg">
+      <main className="max-w-3xl mx-auto px-4 py-8 prose prose-lg text-justify">
         <h1>Quem Somos</h1>
         <p>
           O NaoseiCripto nasceu da vontade de levar informação clara e acessível sobre criptomoedas
