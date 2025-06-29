@@ -1,102 +1,109 @@
-// src/pages/news/UK/index.tsx
-import { GetServerSideProps } from 'next'
+// src/pages/usa/index.tsx
 import Head from 'next/head'
 import Link from 'next/link'
-import Image from 'next/image'
 import { Article } from '../../types'
 
-interface UKNewsIndexProps {
-  articles: Article[]
-}
+const articles: Article[] = [
+  /* mesmos 7 artigos, com category: 'USA' */
+]
 
-export default function UKNewsIndexPage({ articles }: UKNewsIndexProps) {
-  // ordena do mais recente para o mais antigo
-  const sorted = [...articles].sort(
-    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
-  )
-  const featured = sorted.slice(0, 3)          // 3 artigos em destaque
-  const others = sorted.slice(3)               // demais artigos
+const usaArticles: Article[] = [
+  articles[4], // FCA ETNs
+  articles[0], // BCP Stablecoin
+  articles[2], // Reform UK (destaque)
+  articles[1],
+  articles[3],
+  articles[5],
+  articles[6],
+]
 
+const [feature1, feature2, special, ...rest] = usaArticles
+
+const specialText = `Nigel Farage ressaltou em conferência nos EUA a importância de regulamentar doações em cripto, propondo a criação de reservas em Bitcoin para fortalecer a infraestrutura financeira.`
+
+export default function USAIndexPage() {
   return (
     <>
       <Head>
-        <title>UK News – iDontKnowCrypto</title>
+        <title>USA – iDontKnowCrypto</title>
         <meta
           name="description"
-          content="As últimas notícias do UK, com destaques e lista completa."
+          content="Cobertura das principais novidades cripto nos Estados Unidos: política, mercado e regulamentação."
         />
       </Head>
-      <main className="max-w-5xl mx-auto px-4 py-8 space-y-12">
-        <h1 className="text-3xl font-bold">UK News</h1>
+      <main className="max-w-7xl mx-auto px-4 py-8">
+        <section className="mb-12 flex flex-col items-center text-center lg:flex-row lg:items-start gap-6">
+          <Link href={`/usa/${special.slug}`} legacyBehavior>
+            <a className="block lg:w-1/2">
+              <img
+                src={special.imageUrl}
+                alt={special.title}
+                className="w-full h-56 md:h-64 lg:h-72 object-cover rounded"
+              />
+            </a>
+          </Link>
+          <div className="lg:w-1/2">
+            <Link href={`/usa/${special.slug}`} legacyBehavior>
+              <a>
+                <h2 className="text-2xl font-bold hover:underline">
+                  {special.title}
+                </h2>
+              </a>
+            </Link>
+            <p className="mt-4 text-base text-justify">{specialText}</p>
+            <Link href={`/usa/${special.slug}`} legacyBehavior>
+              <a className="mt-4 inline-block text-blue-600 hover:underline">
+                Read more
+              </a>
+            </Link>
+          </div>
+        </section>
 
-        {/* Destaques: três mais recentes com imagem grande, título sobreposto e excerpt abaixo */}
-        <div className="space-y-12">
-          {featured.map((article) => (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+          {[feature1, feature2].map((article) => (
             <article key={article.slug}>
-              <Link href={`/news/UK/${article.slug}`} legacyBehavior >
-                <a className="block relative">
-                  <div className="w-full h-64 relative rounded overflow-hidden">
-                    <Image
-                      src={article.imageUrl}
-                      alt={article.title}
-                      layout="fill"
-                      objectFit="cover"
-                      className="rounded"
-                    />
-                    <h2 className="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 text-white text-2xl p-4 font-semibold">
-                      {article.title}
-                    </h2>
-                  </div>
+              <Link href={`/usa/${article.slug}`} legacyBehavior>
+                <a className="block">
+                  <img
+                    src={article.imageUrl}
+                    alt={article.title}
+                    className="w-full h-64 object-cover rounded"
+                  />
                 </a>
               </Link>
-              {/* primeiro parágrafo (excerpt) */}
-              <p className="mt-4 text-lg leading-relaxed">{article.excerpt}</p>
+              <Link href={`/usa/${article.slug}`} legacyBehavior>
+                <a>
+                  <h2 className="mt-4 text-2xl font-bold">
+                    {article.title}
+                  </h2>
+                </a>
+              </Link>
+              <p className="mt-2 text-lg text-justify">{article.excerpt}</p>
             </article>
           ))}
         </div>
 
-        {/* Outros artigos: grid de cards menores, apenas imagem e título */}
-        {others.length > 0 && (
-          <section>
-            <h2 className="text-2xl font-semibold mb-6">More UK News</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {others.map((article) => (
-                <Link
-                  key={article.slug}
-                  href={`/news/UK/${article.slug}`}
-                  className="block relative w-full h-40 rounded overflow-hidden shadow hover:shadow-lg transition"
-                >
-                  <Image
+        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {rest.map((article) => (
+            <article key={article.slug}>
+              <Link href={`/usa/${article.slug}`} legacyBehavior>
+                <a className="block relative h-48 overflow-hidden rounded">
+                  <img
                     src={article.imageUrl}
                     alt={article.title}
-                    layout="fill"
-                    objectFit="cover"
-                    className="rounded"
+                    className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                    <h3 className="text-white text-lg font-semibold text-center px-2">
+                  <div className="absolute inset-0 bg-black bg-opacity-40 flex items-end p-2">
+                    <h3 className="text-white text-lg font-semibold">
                       {article.title}
                     </h3>
                   </div>
-                </Link>
-              ))}
-            </div>
-          </section>
-        )}
+                </a>
+              </Link>
+            </article>
+          ))}
+        </section>
       </main>
     </>
   )
-}
-
-export const getServerSideProps: GetServerSideProps<UKNewsIndexProps> = async () => {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/news?category=uk`
-    )
-    const articles: Article[] = await res.json()
-    return { props: { articles } }
-  } catch (err) {
-    console.error('Error fetching UK articles:', err)
-    return { props: { articles: [] } }
-  }
 }
