@@ -4,13 +4,86 @@ import Link from 'next/link'
 import { Article } from '../../types'
 
 const articles: Article[] = [
-  /* mesmos 7 artigos acima, com category: 'Ireland' */
+  {
+    slug: 'bcp-technologies-pound-stablecoin-launch',
+    title:
+      'BCP Technologies Introduces New British Pound-Backed Stablecoin',
+    excerpt:
+      'BCP Technologies has launched tGBP, a pound-backed stablecoin designed as a blueprint for future FCA regulations.',
+    imageUrl:
+      '/images/bcp-technologies-pound-stablecoin-launch1.png',
+    publishedAt: '2025-06-15',
+    category: 'Ireland',
+  },
+  {
+    slug: 'uk-crypto-investigator-insolvency-cases',
+    title:
+      'UK Strengthens Efforts to Recover Crypto from Insolvency and Criminal Cases',
+    excerpt:
+      'In response to a dramatic surge in insolvency cases involving cryptocurrencies, the UK Insolvency Service has appointed its first dedicated crypto specialist.',
+    imageUrl: '/images/uk-crypto-investigator-insolvency-cases1.png',
+    publishedAt: '2025-06-15',
+    category: 'Ireland',
+  },
+  {
+    slug: 'reform-uk-accepts-crypto-donations-nigel-farage',
+    title:
+      'Reform UK Embraces Crypto Donations, Announces Ambitious Digital Finance Agenda',
+    excerpt:
+      'Nigel Farage, leader of Reform UK, announced a landmark decision allowing the party to accept cryptocurrency donations, making it the first major British party to adopt digital currencies.',
+    imageUrl:
+      '/images/reform-uk-accepts-crypto-donations-nigel-farage1.png',
+    publishedAt: '2025-06-15',
+    category: 'Ireland',
+  },
+  {
+    slug: 'ig-group-crypto-trading-uk-retail-investors',
+    title: 'IG Group Introduces Direct Crypto Trading for UK Retail Investors',
+    excerpt:
+      'IG Group, the prominent UK-based trading and financial services provider, has officially launched direct cryptocurrency trading for retail investors.',
+    imageUrl: '/images/ig-group-crypto-trading-uk-retail-investors1.png',
+    publishedAt: '2025-06-15',
+    category: 'Ireland',
+  },
+  {
+    slug: 'uk-fca-crypto-etns-retail-investors',
+    title: "UK's FCA Proposes Removing Ban on Crypto ETNs for Retail Investors",
+    excerpt:
+      "The UK's Financial Conduct Authority has proposed ending its prohibition on retail investors accessing crypto ETNs.",
+    imageUrl:
+      '/images/uk-fca-crypto-etns-retail-investors1.png',
+    publishedAt: '2025-06-15',
+    category: 'Ireland',
+  },
+  {
+    slug: 'uk-fca-stablecoin-crypto-custody-regulation',
+    title:
+      'UK’s FCA Opens Consultation on Stablecoin and Crypto Custody Regulations',
+    excerpt:
+      'The FCA has opened a consultation for feedback on stablecoin issuers and crypto custody providers.',
+    imageUrl:
+      '/images/uk-fca-stablecoin-crypto-custody-regulation1.png',
+    publishedAt: '2025-06-15',
+    category: 'Ireland',
+  },
+  {
+    slug: 'uk-crypto-ownership-growth-2025',
+    title:
+      'UK Tops Global Crypto Ownership Growth in 2025 Amid Regulatory Ambiguity',
+    excerpt:
+      'In 2025, the UK recorded the fastest year-over-year increase in crypto ownership among major markets.',
+    imageUrl:
+      '/images/uk-crypto-ownership-growth-20251.png',
+    publishedAt: '2025-06-15',
+    category: 'Ireland',
+  },
 ]
 
+// Ordem específica para Ireland
 const irelandArticles: Article[] = [
-  articles[3], // IG Group
-  articles[4], // FCA ETNs
-  articles[6], // UK Ownership Growth (destaque)
+  articles[3], // IG Group (feature1)
+  articles[4], // FCA ETNs  (feature2)
+  articles[6], // Ownership Growth (destaque principal)
   articles[0],
   articles[1],
   articles[2],
@@ -19,7 +92,7 @@ const irelandArticles: Article[] = [
 
 const [feature1, feature2, special, ...rest] = irelandArticles
 
-const specialText = `Com crescimento recorde na posse de criptoativos, Irlanda destaca-se como mercado emergente na Europa, superando expectativas regulatórias e atraindo investidores institucionais.`
+const specialText = `Em 2025, o Reino Unido registrou o maior crescimento anual de posse de cripto globalmente, um dado que ressalta a posição de mercado da Irlanda como destino para investidores digitais.`
 
 export default function IrelandIndexPage() {
   return (
@@ -32,6 +105,7 @@ export default function IrelandIndexPage() {
         />
       </Head>
       <main className="max-w-7xl mx-auto px-4 py-8">
+        {/* Special Top Story */}
         <section className="mb-12 flex flex-col items-center text-center lg:flex-row lg:items-start gap-6">
           <Link href={`/ireland/${special.slug}`} legacyBehavior>
             <a className="block lg:w-1/2">
@@ -59,6 +133,7 @@ export default function IrelandIndexPage() {
           </div>
         </section>
 
+        {/* Two Big Features */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
           {[feature1, feature2].map((article) => (
             <article key={article.slug}>
@@ -83,6 +158,7 @@ export default function IrelandIndexPage() {
           ))}
         </div>
 
+        {/* Grid of Others */}
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {rest.map((article) => (
             <article key={article.slug}>
