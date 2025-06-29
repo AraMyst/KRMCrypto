@@ -113,7 +113,7 @@ export default function AirdropsIndexPage() {
                 </h2>
               </a>
             </Link>
-            <p className="mt-4 text-base">{specialText}</p>
+            <p className="mt-4 text-base text-justify">{specialText}</p>
             <Link href={`/airdrops/${special.slug}`} legacyBehavior>
               <a className="mt-4 inline-block text-blue-600 hover:underline">
                 Read more
@@ -142,7 +142,7 @@ export default function AirdropsIndexPage() {
                   </h2>
                 </a>
               </Link>
-              <p className="mt-2 text-lg">{article.excerpt}</p>
+              <p className="mt-2 text-lg text-justify">{article.excerpt}</p>
             </article>
           ))}
         </div>
