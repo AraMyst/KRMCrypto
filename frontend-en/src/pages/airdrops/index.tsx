@@ -95,7 +95,7 @@ export default function AirdropsIndexPage() {
       </Head>
       <main className="max-w-7xl mx-auto px-4 py-8">
         {/* Special Top Story */}
-        <section className="mb-12 flex flex-col items-center text-center lg:flex-row lg:items-start lg:text-left gap-6">
+        <section className="mb-12 flex flex-col items-center text-center lg:flex-row lg:items-start gap-6">
           <Link href={`/airdrops/${special.slug}`} legacyBehavior>
             <a className="block lg:w-1/2">
               <img
@@ -113,7 +113,10 @@ export default function AirdropsIndexPage() {
                 </h2>
               </a>
             </Link>
-            <p className="mt-4 text-base text-justify">{specialText}</p>
+            {/* Parágrafo justificado */}
+            <p className="mt-4 text-base text-justify">
+              {specialText}
+            </p>
             <Link href={`/airdrops/${special.slug}`} legacyBehavior>
               <a className="mt-4 inline-block text-blue-600 hover:underline">
                 Read more
@@ -142,7 +145,9 @@ export default function AirdropsIndexPage() {
                   </h2>
                 </a>
               </Link>
-              <p className="mt-2 text-lg text-justify">{article.excerpt}</p>
+              <p className="mt-2 text-lg text-justify">
+                {article.excerpt}
+              </p>
             </article>
           ))}
         </div>
